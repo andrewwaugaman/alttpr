@@ -20,7 +20,7 @@ import items.Location;
  * Ice Palace, Misery Mire, Turtle Rock, and Ganon's Tower
  * @author Andrew
  */
-public interface Area {
+public abstract class Area {
         
     /**
      * Method to be implemented that returns all locations in the area
@@ -28,5 +28,5 @@ public interface Area {
      * @param inventory The current inventory
      * @return A list of locations that are in logic
      */
-    ArrayList<Location> locationsInLogic(Inventory inventory);    
+    public abstract ArrayList<Location> locationsInLogic(Inventory inventory);    
 }

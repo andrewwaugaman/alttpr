@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Implementation of Eastern Palace for the Tracker
  * @author Andrew
  */
-public class EasternPalace extends Dungeon implements Area {
+public class EasternPalace extends Dungeon {
     
     //Eastern Palace has 6 possible item locations
     private final Location cannonballChest;
@@ -23,18 +23,19 @@ public class EasternPalace extends Dungeon implements Area {
     private final Location armosKnights;  
 
     //Eastern Palace has a Big Key, but it does not have any small keys
-    private final String BIG_KEY = "Eastern Palace - Big Key";
+    public final String BIG_KEY = "Eastern Palace - Big Key";
     
     //Name of the dungeon
+    public final static String NAME = "Eastern Palace";
+
     
     /**
      * Constructor Method
-     * Calls the parent constructor (in Dungeon) and passes an unknown reward
+     * Calls the parent constructor (in Dungeon)
      * Instantiate the 6 chests with their description
-     * @param reward The reward associated with Eastern Palace
      */
-    public EasternPalace(Reward reward) {
-        super(reward);
+    public EasternPalace() {
+        super();
         cannonballChest = new Location("Eastern Palace - Cannonball Chest");
         mapChest = new Location("Eastern Palace - Map Chest");
         compassChest = new Location("Eastern Palace - Compass Chest");

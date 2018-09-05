@@ -16,17 +16,17 @@ package areas;
  * Skull Woods, Thieves Town, Ice Palace, Misery Mire, and Turtle Rock
  * @author Andrew
  */
-public abstract class Dungeon {
+public abstract class Dungeon extends Area {
     
     //The reward of the dungeon, a Pendant or Crytstal
     private Reward reward;
     
     /**
-     * Constructor method.  Creates a new reward
-     * @param reward The reward associated with the Dungeon
+     * Constructor method.  Creates an unknown reward that can be 
+     * updated later when it's known
      */
-    public Dungeon(Reward reward) {
-        this.reward = reward;
+    public Dungeon() {
+        this.reward = new Reward(Reward.UNKNOWN);
     }
     
     //Getter and Setter methods below

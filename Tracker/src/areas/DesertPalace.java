@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Implementation of Desert Palace for the Tracker
  * @author Andrew
  */
-public class DesertPalace extends Dungeon implements Area{
+public class DesertPalace extends Dungeon {
 
     //Desert Palace has 6 possible item locations
     private final Location mapChest;
@@ -23,17 +23,18 @@ public class DesertPalace extends Dungeon implements Area{
     private final Location lanmolas;  
     
     //Desert Palace has a Big Key and a Small Key
-    private final String SMALL_KEY= "Desert Palace - Small Key";
-    private final String BIG_KEY= "Desert Palace - Big Key";
+    private final String SMALL_KEY = "Desert Palace - Small Key";
+    private final String BIG_KEY = "Desert Palace - Big Key";
+    
+    public final static String NAME = "Desert Palace";
     
     /**
      * Constructor Method
-     * Calls the parent constructor (in Dungeon) and passes an unknown reward
+     * Calls the parent constructor (in Dungeon) 
      * Instantiate the 6 chests with their description
-     * @param reward The reward for Desert Palace
      */
-    public DesertPalace(Reward reward) {
-        super(reward);
+    public DesertPalace() {
+        super();
         mapChest = new Location("Desert Palace - Map Chest");
         torch = new Location("Desert Palace - Torch");
         compassChest = new Location("Desert Palace - Compass Chest");
@@ -80,7 +81,7 @@ public class DesertPalace extends Dungeon implements Area{
      */
     private boolean closed(Inventory inventory){
         if (inventory.getItem(Item.BOOK).isOwned())
-            return true;
+            return false;
         
         return (inventory.getItem(Item.FLUTE).isOwned() &&
                 ((ProgressiveItem)inventory.getItem(Gloves.GLOVES))
@@ -161,7 +162,7 @@ public class DesertPalace extends Dungeon implements Area{
         if(torch.isAcquired())
             return false;
         
-        return inventory.getItem("Boots").isOwned();
+        return inventory.getItem(Item.BOOTS).isOwned();
     }
     
     

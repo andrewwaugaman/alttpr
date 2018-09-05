@@ -5,7 +5,10 @@
  */
 package areas;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import items.Inventory;
+import items.Location;
 
 /**
  *
@@ -15,24 +18,43 @@ public class AreaSet {
     
     //A way to track all the different areas
     private final HashMap<String,Area> areas;
+    
+    //Names of the areas
 
     public AreaSet() {
         areas = new HashMap<>();
         
-        rewards.put(Reward.GREEN_PENDANT, new Reward(Reward.GREEN_PENDANT));    
-        rewards.put(Reward.BLUE_PENDANT, new Reward(Reward.BLUE_PENDANT));        
-        rewards.put(Reward.RED_PENDANT, new Reward(Reward.RED_PENDANT));    
+        //areas.put(LightWorld.NAME, new LightWorld());
+        //areas.put(HyruleCastle.NAME, new HyruleCastle());
+        areas.put(EasternPalace.NAME, new EasternPalace());   
+        areas.put(DesertPalace.NAME, new DesertPalace());
+        //areas.put(DeathMountain.NAME, new DeathMountain());
+        //areas.put(TowerOfHera.NAME, new TowerOfHera());
+        //areas.put(CastleTower.NAME, new CastleTower());
         
-        rewards.put(Reward.CRYSTAL_1, new Reward(Reward.CRYSTAL_1));
-        rewards.put(Reward.CRYSTAL_2, new Reward(Reward.CRYSTAL_2));
-        rewards.put(Reward.CRYSTAL_3, new Reward(Reward.CRYSTAL_3));
-        rewards.put(Reward.CRYSTAL_4, new Reward(Reward.CRYSTAL_4));
-        rewards.put(Reward.CRYSTAL_5, new Reward(Reward.CRYSTAL_5));
-        rewards.put(Reward.CRYSTAL_6, new Reward(Reward.CRYSTAL_6));
-        rewards.put(Reward.CRYSTAL_7, new Reward(Reward.CRYSTAL_7));
+        /*
+        areas.put(DarkWorld.NAME, new DarkWorld());
+        areas.put(DarkPalace.NAME, new DarkPalace());
+        areas.put(SwampPalace.NAME, new SwampPalace());
+        areas.put(SkullWoods.NAME, new SkullWoods());
+        areas.put(ThievesTown.NAME, new ThievesTown());
+        areas.put(IcePalace.NAME, new IcePalace());
+        areas.put(MiseryMire.NAME, new MiseryMire());
+        areas.put(TurtleRock.NAME, new TurtleRock());
+        
+        areas.put(GanonsTower.NAME, new GanonsTower());
+        */
+
     }
     
-    public HashMap<String,Reward> getRewards() {
-        return rewards;
+    public void locationsInLogic(Inventory inventory, RewardSet rewards)
+    {
+        for (String name : areas.keySet()) {
+            ArrayList<Location> available = 
+                    areas.get(name).locationsInLogic(inventory);
+            for (int i = 0; i < available.size(); i++) {
+                System.out.println(available.get(i).getDescription());
+            }
+        }
     }
 }

@@ -25,8 +25,7 @@ public class Tracker {
         Scanner scan = new Scanner(System.in);
         
         RewardSet rewards = new RewardSet();
-        
-        Area ep = new EasternPalace();
+        AreaSet areas = new AreaSet();
         
         int menu_option = 1;
         
@@ -45,6 +44,7 @@ public class Tracker {
             System.out.println();
             System.out.print("Enter your choice: ");
             menu_option = scan.nextInt();
+            scan.nextLine(); //Gets rid of newline character
             
             System.out.println();
             String item;
@@ -54,7 +54,8 @@ public class Tracker {
                     break;
                 case 2:
                     System.out.print("What item did you get? ");
-                    item = scan.next();
+                    item = scan.nextLine();
+                    System.out.println(item);
                     inventory.updateItem(item, true);
                     break;
                 case 3: 
@@ -68,13 +69,7 @@ public class Tracker {
                     inventory.updateProgressive("Sword",level);
                     break;
                 case 5:
-                    System.out.println("*************************************");
-                    System.out.println("Locations available in Eastern Palace");
-                    System.out.println();
-                    ArrayList<Location> locations = ep.locationsInLogic(inventory);
-                    for (int i = 0; i < locations.size(); i++)
-                        System.out.println(locations.get(i).getDescription());
-                    System.out.println("*************************************");
+                    areas.locationsInLogic(inventory, rewards);
                     break;
                 case 6:
                     System.out.print("How many bottles? ");
