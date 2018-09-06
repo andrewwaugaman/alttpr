@@ -40,7 +40,7 @@ public class DesertPalace extends Dungeon {
         compassChest = new Location("Desert Palace - Compass Chest");
         bigKeyChest = new Location("Desert Palace - Big Key Chest");
         bigChest = new Location("Desert Palace - Big Chest");
-        lanmolas = new Location("Desert Palace - Armos Knights");
+        lanmolas = new Location("Desert Palace - Lanmolas");
     }
     
     /**
