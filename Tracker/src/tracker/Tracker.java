@@ -69,7 +69,10 @@ public class Tracker {
                     inventory.updateProgressive("Sword",level);
                     break;
                 case 5:
-                    areas.locationsInLogic(inventory, rewards);
+                    ArrayList<Location> inLogic = 
+                            areas.locationsInLogic(inventory, rewards);
+                    for (int i = 0; i < inLogic.size(); i++)
+                        System.out.println(inLogic.get(i).getDescription());
                     break;
                 case 6:
                     System.out.print("How many bottles? ");
