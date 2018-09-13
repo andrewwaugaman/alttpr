@@ -78,6 +78,7 @@ public class Tracker {
                     System.out.print("How many bottles? ");
                     int quantity = scan.nextInt();
                     inventory.updateBottle(quantity);
+                    break;
             }
             
             System.out.println();

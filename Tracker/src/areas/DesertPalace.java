@@ -77,16 +77,16 @@ public class DesertPalace extends Dungeon {
      * 1) The book is obtained
      * 2) The flute, Titan's Mitt, and Mirror are obtained
      * @param inventory The current inventory 
-     * @return True or False if it's accessible
+     * @return True or False if it's closed
      */
     private boolean closed(Inventory inventory){
         if (inventory.getItem(Item.BOOK).isOwned())
             return false;
         
-        return (inventory.getItem(Item.FLUTE).isOwned() &&
+        return !((inventory.getItem(Item.FLUTE).isOwned() &&
                 ((ProgressiveItem)inventory.getItem(Gloves.GLOVES))
                         .getDescription().equals(Gloves.TITANS_MITTS)
-                && inventory.getItem(Item.MIRROR).isOwned());
+                && inventory.getItem(Item.MIRROR).isOwned()));
     }
     
     /**
@@ -302,53 +302,90 @@ public class DesertPalace extends Dungeon {
         return inventory.getItem(Sword.SWORD).isOwned();
     }          
     
-    
     //Getters and Setters for the locations below
+
+    /**
+     * @return the mapChest
+     */
     public Location getMapChest() {
         return mapChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setMapChest(Item contents) {
         mapChest.setContents(contents);
     }
-    
+
+    /**
+     * @return the torch
+     */
     public Location getTorch() {
         return torch;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setTorch(Item contents) {
         torch.setContents(contents);
     }
 
+    /**
+     * @return the compassChest
+     */
     public Location getCompassChest() {
         return compassChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setCompassChest(Item contents) {
         compassChest.setContents(contents);
     }
 
+    /**
+     * @return the bigKeyChest
+     */
     public Location getBigKeyChest() {
         return bigKeyChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setBigKeyChest(Item contents) {
         bigKeyChest.setContents(contents);
     }
 
+    /**
+     * @return the bigChest
+     */
     public Location getBigChest() {
         return bigChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setBigChest(Item contents) {
         bigChest.setContents(contents);
     }
 
+    /**
+     * @return the lanmolas
+     */
     public Location getLanmolas() {
         return lanmolas;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setLanmolas(Item contents) {
         lanmolas.setContents(contents);
     }
+    
 }

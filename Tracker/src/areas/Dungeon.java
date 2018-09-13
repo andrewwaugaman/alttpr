@@ -30,10 +30,17 @@ public abstract class Dungeon extends Area {
     }
     
     //Getter and Setter methods below
+    
+    /**
+     * @return the reward
+     */
     public Reward getReward() {
         return reward;
     }
     
+    /**
+     * @param reward the new reward for the dungeon
+     */
     public void setReward(Reward reward) {
         this.reward = reward;
     }

@@ -78,7 +78,7 @@ public class EasternPalace extends Dungeon {
      * Check to see if there is a way to enter the dungeon
      * Eastern Palace is always open
      * @param inventory The current inventory 
-     * @return True or False if it's accessible
+     * @return True or False if it's closed
      */
     private boolean closed(Inventory inventory){
         return false;
@@ -199,50 +199,87 @@ public class EasternPalace extends Dungeon {
     }          
     
     //Getters and Setters for the locations below
+    
+    /**
+     * @return the cannonballChest
+     */
     public Location getCannonballChest() {
         return cannonballChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setCannonballChest(Item contents) {
         cannonballChest.setContents(contents);
     }
 
+    /**
+     * @return the mapChest
+     */
     public Location getMapChest() {
         return mapChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setMapChest(Item contents) {
         mapChest.setContents(contents);
     }
 
+    /**
+     * @return the compassChest
+     */
     public Location getCompassChest() {
         return compassChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setCompassChest(Item contents) {
         compassChest.setContents(contents);
     }
 
+    /**
+     * @return the bigKeyChest
+     */
     public Location getBigKeyChest() {
         return bigKeyChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setBigKeyChest(Item contents) {
         bigKeyChest.setContents(contents);
     }
 
+    /**
+     * @return the bigChest
+     */
     public Location getBigChest() {
         return bigChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setBigChest(Item contents) {
         bigChest.setContents(contents);
     }
 
+    /**
+     * @return the armosKnights
+     */
     public Location getArmosKnights() {
         return armosKnights;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */
     public void setArmosKnights(Item contents) {
         armosKnights.setContents(contents);
     }
