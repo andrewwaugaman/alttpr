@@ -29,7 +29,8 @@ public class AreaSet {
         areas.put(EasternPalace.NAME, new EasternPalace());   
         areas.put(DesertPalace.NAME, new DesertPalace());
         //areas.put(DeathMountain.NAME, new DeathMountain());
-        //areas.put(TowerOfHera.NAME, new TowerOfHera());
+        //areas.put(TowerOfHera.NAME, new TowerOfHera(
+        //        (DeathMountain)(areas.get(DeathMountain.NAME))));
         //areas.put(CastleTower.NAME, new CastleTower());
         
         /*
@@ -52,10 +53,7 @@ public class AreaSet {
             RewardSet rewards) {
         ArrayList<Location> locations = new ArrayList();
         for (String name : areas.keySet()) {
-            ArrayList<Location> available = 
-                    areas.get(name).locationsInLogic(inventory);
-            for (int i = 0; i < available.size(); i++)
-                locations.add(available.get(i));
+            locations.addAll(areas.get(name).locationsInLogic(inventory));
         }
         
         /*

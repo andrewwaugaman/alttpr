@@ -28,12 +28,16 @@ public class TowerOfHera extends Dungeon {
     
     public final static String NAME = "Tower of Hera";
     
+    //Used to check if Tower of Hera is Open
+    private final DeathMountain deathMountain;
+    
     /**
      * Constructor Method
      * Calls the parent constructor (in Dungeon) 
      * Instantiate the 6 chests with their description
+     * @param deathMountain The mountain Hera sits on
      */
-    public TowerOfHera() {
+    public TowerOfHera(DeathMountain deathMountain) {
         super();
         basementCage = new Location("Tower of Hera - Basement Cage");
         mapChest = new Location("Tower of Hera - Map Chest");      
@@ -41,6 +45,7 @@ public class TowerOfHera extends Dungeon {
         compassChest = new Location("Tower of Hera - Compass Chest");
         bigChest = new Location("Tower of Hera - Big Chest");
         moldorm = new Location("Tower of Hera - Moldorm");
+        this.deathMountain = deathMountain;
     }
     
     /**
@@ -78,10 +83,12 @@ public class TowerOfHera extends Dungeon {
      * 1) The Mirror is obtained
      * 2) The Hookshot and Hammer are obtained
      * @param inventory The current inventory 
-     * @return True or False if it's accessible
+     * @return True or False if it's closed
      */
     private boolean closed(Inventory inventory){
-        //Figure out how to check about death mountain being open
+        if(deathMountain.closed(inventory))
+            return true; 
+        
         if (inventory.getItem(Item.MIRROR).isOwned())
             return false;
         
