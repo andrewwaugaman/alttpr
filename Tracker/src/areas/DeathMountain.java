@@ -37,7 +37,7 @@ public class DeathMountain extends Area {
     
     private final Location floatingIsland;
    
-    //Name of the dungeon
+    //Name of the area
     public final static String NAME = "Death Mountain";
 
     
