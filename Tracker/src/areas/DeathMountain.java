@@ -21,11 +21,11 @@ public class DeathMountain extends Area {
     //Death Mountain has 14 possible item locations
     private final Location oldMan;
     private final Location spectacleRockCave;
-    private final Location etherTablet; 
     private final Location spectacleRock; 
+    private final Location etherTablet; 
+
     private final Location spiralCave;
-    private final Location mimicCave;
-    
+
     private final Location paradoxCaveLowerFarLeft;
     private final Location paradoxCaveLowerLeft;
     private final Location paradoxCaveLowerRight;
@@ -36,6 +36,9 @@ public class DeathMountain extends Area {
     private final Location paradoxCaveUpperRight;
     
     private final Location floatingIsland;
+    
+    private final Location mimicCave;
+
    
     //Name of the area
     public final static String NAME = "Death Mountain";
@@ -51,10 +54,10 @@ public class DeathMountain extends Area {
         
         oldMan = new Location("Old Man");
         spectacleRockCave = new Location("Spectacle Rock Cave");
-        etherTablet = new Location("Ether Tablet");
         spectacleRock = new Location("Spectacle Rock"); 
+        etherTablet = new Location("Ether Tablet");
+
         spiralCave = new Location("Spiral Cave");
-        mimicCave = new Location("Mimic Cave");
         
         paradoxCaveLowerFarLeft = new Location(
                 "Paradox Cave Lower - Far Left");
@@ -73,6 +76,9 @@ public class DeathMountain extends Area {
                 "Paradox Cave Upper - Right");
     
         floatingIsland = new Location("Floating Island");
+        
+        mimicCave = new Location("Mimic Cave");
+
     }
     
     /**
@@ -94,19 +100,19 @@ public class DeathMountain extends Area {
             inLogic.add(oldMan);
         if (logicSpectacleRockCave(inventory))
             inLogic.add(spectacleRockCave);
-        if (logicEtherTablet(inventory))
-            inLogic.add(etherTablet);
         if (logicSpectacleRock(inventory))
             inLogic.add(spectacleRock);
+        if (logicEtherTablet(inventory))
+            inLogic.add(etherTablet);
         
         if (eastDeathMountainAccess(inventory)) 
             inLogic.addAll(logicEastDeathMountain(inventory));
         
         /*
-        if (logicMimicCave(inventory, darkWorld, turtleRock))
-            inLogic.add(mimicCave);
         if (logicFloatingIsland(inventory, darkWorld))
             inLogic.add(floatingIsland);
+        if (logicMimicCave(inventory, darkWorld, turtleRock))
+            inLogic.add(mimicCave);
         */
         
         return inLogic;
@@ -171,6 +177,19 @@ public class DeathMountain extends Area {
     }
     
     /**
+     * Check to see if the spectacle rock item is in logic
+     * It's in logic if it's not obtained and the mirror is acquired
+     * @param inventory The current inventory
+     * @return True or False if the location is in logic
+     */
+    private boolean logicSpectacleRock(Inventory inventory) {
+        if (spectacleRock.isAcquired())
+            return false;
+        
+        return inventory.getItem(Item.MIRROR).isOwned();
+    }
+    
+    /**
      * Check to see if the ether tablet item is in logic
      * It's in logic if it's not obtained and
      * 1) The book is acquired
@@ -194,19 +213,6 @@ public class DeathMountain extends Area {
         if (inventory.getItem(Item.HOOKSHOT).isOwned() &&
                 inventory.getItem(Item.HAMMER).isOwned())
             return true;
-        
-        return inventory.getItem(Item.MIRROR).isOwned();
-    }
-    
-    /**
-     * Check to see if the spectacle rock item is in logic
-     * It's in logic if it's not obtained and the mirror is acquired
-     * @param inventory The current inventory
-     * @return True or False if the location is in logic
-     */
-    private boolean logicSpectacleRock(Inventory inventory) {
-        if (spectacleRock.isAcquired())
-            return false;
         
         return inventory.getItem(Item.MIRROR).isOwned();
     }
@@ -248,6 +254,24 @@ public class DeathMountain extends Area {
     
     //Adding in when DarkWorld and TurtleRock are done
     /**
+     * Check to see if Floating Island is in logic
+     * It's in logic if it has not been obtained, if east dark
+     * death mountain can be reached, and the mirror is acquired
+     * @param inventory
+     * @param darkWorld
+     * @return 
+     
+    private boolean logicFloatingIsland(Inventory inventory, 
+            DarkWorld darkWorld){
+        
+        if (floatingIsland.isAcquired())
+            return false;
+        
+        return darkWorld.eastDeathMountainAccess(inventory) &&
+                inventory.getItem(Item.MIRROR).isOwned();
+    } */
+    
+        /**
      * Check to see if Mimic Cave is in logic
      * It's in logic if it has not been obtained, if the area
      * inside Turtle Rock can be reached, and the mirror is acquired
@@ -264,24 +288,6 @@ public class DeathMountain extends Area {
         return turtleRock.mimicCaveAccess(inventory) && 
                 inventory.getItem(Item.MIRROR).isOwned();
     
-    } */
-    
-    /**
-     * Check to see if Floating Island is in logic
-     * It's in logic if it has not been obtained, if east dark
-     * death mountain can be reached, and the mirror is acquired
-     * @param inventory
-     * @param darkWorld
-     * @return 
-     
-    private boolean logicFloatingIsland(Inventory inventory, 
-            DarkWorld darkWorld){
-        
-        if (floatingIsland.isAcquired())
-            return false;
-        
-        return darkWorld.eastDeathMountainAccess(inventory) &&
-                inventory.getItem(Item.MIRROR).isOwned();
     } */
     
     //Getters and Setters for the locations below
@@ -313,6 +319,20 @@ public class DeathMountain extends Area {
     public void setSpectacleRockCave(Item contents) {
         spectacleRockCave.setContents(contents);
     }
+    
+    /**
+     * @return the spectacleRock
+     */
+    public Location getSpectacleRock() {
+        return spectacleRock;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setSpectacleRock(Item contents) {
+        spectacleRock.setContents(contents);
+    }
 
     /**
      * @return the etherTablet
@@ -329,20 +349,6 @@ public class DeathMountain extends Area {
     }
 
     /**
-     * @return the spectacleRock
-     */
-    public Location getSpectacleRock() {
-        return spectacleRock;
-    }
-
-    /**
-     * @param contents The new contents of the chest
-     */
-    public void setSpectacleRock(Item contents) {
-        spectacleRock.setContents(contents);
-    }
-
-    /**
      * @return the spiralCave
      */
     public Location getSpiralCave() {
@@ -354,20 +360,6 @@ public class DeathMountain extends Area {
      */
     public void setSpiralCave(Item contents) {
         spiralCave.setContents(contents);
-    }
-
-    /**
-     * @return the mimicCave
-     */
-    public Location getMimicCave() {
-        return mimicCave;
-    }
-
-    /**
-     * @param contents The new contents of the chest
-     */
-    public void setMimicCave(Item contents) {
-        mimicCave.setContents(contents);
     }
 
     /**
@@ -480,5 +472,19 @@ public class DeathMountain extends Area {
      */
     public void setFloatingIsland(Item contents) {
         floatingIsland.setContents(contents);
+    }
+    
+    /**
+     * @return the mimicCave
+     */
+    public Location getMimicCave() {
+        return mimicCave;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setMimicCave(Item contents) {
+        mimicCave.setContents(contents);
     }
 }
