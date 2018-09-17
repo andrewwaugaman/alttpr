@@ -58,7 +58,7 @@ public class Reward {
         this.acquired = acquired;
     }
     
-    public boolean getAcquired() {
+    public boolean isAcquired() {
         return acquired;
     }
 }

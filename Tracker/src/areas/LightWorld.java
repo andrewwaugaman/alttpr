@@ -360,4 +360,104 @@ public class LightWorld extends Area {
     private boolean logicMushroom(Inventory inventory){
         return !mushroom.isAcquired();
     }    
+    
+    /**
+    public Location logicMagicBat(Inventory inventory, DarkWorld darkWorld){
+        if (!magicBat.isAcquired()) {
+            if (inventory.getItem(Item.HAMMER).isOwned() && 
+                    inventory.getItem(Item.POWDER).isOwned())
+                return magicBat;
+            if (darkWorld.northEastAccess(inventory) && 
+                    inventory.getItem(Item.MIRROR).isOwned() &&
+                    inventory.getItem(Item.POWDER).isOwned())
+                return magicBat;
+        }
+        
+        return null;
+    }
+        
+    public Location logicCave45(Inventory inventory, DarkWorld darkWorld){
+        if (!cave45.isAcquired())
+            if (darkWorld.southAccess(inventory) && 
+                    inventory.getItem(Item.MIRROR).isOwned())
+                return cave45;
+            
+        return null;
+    }
+    
+    public Location logicBombosTable(Inventory inventory, DarkWorld darkWorld){
+        if (!bombosTablet.isAcquired())
+            if (darkWorld.southAccess(inventory) &&
+                    inventory.getItem(Item.MIRROR).isOwned() &&
+                    inventory.getItem(Item.BOOK).isOwned() &&
+                    ((Sword)(inventory.getItem(Sword.SWORD))).getLevel() >= 2)
+                return bombosTablet;
+        
+        return null;
+    }
+    
+    public Location logicLakeHyliaIsland(Inventory inventory, 
+            DarkWorld darkWorld){
+        if (!lakeHyliaIsland.isAcquired())
+            if (!darkWorld.isClosed(inventory) && 
+                    inventory.getItem(Item.MIRROR).isOwned() &&
+                    inventory.getItem(Item.FLIPPERS).isOwned())
+            return lakeHyliaIsland;
+        
+        return null;
+    }
+    
+    public Location logicSahasrahla(Reward greenPendant){
+        if (!sahasrahla.isAcquired())
+            if (greenPendant.isAcquired())
+                return sahasrahla;
+        
+        return null;     
+    }
+    
+    public Location logicKingsTomb(Inventory inventory, DarkWorld darkWorld){
+        if (!kingsTomb.isAcquired()) {
+            if (inventory.getItem(Item.BOOTS).isOwned() && 
+                    ((Gloves)(inventory.getItem(Gloves.GLOVES))).getLevel()
+                    == 2)
+                return kingsTomb;
+            if (darkWorld.northEastAccess(inventory) && 
+                    inventory.getItem(Item.MIRROR).isOwned() &&
+                    inventory.getItem(Item.BOOTS).isOwned())
+                return kingsTomb;
+        }
+        
+        return null;
+    }
+    
+    public Location logicGraveyardLedge(Inventory inventory,
+            DarkWorld darkWorld){
+        if (!graveyardLedge.isAcquired())
+            if (darkWorld.northEastAccess(inventory) && 
+                    inventory.getItem(Item.MIRROR).isOwned())
+                return graveyardLedge;
+            
+        return null;
+    }
+    
+    public Location logicLumberjackTree(Inventory inventory, 
+            HyruleCastle hyruleCastle){
+        if (!lumberjackTree.isAcquired())
+            if (hyruleCastle.isAgahnimDefeated() &&
+                    inventory.getItem(Item.BOOTS).isOwned())
+                return lumberjackTree;
+        
+        return null;
+    }
+    
+    public Location logicMasterSwordPedestal(Reward greenPendant, 
+            Reward bluePendant, Reward redPendant){
+        if (!masterSwordPedestal.isAcquired())
+            if (greenPendant.isAcquired() && bluePendant.isAcquired() &&
+                    redPendant.isAcquired())
+                return masterSwordPedestal;
+        
+        return null;
+    }
+    */
 }
