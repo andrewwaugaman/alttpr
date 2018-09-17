@@ -46,7 +46,7 @@ public class DeathMountain extends Area {
     
     /**
      * Constructor Method
-     * Calls the parent constructor (in Dungeon)
+     * Calls the parent constructor
      * Instantiate the 14 Locations with their description
      */
     public DeathMountain() {
