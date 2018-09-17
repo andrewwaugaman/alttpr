@@ -52,11 +52,6 @@ public class EasternPalace extends Dungeon {
     @Override
     public ArrayList<Location> locationsInLogic(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
-        
-        //Check to see if there is a way to enter the dungeon
-        if(closed(inventory)){
-            return inLogic;
-        }
 
         //Check the logic of each of the chests and add them to the list
         if (logicCannonballChest(inventory))
@@ -75,16 +70,6 @@ public class EasternPalace extends Dungeon {
     }
     
     /**
-     * Check to see if there is a way to enter the dungeon
-     * Eastern Palace is always open
-     * @param inventory The current inventory 
-     * @return True or False if it's closed
-     */
-    private boolean closed(Inventory inventory){
-        return false;
-    }
-    
-    /**
      * Check to see if it's possible to full clear the dungeon
      * Eastern Palace requires the bow and the lantern to full clear
      * (Since Bow is required, that can be used for Armos Knights)
@@ -92,8 +77,6 @@ public class EasternPalace extends Dungeon {
      * @return True or False if it can be full cleared
      */
     public boolean canFullClear(Inventory inventory) {
-        if (closed(inventory))
-            return false;
         return (inventory.getItem(Item.BOW).isOwned() && 
                 inventory.getItem(Item.LANTERN).isOwned());      
     }
