@@ -300,7 +300,7 @@ public class DeathMountain extends Area {
     }
 
     /**
-     * @param contents The new contents of the chest
+     * @param contents The old man's item
      */
     public void setOldMan(Item contents) {
         oldMan.setContents(contents);
@@ -314,7 +314,7 @@ public class DeathMountain extends Area {
     }
 
     /**
-     * @param contents The new contents of the chest
+     * @param contents The new contents of spectacle rock cave
      */
     public void setSpectacleRockCave(Item contents) {
         spectacleRockCave.setContents(contents);
@@ -328,7 +328,7 @@ public class DeathMountain extends Area {
     }
 
     /**
-     * @param contents The new contents of the chest
+     * @param contents The new item on spectacle rock
      */
     public void setSpectacleRock(Item contents) {
         spectacleRock.setContents(contents);
@@ -342,7 +342,7 @@ public class DeathMountain extends Area {
     }
 
     /**
-     * @param contents The new contents of the chest
+     * @param contents The new contents of the tablet
      */
     public void setEtherTablet(Item contents) {
         etherTablet.setContents(contents);
@@ -468,7 +468,7 @@ public class DeathMountain extends Area {
     }
 
     /**
-     * @param contents The new contents of the chest
+     * @param contents The new item on the floating island
      */
     public void setFloatingIsland(Item contents) {
         floatingIsland.setContents(contents);

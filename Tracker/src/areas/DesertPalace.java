@@ -292,7 +292,6 @@ public class DesertPalace extends Dungeon {
         if(inventory.getItem(Item.HAMMER).isOwned())
             return true;
         
-        //I need to check if this damages it
         if(inventory.getItem(Item.SOMARIA).isOwned())
             return true;
         
@@ -326,7 +325,7 @@ public class DesertPalace extends Dungeon {
     }
     
     /**
-     * @param contents The new contents of the chest
+     * @param contents The new item on the torch
      */
     public void setTorch(Item contents) {
         torch.setContents(contents);
@@ -382,7 +381,7 @@ public class DesertPalace extends Dungeon {
     }
     
     /**
-     * @param contents The new contents of the chest
+     * @param contents Lanmolas new item
      */
     public void setLanmolas(Item contents) {
         lanmolas.setContents(contents);

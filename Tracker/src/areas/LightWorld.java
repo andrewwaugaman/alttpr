@@ -42,7 +42,7 @@ public class LightWorld extends Area {
     
     private final Location desertLedge;
     private final Location checkerboardCave;
-    private final Location aginahscave;
+    private final Location aginahsCave;
     private final Location bombosTablet;
     
     private final Location sunkenTreasure;
@@ -116,7 +116,7 @@ public class LightWorld extends Area {
     
         desertLedge = new Location("Desert Ledge");
         checkerboardCave = new Location("Checkerboard Cave");
-        aginahscave = new Location("Aginah's Cave");
+        aginahsCave = new Location("Aginah's Cave");
         bombosTablet = new Location("Bombos Tablet");
     
         sunkenTreasure = new Location("Sunken Treasure");
@@ -274,8 +274,8 @@ public class LightWorld extends Area {
                 if(!desertLedge.isAcquired())
                     inLogic.add(desertLedge);
         
-        if(!aginahscave.isAcquired())
-            inLogic.add(aginahscave);
+        if(!aginahsCave.isAcquired())
+            inLogic.add(aginahsCave);
             
         return inLogic;
     }
@@ -460,4 +460,705 @@ public class LightWorld extends Area {
         return null;
     }
     */
+    
+    //Getters and Setters for the locations below
+    /**
+     * @return the kakarikoWellTop
+     */
+    public Location getKakarikoWellTop() {
+        return kakarikoWellTop;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setKakarikoWellTop(Item contents) {
+        kakarikoWellTop.setContents(contents);
+    }
+
+    /**
+     * @return the kakarikoWellLeft
+     */
+    public Location getKakarikoWellLeft() {
+        return kakarikoWellLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setKakarikoWellLeft(Item contents) {
+        kakarikoWellLeft.setContents(contents);
+    }
+
+    /**
+     * @return the kakarikoWellMiddle
+     */
+    public Location getKakarikoWellMiddle() {
+        return kakarikoWellMiddle;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setKakarikoWellMiddle(Item contents) {
+        kakarikoWellMiddle.setContents(contents);
+    }
+    
+    /**
+     * @return the kakarikoWellRight
+     */
+    public Location getKakarikoWellRight() {
+        return kakarikoWellRight;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setKakarikoWellRight(Item contents) {
+        kakarikoWellRight.setContents(contents);
+    }
+    
+    /**
+     * @return the kakarikoWellBottom
+     */
+    public Location getKakarikoWellBottom() {
+        return kakarikoWellBottom;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setKakarikoWellBottom(Item contents) {
+        kakarikoWellBottom.setContents(contents);
+    }
+
+    /**
+     * @return the blindsHideoutTop
+     */
+    public Location getBlindsHideoutTop() {
+        return blindsHideoutTop;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setBlindsHideoutTop(Item contents) {
+        blindsHideoutTop.setContents(contents);
+    }
+    
+    /**
+     * @return the blindsHideoutLeft
+     */
+    public Location getBlindsHideoutLeft() {
+        return blindsHideoutLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setBlindsHideoutLeft(Item contents) {
+        blindsHideoutLeft.setContents(contents);
+    }
+
+    /**
+     * @return the blindsHideoutRight
+     */
+    public Location getBlindsHideoutRight() {
+        return blindsHideoutRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setBlindsHideoutRight(Item contents) {
+        blindsHideoutRight.setContents(contents);
+    }
+
+    /**
+     * @return the blindsHideoutFarLeft
+     */
+    public Location getBlindsHideoutFarLeft() {
+        return blindsHideoutFarLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setBlindsHideoutFarLeft(Item contents) {
+        blindsHideoutFarLeft.setContents(contents);
+    }
+
+    /**
+     * @return the blindsHideoutFarRight
+     */
+    public Location getBlindsHideoutFarRight() {
+        return blindsHideoutFarRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setBlindsHideoutFarRight(Item contents) {
+        blindsHideoutFarRight.setContents(contents);
+    }
+
+    /**
+     * @return the bottleMerchant
+     */
+    public Location getBottleMerchant() {
+        return bottleMerchant;
+    }
+    
+    /**
+     * @param contents The Bottle Merchant's new item
+     */
+    public void setBottleMerchant(Item contents) {
+        bottleMerchant.setContents(contents);
+    }
+
+    /**
+     * @return the chickenHouse
+     */
+    public Location getChickenHouse() {
+        return chickenHouse;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setChickenHouse(Item contents) {
+        chickenHouse.setContents(contents);
+    }
+
+    /**
+     * @return the sickKid
+     */
+    public Location getSickKid() {
+        return sickKid;
+    }
+
+    /**
+     * @param contents Sick Kid's new item
+     */
+    public void setSickKid(Item contents) {
+        sickKid.setContents(contents);
+    }
+    
+    /**
+     * @return the kakarikoTavern
+     */
+    public Location getKakarikoTavern() {
+        return kakarikoTavern;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setKakarikoTavern(Item contents) {
+        kakarikoTavern.setContents(contents);
+    }
+
+    /**
+     * @return the magicBat
+     */
+    public Location getMagicBat() {
+        return magicBat;
+    }
+
+    /**
+     * @param contents The new contents of the magic bat
+     */
+    public void setMagicBat(Item contents) {
+        magicBat.setContents(contents);
+    }
+    
+    /**
+     * @return the library
+     */
+    public Location getLibrary() {
+        return library;
+    }
+    
+    /**
+     * @param contents The new contents of the library
+     */
+    public void setLibrary(Item contents) {
+        library.setContents(contents);
+    }
+
+    /**
+     * @return the mazeRace
+     */
+    public Location getMazeRace() {
+        return mazeRace;
+    }
+    
+    /**
+     * @param contents The new contents of the maze race
+     */
+    public void setMazeRace(Item contents) {
+        mazeRace.setContents(contents);
+    }
+
+    /**
+     * @return the fluteSpot
+     */
+    public Location getFluteSpot() {
+        return fluteSpot;
+    }
+    
+    /**
+     * @param contents The new contents of the flute spot
+     */
+    public void setFluteSpot(Item contents) {
+        fluteSpot.setContents(contents);
+    }
+
+    /**
+     * @return the cave45
+     */
+    public Location getCave45() {
+        return cave45;
+    }
+    
+    /**
+     * @param contents The new contents of cave45
+     */
+    public void setCave45(Item contents) {
+        cave45.setContents(contents);
+    }
+
+    /**
+     * @return the linksHouse
+     */
+    public Location getLinksHouse() {
+        return linksHouse;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setLinksHouse(Item contents) {
+        linksHouse.setContents(contents);
+    }
+
+    /**
+     * @return the desertLedge
+     */
+    public Location getDesertLedge() {
+        return desertLedge;
+    }
+    
+    /**
+     * @param contents The new contents of the desert ledge
+     */
+    public void setDesertLedge(Item contents) {
+        desertLedge.setContents(contents);
+    }
+
+    /**
+     * @return the checkerboardCave
+     */
+    public Location getCheckerboardCave() {
+        return checkerboardCave;
+    }
+    
+    /**
+     * @param contents The new contents of the checkerboard cave
+     */
+    public void setCheckerboardCave(Item contents) {
+        checkerboardCave.setContents(contents);
+    }
+
+    /**
+     * @return the aginahscave
+     */
+    public Location getAginahsCave() {
+        return aginahsCave;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setAginahsCave(Item contents) {
+        aginahsCave.setContents(contents);
+    }
+
+    /**
+     * @return the bombosTablet
+     */
+    public Location getBombosTablet() {
+        return bombosTablet;
+    }
+    
+    /**
+     * @param contents The new contents of the tablet
+     */
+    public void setBombosTablet(Item contents) {
+        bombosTablet.setContents(contents);
+    }
+
+    /**
+     * @return the sunkenTreasure
+     */
+    public Location getSunkenTreasure() {
+        return sunkenTreasure;
+    }
+    
+    /**
+     * @param contents The new contents of the sunken treasure
+     */
+    public void setSunkenTreasure(Item contents) {
+        sunkenTreasure.setContents(contents);
+    }
+
+    /**
+     * @return the floodgateChest
+     */
+    public Location getFloodgateChest() {
+        return floodgateChest;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setFloodgateChest(Item contents) {
+        floodgateChest.setContents(contents);
+    }
+
+    /**
+     * @return the miniMoldormCaveFarLeft
+     */
+    public Location getMiniMoldormCaveFarLeft() {
+        return miniMoldormCaveFarLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setMiniMoldormCaveFarLeft(Item contents) {
+        miniMoldormCaveFarLeft.setContents(contents);
+    }
+
+    /**
+     * @return the miniMoldormCaveLeft
+     */
+    public Location getMiniMoldormCaveLeft() {
+        return miniMoldormCaveLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setMiniMoldormCaveLeft(Item contents) {
+        miniMoldormCaveLeft.setContents(contents);
+    }
+
+    /**
+     * @return the miniMoldormCaveRight
+     */
+    public Location getMiniMoldormCaveRight() {
+        return miniMoldormCaveRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setMiniMoldormCaveRight(Item contents) {
+        miniMoldormCaveRight.setContents(contents);
+    }
+
+    /**
+     * @return the miniMoldormCaveFarRight
+     */
+    public Location getMiniMoldormCaveFarRight() {
+        return miniMoldormCaveFarRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void miniMoldormCaveFarRight(Item contents) {
+        miniMoldormCaveFarRight.setContents(contents);
+    }
+
+    /**
+     * @return the miniMoldormCaveNPC
+     */
+    public Location getMiniMoldormCaveNPC() {
+        return miniMoldormCaveNPC;
+    }
+    
+    /**
+     * @param contents The NPC's new item
+     */
+    public void setMiniMoldormCaveNPC(Item contents) {
+        miniMoldormCaveNPC.setContents(contents);
+    }
+
+    /**
+     * @return the iceRodCave
+     */
+    public Location getIceRodCave() {
+        return iceRodCave;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setIceRodCave(Item contents) {
+        iceRodCave.setContents(contents);
+    }
+    
+    /**
+     * @return the lakeHyliaIsland
+     */
+    public Location getLakeHyliaIsland() {
+        return lakeHyliaIsland;
+    }
+    
+    /**
+     * @param contents The new contents of Lake Hylia Island
+     */
+    public void setLakeHyliaIsland(Item contents) {
+        lakeHyliaIsland.setContents(contents);
+    }
+
+    /**
+     * @return the hobo
+     */
+    public Location getHobo() {
+        return hobo;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHobo(Item contents) {
+        hobo.setContents(contents);
+    }
+
+    /**
+     * @return the sahasrahlasHutLeft
+     */
+    public Location getSahasrahlasHutLeft() {
+        return sahasrahlasHutLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setSahasrahlasHutLeft(Item contents) {
+        sahasrahlasHutLeft.setContents(contents);
+    }
+
+    /**
+     * @return the sahasrahlasHutMiddle
+     */
+    public Location getSahasrahlasHutMiddle() {
+        return sahasrahlasHutMiddle;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setSahasrahlasHutMiddle(Item contents) {
+        sahasrahlasHutMiddle.setContents(contents);
+    }
+
+    /**
+     * @return the sahasrahlasHutRight
+     */
+    public Location getSahasrahlasHutRight() {
+        return sahasrahlasHutRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setSahasrahlasHutRight(Item contents) {
+        sahasrahlasHutRight.setContents(contents);
+    }
+
+    /**
+     * @return Sahasrahla
+     */
+    public Location getSahasrahla() {
+        return sahasrahla;
+    }
+    
+    /**
+     * @param contents Sahasrahla's new item
+     */
+    public void setSahasrahla(Item contents) {
+        sahasrahla.setContents(contents);
+    }
+
+    /**
+     * @return the potionShop
+     */
+    public Location getPotionShop() {
+        return potionShop;
+    }
+    
+    /**
+     * @param contents The new contents of the potion shop
+     */
+    public void setPotionShop(Item contents) {
+        potionShop.setContents(contents);
+    }
+
+    /**
+     * @return the waterfallFairyLeft
+     */
+    public Location getWaterfallFairyLeft() {
+        return waterfallFairyLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setWaterfallFairyLeft(Item contents) {
+        waterfallFairyLeft.setContents(contents);
+    }
+
+    /**
+     * @return the waterfallFairyRight
+     */
+    public Location getWaterfallFairyRight() {
+        return waterfallFairyRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setWaterfallFairyRight(Item contents) {
+        waterfallFairyRight.setContents(contents);
+    }
+
+    /**
+     * @return the kingZora
+     */
+    public Location getKingZora() {
+        return kingZora;
+    }
+    
+    /**
+     * @param contents The new item King Zora is holding
+     */
+    public void setKingZora(Item contents) {
+        kingZora.setContents(contents);
+    }
+
+    /**
+     * @return the zorasLedge
+     */
+    public Location getZorasLedge() {
+        return zorasLedge;
+    }
+    
+    /**
+     * @param contents The new contents of Zora's Ledge
+     */
+    public void setZorasLedge(Item contents) {
+        zorasLedge.setContents(contents);
+    }
+
+    /**
+     * @return the kingsTomb
+     */
+    public Location getKingsTomb() {
+        return kingsTomb;
+    }
+    
+    /**
+     * @param contents The new contents of King's tomb
+     */
+    public void setKingsTomb(Item contents) {
+        kingsTomb.setContents(contents);
+    }
+
+    /**
+     * @return the graveyardLedge
+     */
+    public Location getGraveyardLedge() {
+        return graveyardLedge;
+    }
+    
+    /**
+     * @param contents The new contents of the graveyard ledge
+     */
+    public void setGraveyardLedge(Item contents) {
+        graveyardLedge.setContents(contents);
+    }
+
+    /**
+     * @return the pegasusRocks
+     */
+    public Location getPegasusRocks() {
+        return pegasusRocks;
+    }
+    
+    /**
+     * @param contents The new contents of the Pegasus rocks
+     */
+    public void setPegasusRocks(Item contents) {
+        pegasusRocks.setContents(contents);
+    }
+
+    /**
+     * @return the lumberjackTree
+     */
+    public Location getLumberjackTree() {
+        return lumberjackTree;
+    }
+    
+    /**
+     * @param contents The new contents of the lumberjack tree
+     */
+    public void setLumberjackTree(Item contents) {
+        lumberjackTree.setContents(contents);
+    }
+
+    /**
+     * @return the lostWoodsHideout
+     */
+    public Location getLostWoodsHideout() {
+        return lostWoodsHideout;
+    }
+    
+    /**
+     * @param contents The new contents of the lost woods hideout
+     */
+    public void setLostWoodsHideout(Item contents) {
+        lostWoodsHideout.setContents(contents);
+    }
+
+    /**
+     * @return the mushroom
+     */
+    public Location getMushroom() {
+        return mushroom;
+    }
+    
+    /**
+     * @param contents The new contents of the mushroom spot
+     */
+    public void setMushroom(Item contents) {
+        mushroom.setContents(contents);
+    }
+
+    /**
+     * @return the masterSwordPedestal
+     */
+    public Location getMasterSwordPedestal() {
+        return masterSwordPedestal;
+    }
+    
+    /**
+     * @param contents The new contents of the pedestal
+     */
+    public void setMasterSwordPedestal(Item contents) {
+        masterSwordPedestal.setContents(contents);
+    }
 }

@@ -248,51 +248,87 @@ public class TowerOfHera extends Dungeon {
     }          
     
     
-    //Getters and Setters for the locations below      
+    //Getters and Setters for the locations below  
+    /**
+     * @return the basementCage
+     */
     public Location getBasementCage() {
         return basementCage;
     }
-    
+ 
+    /**
+     * @param contents The new item in the basement cage
+     */
     public void setBasementCage(Item contents) {
         basementCage.setContents(contents);
     }
     
+    /**
+     * @return the mapChest
+     */    
     public Location getMapChest() {
         return mapChest;
     }
     
+    /**
+     * @param contents The new contents of the chest
+     */    
     public void setMapChest(Item contents) {
         mapChest.setContents(contents);
     }
 
+    /**
+     * @return the bigKeyChest
+     */    
     public Location getBigKeyChest() {
         return bigKeyChest;
     }
     
-    public Location getCompassChest() {
-        return compassChest;
-    }
-    
-    public void setCompassChest(Item contents) {
-        compassChest.setContents(contents);
-    }
-    
+    /**
+     * @param contents The new contents of the chest
+     */    
     public void setBigKeyChest(Item contents) {
         bigKeyChest.setContents(contents);
     }
+    
+    /**
+     * @return the compassChest
+     */    
+    public Location getCompassChest() {
+        return compassChest;
+    }
 
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setCompassChest(Item contents) {
+        compassChest.setContents(contents);
+    }
+
+    /**
+     * @return the bigChest
+     */    
     public Location getBigChest() {
         return bigChest;
     }
-    
+
+    /**
+     * @param contents The new contents of the chest
+     */    
     public void setBigChest(Item contents) {
         bigChest.setContents(contents);
     }
 
+    /**
+     * @return the moldorm
+     */    
     public Location getMoldorm() {
         return moldorm;
     }
-    
+
+    /**
+     * @param contents Moldorm's new item
+     */
     public void setMoldorm(Item contents) {
         moldorm.setContents(contents);
     }

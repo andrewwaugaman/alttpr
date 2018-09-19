@@ -261,7 +261,7 @@ public class EasternPalace extends Dungeon {
     }
     
     /**
-     * @param contents The new contents of the chest
+     * @param contents The Armos Knights new item
      */
     public void setArmosKnights(Item contents) {
         armosKnights.setContents(contents);
