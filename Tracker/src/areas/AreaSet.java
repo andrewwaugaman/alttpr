@@ -25,7 +25,7 @@ public class AreaSet {
         areas = new HashMap<>();
         
         //areas.put(LightWorld.NAME, new LightWorld());
-        //areas.put(HyruleCastle.NAME, new HyruleCastle());
+        areas.put(HyruleCastle.NAME, new HyruleCastle());
         areas.put(EasternPalace.NAME, new EasternPalace());   
         areas.put(DesertPalace.NAME, new DesertPalace());
         //areas.put(DeathMountain.NAME, new DeathMountain());
