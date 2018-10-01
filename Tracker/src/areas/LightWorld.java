@@ -418,8 +418,8 @@ public class LightWorld extends Area {
     public Location logicKingsTomb(Inventory inventory, DarkWorld darkWorld){
         if (!kingsTomb.isAcquired()) {
             if (inventory.getItem(Item.BOOTS).isOwned() && 
-                    ((Gloves)(inventory.getItem(Gloves.GLOVES))).getLevel()
-                    == 2)
+                    inventory.getItem(Gloves.GLOVES).getDescription()
+                    .equals(Gloves.TITANS_MITTS))
                 return kingsTomb;
             if (darkWorld.northEastAccess(inventory) && 
                     inventory.getItem(Item.MIRROR).isOwned() &&
