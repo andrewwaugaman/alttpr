@@ -25,6 +25,10 @@ public class Reward {
     public final static String CRYSTAL_6 = "Crystal 6";
     public final static String CRYSTAL_7 = "Crystal 7";
     
+    //Agahnim for checks
+    public final static String AGAHNIM_1 = "Agahnim 1";
+    public final static String AGAHNIM_2 = "Agahnim 2";
+    
     //When the Reward is unknown
     public final static String UNKNOWN = "Unknown";
     

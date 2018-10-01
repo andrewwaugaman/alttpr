@@ -29,6 +29,14 @@ public abstract class Dungeon extends Area {
         this.reward = new Reward(Reward.UNKNOWN);
     }
     
+    /**
+     * Constructor method.  Sets the reward of the dungeon
+     * @param reward The reward of the dungeon
+     */
+    public Dungeon(Reward reward) {
+        this.reward = reward;
+    }
+    
     //Getter and Setter methods below
     
     /**
