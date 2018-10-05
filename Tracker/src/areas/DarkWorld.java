@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import items.*;
 
 /**
- *
+ * Maybe make a method for each portal instead of checks with no context?
+ * Portals check should be in lightWorld/deathMountain, here, or new class?
  * @author Andrew
  */
 public class DarkWorld extends Area {
@@ -57,12 +58,9 @@ public class DarkWorld extends Area {
     private final Location hookshotCaveBottomRight;
     
     //Used to check if Dark World is Open
-    private final LightWorld lightWorld;
-    private final DeathMountain deathMountain;
-    private final Reward agahnim;
-    
-    public DarkWorld(LightWorld lightWorld, DeathMountain deathMountain,
-            Reward agahnim) {
+    private final Portals portals;
+
+    public DarkWorld(DeathMountain deathMountain, Reward agahnim) {
         super();
         
         bumperCave = new Location("Bumper Cave");
@@ -104,9 +102,7 @@ public class DarkWorld extends Area {
         hookshotCaveBottomLeft = new Location("Hookshot Cave - Bottom Left");
         hookshotCaveBottomRight = new Location("Hookshot Cave - Bottom Right");
         
-        this.lightWorld = lightWorld;
-        this.deathMountain = deathMountain;
-        this.agahnim = agahnim;
+        portals = new Portals(deathMountain, agahnim);
     }
     
     /**
@@ -141,7 +137,8 @@ public class DarkWorld extends Area {
         if(logicSpikeCave(inventory))
             inLogic.add(spikeCave);
         
-        inLogic.addAll(logicDarkDeathMountain(inventory));
+        if(eastDarkDeathMountainAccess(inventory))
+            inLogic.addAll(logicEastDarkDeathMountain(inventory));
         
         return inLogic;
         
@@ -169,7 +166,7 @@ public class DarkWorld extends Area {
      */
     private boolean logicPyramidNoPearl(Inventory inventory) {
         if (!pyramid.isAcquired())
-            if (agahnim.isAcquired())
+            if (portals.agahnimPortalOpen())
                 return true;
         
         return false;   
@@ -180,8 +177,7 @@ public class DarkWorld extends Area {
      * Public Method so that it can be used by SkullWoods and ThievesTown
      * North West Dark World is open if either:
      * 1) Agahnim is defeated and the hookshot is acquired
-     * 2) The Hammer and Power Gloves are acquired
-     * 3) The Titan's Mitts are acquired
+     * 2) The Kakariko Portal is open
      * @param inventory the current inventory
      * @return True of False if it's accessible
      */
@@ -190,15 +186,11 @@ public class DarkWorld extends Area {
         if (closed(inventory))
             return false;
         
-        if (agahnim.isAcquired() && inventory.getItem(Item.HOOKSHOT).isOwned())
+        if (portals.agahnimPortalOpen() && 
+                inventory.getItem(Item.HOOKSHOT).isOwned())
             return true;
         
-        if (inventory.getItem(Item.HAMMER).isOwned() &&
-                inventory.getItem(Gloves.GLOVES).isOwned())
-            return true;
-        
-        return inventory.getItem(Gloves.GLOVES).getDescription()
-                .equals(Gloves.TITANS_MITTS);
+        return portals.kakarikoPortalOpen(inventory);
     }
 
     private ArrayList<Location> logicNorthWestDark(Inventory inventory){
@@ -239,8 +231,8 @@ public class DarkWorld extends Area {
      * Public Method so that it can be used by SwampPalace and IcePalace
      * South Dark World is open if either:
      * 1) Agahnim is defeated and the Hammer or Hookshot is acquired
-     * 2) The Hammer and Power Gloves are acquired
-     * 3) The Titan's Mitts are acquired
+     * 2) The South Shore portal is open
+     * 3) The Kakariko portal is open (Titan's Mitts)
      * @param inventory the current inventory
      * @return True of False if it's accessible
      */
@@ -249,19 +241,17 @@ public class DarkWorld extends Area {
         if (closed(inventory))
             return false;
         
-        if (agahnim.isAcquired()) {
+        if (portals.agahnimPortalOpen()) {
             if (inventory.getItem(Item.HAMMER).isOwned())
                 return true;
             if (inventory.getItem(Item.HOOKSHOT).isOwned())
                 return true;
         }
         
-        if (inventory.getItem(Item.HAMMER).isOwned() &&
-                inventory.getItem(Gloves.GLOVES).isOwned())
+        if (portals.southShorePortalOpen(inventory))
             return true;
         
-        return inventory.getItem(Gloves.GLOVES).getDescription()
-                .equals(Gloves.TITANS_MITTS);
+        return portals.kakarikoPortalOpen(inventory);
     }
 
     private ArrayList<Location> logicSouthDark(Inventory inventory){
@@ -294,22 +284,13 @@ public class DarkWorld extends Area {
     /**
      * Check to see if Mire Area is reachable
      * Public Method so that it can be used by MiseryMire
-     * Mire Area is open if:
-     * 1) The Flute is acquired
-     * 2) The Titan's Mitts are acquired
+     * Mire Area is open if the Mire Area portal is open
      * @param inventory the current inventory
      * @return True of False if it's accessible
      */
     public boolean mireAreaAccess(Inventory inventory) {  
         
-        if (closed(inventory))
-            return false;
-        
-        if (inventory.getItem(Item.FLUTE).isOwned())
-            return true;
-        
-        return inventory.getItem(Gloves.GLOVES).getDescription()
-                .equals(Gloves.TITANS_MITTS);
+        return portals.mirePortalOpen(inventory);
     }
 
     private ArrayList<Location> logicMireArea(Inventory inventory){
@@ -329,8 +310,8 @@ public class DarkWorld extends Area {
      * Public Method so that it can be used by PalaceOfDarkness
      * East Dark World is open if:
      * 1) Agahnim is defeated
-     * 2) The Hammer and Power Gloves are acquired
-     * 2) The Titan's Mitts and Flippers
+     * 2) The East Hyrule portal is open
+     * 3) The Kakariko portal is open and the flippers are acquired
      * @param inventory the current inventory
      * @return True of False if it's accessible
      */
@@ -339,16 +320,11 @@ public class DarkWorld extends Area {
         if (closed(inventory))
             return false;
         
-        if (agahnim.isAcquired())
+        if (portals.eastHyrulePortalOpen(inventory))
             return true;
         
-        if (inventory.getItem(Item.HAMMER).isOwned() &&
-                inventory.getItem(Gloves.GLOVES).isOwned())
-            return true;
-        
-        return (inventory.getItem(Gloves.GLOVES).getDescription()
-                .equals(Gloves.TITANS_MITTS) &&
-                inventory.getItem(Item.FLIPPERS).isOwned());
+        return portals.kakarikoPortalOpen(inventory) &&
+                inventory.getItem(Item.FLIPPERS).isOwned();
     }
 
     private ArrayList<Location> logicEastDark(Inventory inventory){
@@ -365,16 +341,23 @@ public class DarkWorld extends Area {
       
     /**
      * Check to see if the spike cave's item is in logic
-     * It's in logic if it's not obtained and:
+     * It's in logic if it's not obtained and Death Mountain is accessible:
      * 1) The Hammer is acquired
      * 2) Power Gloves are acquired
      * 3) An invincibility item is acquired with a bottle for Magic Refill
      *    - Cane of Byrna
      *    - Magic Cape    
+     * Note - Check about Half Magic
      * @param inventory The current inventory
      * @return True or False if the location is in logic
      */
     private boolean logicSpikeCave(Inventory inventory) {
+        if (!spikeCave.isAcquired())
+            return false;
+        
+        if (portals.deathMountainWestPortalOpen(inventory))
+            return false;
+        
         if (!inventory.getItem(Item.HAMMER).isOwned())
             return false;
         
@@ -389,6 +372,51 @@ public class DarkWorld extends Area {
     }
     
     /**
+     * Check to see if East Dark Death Mountain is reachable
+     * Public Method so that it can be used by TurtleRock
+     * East Dark Death Mountain is open if either death 
+     * moutain portal is open
+     * @param inventory the current inventory
+     * @return True of False if it's accessible
+     */
+    public boolean eastDarkDeathMountainAccess(Inventory inventory) {      
+        
+        if (closed(inventory))
+            return false;
+        
+        return portals.deathMountainNorthEastPortalOpen(inventory) || 
+                portals.deathMountainSouthEastPortalOpen(inventory);
+    }
+
+    private ArrayList<Location> logicEastDarkDeathMountain(Inventory inventory){
+        ArrayList<Location> inLogic = new ArrayList();
+         
+        if (!superbunnyCaveTop.isAcquired())
+            inLogic.add(superbunnyCaveTop);
+   
+        if (!superbunnyCaveBottom.isAcquired())
+            inLogic.add(superbunnyCaveBottom);
+        
+        if (inventory.getItem(Item.HOOKSHOT).isOwned()) {
+            
+            if (!hookshotCaveTopRight.isAcquired())
+                inLogic.add(hookshotCaveTopRight);
+            if (!hookshotCaveTopLeft.isAcquired())
+                inLogic.add(hookshotCaveTopLeft);
+            if (!hookshotCaveBottomLeft.isAcquired())
+                inLogic.add(hookshotCaveBottomLeft);
+            if (!hookshotCaveBottomRight.isAcquired())
+                inLogic.add(hookshotCaveBottomRight);
+        }
+        else
+            if (inventory.getItem(Item.BOOTS).isOwned())
+                if (!hookshotCaveBottomRight.isAcquired())
+                    inLogic.add(hookshotCaveBottomRight);                
+
+        return inLogic;
+    }  
+    
+    
     public ArrayList<Location> logicPyramidFairy(Inventory inventory, 
             Reward crystal5, Reward crystal6) {
         ArrayList<Location> inLogic = new ArrayList();
@@ -397,7 +425,7 @@ public class DarkWorld extends Area {
                 southDarkAccess(inventory)) { 
             if (inventory.getItem(Item.HAMMER).isOwned() ||
                     (inventory.getItem(Item.MIRROR).isOwned() &&
-                    agahnim.isAcquired())) {
+                    portals.agahnimPortalOpen())) {
                 inLogic.add(pyramidFairyLeft);
                 inLogic.add(pyramidFairyRight);
             }
@@ -405,5 +433,85 @@ public class DarkWorld extends Area {
         
         return inLogic;
     }
-    */
+    
+    /**
+     * Private class to check which portals are on logic that will 
+     * be used to see what areas of the Dark World are accessible
+     */
+    private class Portals {
+        
+        private final DeathMountain deathMountain;
+        private final Reward agahnim;
+        
+        public Portals(DeathMountain deathMountain, Reward agahnim)
+        {
+            this.deathMountain = deathMountain;
+            this.agahnim = agahnim;
+        }
+        
+        public boolean agahnimPortalOpen()
+        {
+            return agahnim.isAcquired();
+        }
+        
+        public boolean kakarikoPortalOpen(Inventory inventory)
+        {
+            //Need Titan's Mitts or Power Gloves + Hammer
+            return inventory.getItem(Gloves.GLOVES).getDescription()
+                    .equals(Gloves.TITANS_MITTS) ||
+                    (inventory.getItem(Gloves.GLOVES).isOwned() &&
+                    inventory.getItem(Item.HAMMER).isOwned());
+        }
+        
+        public boolean mirePortalOpen(Inventory inventory)
+        {
+            return inventory.getItem(Gloves.GLOVES).getDescription()
+                    .equals(Gloves.TITANS_MITTS) &&
+                    inventory.getItem(Item.FLUTE).isOwned();
+        }
+        
+        public boolean southShorePortalOpen(Inventory inventory)
+        {
+            return inventory.getItem(Gloves.GLOVES).isOwned() &&
+                    inventory.getItem(Item.HAMMER).isOwned();
+        }
+        
+        public boolean lakeHyliaPortalOpen(Inventory inventory)
+        {
+            return inventory.getItem(Gloves.GLOVES).getDescription()
+                    .equals(Gloves.TITANS_MITTS) &&
+                    inventory.getItem(Item.FLIPPERS).isOwned();
+        }
+        
+        public boolean eastHyrulePortalOpen(Inventory inventory)
+        {
+            return inventory.getItem(Gloves.GLOVES).isOwned() &&
+                    inventory.getItem(Item.HAMMER).isOwned();            
+        }
+        
+        public boolean deathMountainWestPortalOpen(Inventory inventory)
+        {
+            return !deathMountain.closed(inventory);
+        }
+        
+        public boolean deathMountainSouthEastPortalOpen(Inventory inventory)
+        {
+            if (deathMountain.eastDeathMountainAccess(inventory))
+                return inventory.getItem(Gloves.GLOVES).getDescription()
+                        .equals(Gloves.TITANS_MITTS);
+            
+            return false;
+        }
+        
+        public boolean deathMountainNorthEastPortalOpen(Inventory inventory)
+        {
+            if (deathMountain.eastDeathMountainAccess(inventory))
+                return inventory.getItem(Gloves.GLOVES).getDescription()
+                        .equals(Gloves.TITANS_MITTS) && 
+                        inventory.getItem(Item.HAMMER).isOwned();
+                    
+            
+            return false;            
+        }
+    }
 }
