@@ -59,6 +59,9 @@ public class DarkWorld extends Area {
     
     //Used to check if Dark World is Open
     private final Portals portals;
+    
+    //Name of the area
+    public final static String NAME = "Dark World";
 
     public DarkWorld(DeathMountain deathMountain, Reward agahnim) {
         super();

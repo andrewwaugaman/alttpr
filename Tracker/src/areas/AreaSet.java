@@ -21,21 +21,25 @@ public class AreaSet {
     
     //Names of the areas
 
-    public AreaSet() {
+    public AreaSet(RewardSet rewards) {
         areas = new HashMap<>();
         
-        //areas.put(LightWorld.NAME, new LightWorld());
+        areas.put(LightWorld.NAME, new LightWorld());
         areas.put(HyruleCastle.NAME, new HyruleCastle());
         areas.put(EasternPalace.NAME, new EasternPalace());   
         areas.put(DesertPalace.NAME, new DesertPalace());
-        //areas.put(DeathMountain.NAME, new DeathMountain());
-        //areas.put(TowerOfHera.NAME, new TowerOfHera(
-        //        (DeathMountain)(areas.get(DeathMountain.NAME))));
-        //areas.put(CastleTower.NAME, new CastleTower());
+        areas.put(DeathMountain.NAME, new DeathMountain());
+        areas.put(TowerOfHera.NAME, new TowerOfHera(
+                (DeathMountain)(areas.get(DeathMountain.NAME))));
+        areas.put(CastleTower.NAME, new CastleTower(
+                rewards.getRewards().get(Reward.AGAHNIM_1)));
         
+        areas.put(DarkWorld.NAME, new DarkWorld(
+                (DeathMountain)(areas.get(DeathMountain.NAME)),
+                rewards.getRewards().get(Reward.AGAHNIM_1)));
+        areas.put(DarkPalace.NAME, new DarkPalace(
+                (DarkWorld)(areas.get(DarkWorld.NAME))));
         /*
-        areas.put(DarkWorld.NAME, new DarkWorld());
-        areas.put(DarkPalace.NAME, new DarkPalace());
         areas.put(SwampPalace.NAME, new SwampPalace());
         areas.put(SkullWoods.NAME, new SkullWoods());
         areas.put(ThievesTown.NAME, new ThievesTown());

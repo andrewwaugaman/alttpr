@@ -88,11 +88,11 @@ public class TowerOfHera extends Dungeon {
     private boolean closed(Inventory inventory){
         if(deathMountain.closed(inventory))
             return true; 
-        
+
         if (inventory.getItem(Item.MIRROR).isOwned())
             return false;
         
-        return (inventory.getItem(Item.HOOKSHOT).isOwned()
+        return !(inventory.getItem(Item.HOOKSHOT).isOwned()
                 && inventory.getItem(Item.HAMMER).isOwned());
     }
     
@@ -239,10 +239,12 @@ public class TowerOfHera extends Dungeon {
      */
     private boolean logicMoldorm(Inventory inventory) {
         //If it's acquired it doesn't need to be listed as available
-        if(moldorm.isAcquired())
+        if (moldorm.isAcquired())
             return false;
         
-        //1) Check the various weapons
+        if (!bigKeyAcquired())
+            return false;
+        
         return inventory.getItem(Item.HAMMER).isOwned() || 
                 inventory.getItem(Sword.SWORD).isOwned();
     }          

@@ -64,9 +64,9 @@ public class CastleTower extends Dungeon {
      */
     private boolean closed(Inventory inventory){
         if (((Sword)(inventory.getItem(Sword.SWORD))).getLevel() >= 2)
-            return true;
+            return false;
         
-        return inventory.getItem(Item.CAPE).isOwned();
+        return !inventory.getItem(Item.CAPE).isOwned();
     }
     
     /**

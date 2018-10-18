@@ -123,7 +123,7 @@ public class DarkPalace extends Dungeon {
      * @return True or False if it's closed
      */
     private boolean closed(Inventory inventory) {
-        return darkWorld.eastDarkAccess(inventory);
+        return !darkWorld.eastDarkAccess(inventory);
     }
     
     /**

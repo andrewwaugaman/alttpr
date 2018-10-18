@@ -130,9 +130,9 @@ public class DeathMountain extends Area {
     public boolean closed(Inventory inventory){
         if(inventory.getItem(Item.LANTERN).isOwned() && 
                 inventory.getItem(Gloves.GLOVES).isOwned())
-            return true;
-        
-        return inventory.getItem(Item.FLUTE).isOwned();
+            return false;
+
+        return !inventory.getItem(Item.FLUTE).isOwned();
     }
     
     /**

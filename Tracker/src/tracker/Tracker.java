@@ -25,7 +25,7 @@ public class Tracker {
         Scanner scan = new Scanner(System.in);
         
         RewardSet rewards = new RewardSet();
-        AreaSet areas = new AreaSet();
+        AreaSet areas = new AreaSet(rewards);
         
         int menu_option = 1;
         
@@ -37,7 +37,7 @@ public class Tracker {
             System.out.println("1 - Display Inventory");
             System.out.println("2 - Add Item to Inventory");
             System.out.println("3 - Remove Item from Inventory");
-            System.out.println("4 - Add Item (Sword) To Inventory");
+            System.out.println("4 - Add Item (Gloves) To Inventory");
             System.out.println("5 - Show available items");
             System.out.println("0 - Quit");
             System.out.println("************************");
@@ -64,9 +64,9 @@ public class Tracker {
                     inventory.updateItem(item, false);
                     break;
                 case 4:
-                    System.out.print("What level sword? ");
+                    System.out.print("What level gloves? ");
                     int level = scan.nextInt();
-                    inventory.updateProgressive("Sword",level);
+                    inventory.updateProgressive("Gloves",level);
                     break;
                 case 5:
                     ArrayList<Location> inLogic = 
