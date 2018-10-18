@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package areas;
 
 import items.*;
@@ -17,7 +12,9 @@ public class TowerOfHera extends Dungeon {
     //Tower of Hera has 6 possible item locations
     private final Location basementCage;
     private final Location mapChest;
+    
     private final Location bigKeyChest; 
+    
     private final Location compassChest; 
     private final Location bigChest;
     private final Location moldorm;  
@@ -34,17 +31,21 @@ public class TowerOfHera extends Dungeon {
     /**
      * Constructor Method
      * Calls the parent constructor (in Dungeon) 
-     * Instantiate the 6 chests with their description
+     * Instantiate the 6 locations with their description
      * @param deathMountain The mountain Hera sits on
      */
     public TowerOfHera(DeathMountain deathMountain) {
         super();
+        
         basementCage = new Location("Tower of Hera - Basement Cage");
         mapChest = new Location("Tower of Hera - Map Chest");      
-        bigKeyChest = new Location("Tower of Hera - Big Key Chest");        
+        
+        bigKeyChest = new Location("Tower of Hera - Big Key Chest"); 
+        
         compassChest = new Location("Tower of Hera - Compass Chest");
         bigChest = new Location("Tower of Hera - Big Chest");
         moldorm = new Location("Tower of Hera - Moldorm");
+        
         this.deathMountain = deathMountain;
     }
     
@@ -57,7 +58,7 @@ public class TowerOfHera extends Dungeon {
     public ArrayList<Location> locationsInLogic(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
-        if(closed(inventory)){
+        if (closed(inventory)){
             return inLogic;
         }
 
@@ -65,14 +66,17 @@ public class TowerOfHera extends Dungeon {
             inLogic.add(basementCage);
         if (logicMapChest(inventory))
             inLogic.add(mapChest);
+        
         if (logicBigKeyChest(inventory))
             inLogic.add(bigKeyChest);
+        
         if (logicCompassChest(inventory))
             inLogic.add(compassChest);
         if (logicBigChest(inventory))
             inLogic.add(bigChest);
         if (logicMoldorm(inventory))
             inLogic.add(moldorm);  
+        
         return inLogic;
     }
        
@@ -85,8 +89,8 @@ public class TowerOfHera extends Dungeon {
      * @param inventory The current inventory 
      * @return True or False if it's closed
      */
-    private boolean closed(Inventory inventory){
-        if(deathMountain.closed(inventory))
+    private boolean closed(Inventory inventory) {
+        if (deathMountain.closed(inventory))
             return true; 
 
         if (inventory.getItem(Item.MIRROR).isOwned())
@@ -109,12 +113,10 @@ public class TowerOfHera extends Dungeon {
         if(closed(inventory))
             return false;
         
-        //1) Check the Fire Source
         if(!inventory.getItem(Item.FIRE_ROD).isOwned() && 
                 !inventory.getItem(Item.LANTERN).isOwned())
             return false;
         
-        //2) Check the Hammer or Sword  
         return inventory.getItem(Item.HAMMER).isOwned() || 
                 inventory.getItem(Sword.SWORD).isOwned();
     }
@@ -145,19 +147,19 @@ public class TowerOfHera extends Dungeon {
      * @return True or False if the big key is acquired
      */
     private boolean smallKeyAcquired() {
-        if(mapChest.isAcquired() && 
+        if (mapChest.isAcquired() && 
                 mapChest.getContents().getDescription().equals(SMALL_KEY))
             return true;
         
-        if(basementCage.isAcquired() && 
+        if (basementCage.isAcquired() && 
                 basementCage.getContents().getDescription().equals(SMALL_KEY))
             return true;
         
-        if(compassChest.isAcquired() &&
+        if (compassChest.isAcquired() &&
                 compassChest.getContents().getDescription().equals(SMALL_KEY))
             return true;
         
-        if(bigChest.isAcquired() &&
+        if (bigChest.isAcquired() &&
                 bigChest.getContents().getDescription().equals(SMALL_KEY))
             return true;
         
@@ -173,7 +175,7 @@ public class TowerOfHera extends Dungeon {
      * @return True or False if the chest is in logic
      */
     private boolean logicBigKeyChest(Inventory inventory) {
-        if(bigKeyChest.isAcquired())
+        if (bigKeyChest.isAcquired())
             return false;
         
         if (!smallKeyAcquired())
@@ -183,17 +185,17 @@ public class TowerOfHera extends Dungeon {
                 inventory.getItem(Item.LANTERN).isOwned();
     }
     
-        /**
+    /**
      * Check to see if the big key has been picked up
      * This checks all the locations possible without the big key
      * @return True or False if the big key is acquired
      */
     private boolean bigKeyAcquired() {
-        if(basementCage.isAcquired() &&
+        if (basementCage.isAcquired() &&
                 basementCage.getContents().getDescription().equals(BIG_KEY))
             return true;
                 
-        if(mapChest.isAcquired() && 
+        if (mapChest.isAcquired() && 
                 mapChest.getContents().getDescription().equals(BIG_KEY))
             return true;
         
@@ -208,7 +210,7 @@ public class TowerOfHera extends Dungeon {
      * @return True or False if the chest is in logic
      */
     private boolean logicCompassChest(Inventory inventory) {
-        if(compassChest.isAcquired())
+        if (compassChest.isAcquired())
             return false;
         
         return bigKeyAcquired();
@@ -221,7 +223,7 @@ public class TowerOfHera extends Dungeon {
      * @return True or False if the big key chest is in logic
      */
     private boolean logicBigChest(Inventory inventory) {
-        if(bigChest.isAcquired())
+        if (bigChest.isAcquired())
             return false;
     
         return bigKeyAcquired();
@@ -232,13 +234,12 @@ public class TowerOfHera extends Dungeon {
      * They're in logic if the item isn't acquired and 
      * the big key is acquired.  
      * Items Required:
-     * 1) A weapon to kill Lanmolas 
-     *    - Hammer or Sword
+     * 1) A weapon to kill Moldorm 
+     *    - Hammer or Sword 
      * @param inventory The current inventory
-     * @return True or False if the Lanmolas are in logic
+     * @return True or False if Moldorm is in logic
      */
     private boolean logicMoldorm(Inventory inventory) {
-        //If it's acquired it doesn't need to be listed as available
         if (moldorm.isAcquired())
             return false;
         
@@ -249,8 +250,8 @@ public class TowerOfHera extends Dungeon {
                 inventory.getItem(Sword.SWORD).isOwned();
     }          
     
-    
     //Getters and Setters for the locations below  
+    
     /**
      * @return the basementCage
      */

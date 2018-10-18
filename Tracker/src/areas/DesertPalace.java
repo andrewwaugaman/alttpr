@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package areas;
 
 import items.*;
@@ -16,10 +11,14 @@ public class DesertPalace extends Dungeon {
 
     //Desert Palace has 6 possible item locations
     private final Location mapChest;
+    
     private final Location torch;
+    
     private final Location compassChest; 
     private final Location bigKeyChest; 
+    
     private final Location bigChest;
+    
     private final Location lanmolas;  
     
     //Desert Palace has a Big Key and a Small Key
@@ -31,15 +30,20 @@ public class DesertPalace extends Dungeon {
     /**
      * Constructor Method
      * Calls the parent constructor (in Dungeon) 
-     * Instantiate the 6 chests with their description
+     * Instantiate the 6 locations with their description
      */
     public DesertPalace() {
         super();
+        
         mapChest = new Location("Desert Palace - Map Chest");
+        
         torch = new Location("Desert Palace - Torch");
+        
         compassChest = new Location("Desert Palace - Compass Chest");
         bigKeyChest = new Location("Desert Palace - Big Key Chest");
+        
         bigChest = new Location("Desert Palace - Big Chest");
+        
         lanmolas = new Location("Desert Palace - Lanmolas");
     }
     
@@ -52,22 +56,27 @@ public class DesertPalace extends Dungeon {
     public ArrayList<Location> locationsInLogic(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
-        if(closed(inventory)){
+        if (closed(inventory)){
             return inLogic;
         }
 
         if (logicMapChest(inventory))
             inLogic.add(mapChest);
+        
         if (logicTorch(inventory))
             inLogic.add(torch);
+        
         if (logicCompassChest(inventory))
             inLogic.add(compassChest);
         if (logicBigKeyChest(inventory))
             inLogic.add(bigKeyChest);
+        
         if (logicBigChest(inventory))
             inLogic.add(bigChest);
+        
         if (logicLanmolas(inventory))
             inLogic.add(lanmolas);  
+        
         return inLogic;
     }
        
@@ -79,7 +88,7 @@ public class DesertPalace extends Dungeon {
      * @param inventory The current inventory 
      * @return True or False if it's closed
      */
-    private boolean closed(Inventory inventory){
+    private boolean closed(Inventory inventory) {
         if (inventory.getItem(Item.BOOK).isOwned())
             return false;
         
@@ -102,41 +111,37 @@ public class DesertPalace extends Dungeon {
      * @return True or False if it can be full cleared
      */
     public boolean canFullClear(Inventory inventory) {
-        if(closed(inventory))
+        if (closed(inventory))
             return false;
         
-        //1) Check the Boots
-        if(!inventory.getItem(Item.BOOTS).isOwned())
+        if (!inventory.getItem(Item.BOOTS).isOwned())
             return false;
         
-        //2) Check the Gloves 
-        if(!inventory.getItem(Gloves.GLOVES).isOwned())
+        if (!inventory.getItem(Gloves.GLOVES).isOwned())
             return false;
         
-        //3) Check the Fire Source
+        //Check the Fire Source
         //Fire Rod works as a fire source and a weapon
-        if(inventory.getItem(Item.FIRE_ROD).isOwned())
+        if (inventory.getItem(Item.FIRE_ROD).isOwned())
             return true;
         
         //No Fire Rod, Check the Lantern
-        if(!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(Item.LANTERN).isOwned())
             return false;
         
-        //4) Check the various weapons
-        if(inventory.getItem(Item.BOW).isOwned())
+        if (inventory.getItem(Item.BOW).isOwned())
             return true;
         
-        if(inventory.getItem(Item.ICE_ROD).isOwned())
+        if (inventory.getItem(Item.ICE_ROD).isOwned())
             return true;
         
-        if(inventory.getItem(Item.HAMMER).isOwned())
+        if (inventory.getItem(Item.HAMMER).isOwned())
             return true;
         
-        //I need to check if this damages it
-        if(inventory.getItem(Item.SOMARIA).isOwned())
+        if (inventory.getItem(Item.SOMARIA).isOwned())
             return true;
         
-        if(inventory.getItem(Item.BYRNA).isOwned())
+        if (inventory.getItem(Item.BYRNA).isOwned())
             return true;
         
         return inventory.getItem(Sword.SWORD).isOwned();
@@ -159,7 +164,7 @@ public class DesertPalace extends Dungeon {
      * @return True or False if the chest is in logic
      */
     private boolean logicTorch(Inventory inventory) {
-        if(torch.isAcquired())
+        if (torch.isAcquired())
             return false;
         
         return inventory.getItem(Item.BOOTS).isOwned();
@@ -172,11 +177,11 @@ public class DesertPalace extends Dungeon {
      * @return True or False if the big key is acquired
      */
     private boolean smallKeyAcquired() {
-        if(mapChest.isAcquired() && 
+        if (mapChest.isAcquired() && 
                 mapChest.getContents().getDescription().equals(SMALL_KEY))
             return true;
         
-        if(torch.isAcquired() && 
+        if (torch.isAcquired() && 
                 torch.getContents().getDescription().equals(SMALL_KEY))
             return true;
         
@@ -191,7 +196,7 @@ public class DesertPalace extends Dungeon {
      * @return True or False if the chest is in logic
      */
     private boolean logicCompassChest(Inventory inventory) {
-        if(compassChest.isAcquired())
+        if (compassChest.isAcquired())
             return false;
         
         return smallKeyAcquired();
@@ -204,7 +209,7 @@ public class DesertPalace extends Dungeon {
      * @return True or False if the chest is in logic
      */
     private boolean logicBigKeyChest(Inventory inventory) {
-        if(bigKeyChest.isAcquired())
+        if (bigKeyChest.isAcquired())
             return false;
         
         return smallKeyAcquired();
@@ -216,15 +221,15 @@ public class DesertPalace extends Dungeon {
      * @return True or False if the big key is acquired
      */
     private boolean bigKeyAcquired() {
-        if(mapChest.isAcquired() && 
+        if (mapChest.isAcquired() && 
                 mapChest.getContents().getDescription().equals(BIG_KEY))
             return true;
         
-        if(torch.isAcquired() && 
+        if (torch.isAcquired() && 
                 torch.getContents().getDescription().equals(BIG_KEY))
             return true;
         
-        if(compassChest.isAcquired() &&
+        if (compassChest.isAcquired() &&
                 compassChest.getContents().getDescription().equals(BIG_KEY))
             return true;
         
@@ -239,7 +244,7 @@ public class DesertPalace extends Dungeon {
      * @return True or False if the big key chest is in logic
      */
     private boolean logicBigChest(Inventory inventory) {
-        if(bigChest.isAcquired())
+        if (bigChest.isAcquired())
             return false;
     
         return bigKeyAcquired();
@@ -259,21 +264,19 @@ public class DesertPalace extends Dungeon {
      * @return True or False if the Lanmolas are in logic
      */
     private boolean logicLanmolas(Inventory inventory) {
-        //If it's acquired it doesn't need to be listed as available
-        if(lanmolas.isAcquired())
+        if (lanmolas.isAcquired())
             return false;
         
-        if(!bigKeyAcquired())
+        if (!bigKeyAcquired())
             return false;
         
-        if(!smallKeyAcquired())
+        if (!smallKeyAcquired())
             return false;
                
-        //1) Check the Gloves 
         if(!inventory.getItem(Gloves.GLOVES).isOwned())
             return false;
         
-        //2) Check the Fire Source
+        //Check the Fire Source
         //Fire Rod works as a fire source and a weapon
         if(inventory.getItem(Item.FIRE_ROD).isOwned())
             return true;
@@ -282,7 +285,6 @@ public class DesertPalace extends Dungeon {
         if(!inventory.getItem(Item.LANTERN).isOwned())
             return false;
         
-        //3) Check the various weapons
         if(inventory.getItem(Item.BOW).isOwned())
             return true;
         

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package areas;
 
 import items.*;
@@ -18,8 +13,11 @@ public class EasternPalace extends Dungeon {
     private final Location cannonballChest;
     private final Location mapChest;
     private final Location compassChest; 
+    
     private final Location bigKeyChest; 
+    
     private final Location bigChest;
+    
     private final Location armosKnights;  
 
     //Eastern Palace has a Big Key, but it does not have any small keys
@@ -28,19 +26,22 @@ public class EasternPalace extends Dungeon {
     //Name of the dungeon
     public final static String NAME = "Eastern Palace";
 
-    
     /**
      * Constructor Method
      * Calls the parent constructor (in Dungeon)
-     * Instantiate the 6 chests with their description
+     * Instantiate the 6 locations with their description
      */
     public EasternPalace() {
         super();
+        
         cannonballChest = new Location("Eastern Palace - Cannonball Chest");
         mapChest = new Location("Eastern Palace - Map Chest");
         compassChest = new Location("Eastern Palace - Compass Chest");
+        
         bigKeyChest = new Location("Eastern Palace - Big Key Chest");
+        
         bigChest = new Location("Eastern Palace - Big Chest");
+        
         armosKnights = new Location("Eastern Palace - Armos Knights");
     }
     
@@ -53,19 +54,22 @@ public class EasternPalace extends Dungeon {
     public ArrayList<Location> locationsInLogic(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
 
-        //Check the logic of each of the chests and add them to the list
         if (logicCannonballChest(inventory))
             inLogic.add(cannonballChest);
         if (logicMapChest(inventory))
             inLogic.add(mapChest);
         if (logicCompassChest(inventory))
             inLogic.add(compassChest);
+        
         if (logicBigKeyChest(inventory))
             inLogic.add(bigKeyChest);
+        
         if (logicBigChest(inventory))
             inLogic.add(bigChest);
+        
         if (logicArmosKnights(inventory))
             inLogic.add(armosKnights);  
+        
         return inLogic;
     }
     
@@ -118,7 +122,7 @@ public class EasternPalace extends Dungeon {
      * @return True or False if the chest is in logic
      */
     private boolean logicBigKeyChest(Inventory inventory) {
-        if(bigKeyChest.isAcquired())
+        if (bigKeyChest.isAcquired())
             return false;
         
         return inventory.getItem(Item.LANTERN).isOwned();
@@ -130,15 +134,15 @@ public class EasternPalace extends Dungeon {
      * @return True or False if the big key is acquired
      */
     private boolean bigKeyAcquired() {
-        if(cannonballChest.isAcquired() && 
+        if (cannonballChest.isAcquired() && 
                 cannonballChest.getContents().getDescription().equals(BIG_KEY))
             return true;
         
-        if(mapChest.isAcquired() && 
+        if (mapChest.isAcquired() && 
                 mapChest.getContents().getDescription().equals(BIG_KEY))
             return true;
         
-        if(compassChest.isAcquired() &&
+        if (compassChest.isAcquired() &&
                 compassChest.getContents().getDescription().equals(BIG_KEY))
             return true;
         
@@ -153,7 +157,7 @@ public class EasternPalace extends Dungeon {
      * @return True or False if the big key chest is in logic
      */
     private boolean logicBigChest(Inventory inventory) {
-        if(bigChest.isAcquired())
+        if (bigChest.isAcquired())
             return false;
     
         return bigKeyAcquired();
@@ -169,13 +173,13 @@ public class EasternPalace extends Dungeon {
      * @return True or False if the Armos Knights are in logic
      */
     private boolean logicArmosKnights(Inventory inventory) {
-        if(armosKnights.isAcquired())
+        if (armosKnights.isAcquired())
             return false;
         
-        if(!bigKeyAcquired())
+        if (!bigKeyAcquired())
             return false;
         
-        if(!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(Item.LANTERN).isOwned())
             return false;
         
         return inventory.getItem(Item.BOW).isOwned();

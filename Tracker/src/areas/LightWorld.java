@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package areas;
 
 import java.util.ArrayList;
@@ -86,7 +81,11 @@ public class LightWorld extends Area {
     //Name of the area
     public final static String NAME = "Light World";
     
-    public LightWorld(){
+    /**
+     * Constructor Method
+     * Instantiate the 50 locations with their description
+     */
+    public LightWorld() {
                 
         kakarikoWellTop = new Location("Kakariko Well - Top");
         kakarikoWellLeft = new Location("Kakariko Well - Left");
@@ -158,16 +157,22 @@ public class LightWorld extends Area {
         masterSwordPedestal = new Location("Master Sword Pedestal");        
     }
 
-    public ArrayList<Location> locationsInLogic (Inventory inventory){
+    /**
+     * Get the locations that are currently in logic
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    @Override
+    public ArrayList<Location> locationsInLogic (Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
         //Check the logic of each location (grouped by area)
         //And add them to the list if they are in logic
         inLogic.addAll(logicKakariko(inventory));
         
-        if(logicFluteSpot(inventory))
+        if (logicFluteSpot(inventory))
             inLogic.add(fluteSpot);
-        if(logicLinksHouse(inventory))
+        if (logicLinksHouse(inventory))
             inLogic.add(linksHouse);
         
         inLogic.addAll(logicDesert(inventory));
@@ -178,12 +183,12 @@ public class LightWorld extends Area {
         
         inLogic.addAll(logicZorasDomain(inventory));
         
-        if(logicPegasusRocks(inventory))
+        if (logicPegasusRocks(inventory))
             inLogic.add(pegasusRocks);
         
-        if(logicLostWoodsHideout(inventory))
+        if (logicLostWoodsHideout(inventory))
             inLogic.add(lostWoodsHideout);
-        if(logicMushroom(inventory))
+        if (logicMushroom(inventory))
             inLogic.add(mushroom);
         
         return inLogic;
@@ -202,9 +207,14 @@ public class LightWorld extends Area {
          * 8) Lumberjack Tree
          * 9) Master Sword Pedestal
          */
-    }
+    }  
     
-    private ArrayList<Location> logicKakariko(Inventory inventory){
+    /**
+     * Get the locations that are currently in logic in the Kakariko area
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    private ArrayList<Location> logicKakariko(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
                
         if (!kakarikoWellTop.isAcquired())
@@ -247,18 +257,35 @@ public class LightWorld extends Area {
         return inLogic;
     }
     
-    private boolean logicFluteSpot(Inventory inventory){
+    /**
+     * Check to see if the flute spot is in logic
+     * It's in logic if it's not opened and the shovel is acquired
+     * @param inventory The current inventory 
+     * @return True or False if the chest is in logic
+     */
+    private boolean logicFluteSpot(Inventory inventory) {
         if (fluteSpot.isAcquired())
             return false;
         
         return inventory.getItem(Item.SHOVEL).isOwned();
     }
     
-    private boolean logicLinksHouse(Inventory inventory){
+    /**
+     * Check to see if the chest in Link's House is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the chest is in logic
+     */
+    private boolean logicLinksHouse(Inventory inventory) {
         return !linksHouse.isAcquired();
     }
     
-    private ArrayList<Location> logicDesert(Inventory inventory){
+    /**
+     * Get the locations that are currently in logic in the desert
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    private ArrayList<Location> logicDesert(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
                
         //Access through dark world
@@ -270,17 +297,22 @@ public class LightWorld extends Area {
                 inLogic.add(checkerboardCave);
         }
         else
-            if(inventory.getItem(Item.BOOK).isOwned())
-                if(!desertLedge.isAcquired())
+            if (inventory.getItem(Item.BOOK).isOwned())
+                if (!desertLedge.isAcquired())
                     inLogic.add(desertLedge);
         
-        if(!aginahsCave.isAcquired())
+        if (!aginahsCave.isAcquired())
             inLogic.add(aginahsCave);
             
         return inLogic;
     }
     
-    private ArrayList<Location> logicSouthShore(Inventory inventory){
+    /**
+     * Get the locations that are currently in logic in the south shore
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    private ArrayList<Location> logicSouthShore(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
                
         if (!sunkenTreasure.isAcquired())
@@ -305,7 +337,12 @@ public class LightWorld extends Area {
         return inLogic;
     }
     
-    private ArrayList<Location> logicEastHyrule(Inventory inventory){
+    /**
+     * Get the locations that are currently in logic in the east Hyrule area
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    private ArrayList<Location> logicEastHyrule(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
                
         if (!hobo.isAcquired() && inventory.getItem(Item.FLIPPERS).isOwned())
@@ -324,6 +361,11 @@ public class LightWorld extends Area {
         return inLogic;
     }
     
+    /**
+     * Get the locations that are currently in logic in Zora's Domain
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
     private ArrayList<Location> logicZorasDomain(Inventory inventory){
         ArrayList<Location> inLogic = new ArrayList();
         
@@ -346,17 +388,35 @@ public class LightWorld extends Area {
         return inLogic;
     }
     
-    private boolean logicPegasusRocks(Inventory inventory){
+    /**
+     * Check to see if the pegasus rock's chest is in logic
+     * It's in logic if it's not opened and the boots are acquired
+     * @param inventory The current inventory 
+     * @return True or False if the chest is in logic
+     */
+    private boolean logicPegasusRocks(Inventory inventory) {
         if (pegasusRocks.isAcquired())
             return false;
         
         return inventory.getItem(Item.BOOTS).isOwned();
     }
     
+    /**
+     * Check to see if the lost woods item is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the chest is in logic
+     */
     private boolean logicLostWoodsHideout(Inventory inventory){
         return !lostWoodsHideout.isAcquired();
     }  
     
+    /**
+     * Check to see if the mushroom spot is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the chest is in logic
+     */
     private boolean logicMushroom(Inventory inventory){
         return !mushroom.isAcquired();
     }    
@@ -462,6 +522,7 @@ public class LightWorld extends Area {
     */
     
     //Getters and Setters for the locations below
+    
     /**
      * @return the kakarikoWellTop
      */
