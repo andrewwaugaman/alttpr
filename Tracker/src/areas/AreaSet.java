@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package areas;
 
 import java.util.ArrayList;
@@ -21,6 +16,11 @@ public class AreaSet {
     
     //Names of the areas
 
+    /**
+     * Constructor Method
+     * Create all the different areas and put them into the hash
+     * @param rewards The different rewards, used for Agahnim 1/2
+     */
     public AreaSet(RewardSet rewards) {
         areas = new HashMap<>();
         
@@ -52,7 +52,12 @@ public class AreaSet {
 
     }
     
-    
+    /**
+     * Get the locations that are currently in logic from each area
+     * @param inventory The current inventory
+     * @param rewards The different rewards, used for specific checks
+     * @return The locations that are in logic
+     */
     public ArrayList<Location> locationsInLogic(Inventory inventory,
             RewardSet rewards) {
         ArrayList<Location> locations = new ArrayList();

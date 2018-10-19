@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package areas;
 
 import items.Gloves;
@@ -21,7 +16,9 @@ public class DeathMountain extends Area {
     //Death Mountain has 14 possible item locations
     private final Location oldMan;
     private final Location spectacleRockCave;
+    
     private final Location spectacleRock; 
+
     private final Location etherTablet; 
 
     private final Location spiralCave;
@@ -47,14 +44,16 @@ public class DeathMountain extends Area {
     /**
      * Constructor Method
      * Calls the parent constructor
-     * Instantiate the 14 Locations with their description
+     * Instantiate the 14 locations with their description
      */
     public DeathMountain() {
         super();
         
         oldMan = new Location("Old Man");
         spectacleRockCave = new Location("Spectacle Rock Cave");
+        
         spectacleRock = new Location("Spectacle Rock"); 
+        
         etherTablet = new Location("Ether Tablet");
 
         spiralCave = new Location("Spiral Cave");
@@ -91,7 +90,7 @@ public class DeathMountain extends Area {
         ArrayList<Location> inLogic = new ArrayList();
         
         //Check to see if there is a way to enter the mountain
-        if(closed(inventory)){
+        if (closed(inventory)){
             return inLogic;
         }
 
@@ -127,8 +126,8 @@ public class DeathMountain extends Area {
      * @param inventory The current inventory 
      * @return True or False if it's accessible
      */
-    public boolean closed(Inventory inventory){
-        if(inventory.getItem(Item.LANTERN).isOwned() && 
+    public boolean closed(Inventory inventory) {
+        if (inventory.getItem(Item.LANTERN).isOwned() && 
                 inventory.getItem(Gloves.GLOVES).isOwned())
             return false;
 
@@ -144,9 +143,8 @@ public class DeathMountain extends Area {
      * @param inventory the current inventory
      * @return True of False if it's accessible
      */
-    public boolean eastDeathMountainAccess(Inventory inventory)
-    {
-        if(inventory.getItem(Item.HOOKSHOT).isOwned())
+    public boolean eastDeathMountainAccess(Inventory inventory) {
+        if (inventory.getItem(Item.HOOKSHOT).isOwned())
             return true;
         
         return inventory.getItem(Item.MIRROR).isOwned() &&
@@ -193,7 +191,7 @@ public class DeathMountain extends Area {
      * Check to see if the ether tablet item is in logic
      * It's in logic if it's not obtained and
      * 1) The book is acquired
-     * 2) At least the master sword is acquired
+     * 2) At least the master sword (level 2) is acquired
      * 3) One of these is obtained:
      *    - Hookshot and Hammer
      *    - Mirror

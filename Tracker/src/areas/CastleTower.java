@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package areas;
 import items.*;
 import java.util.ArrayList;
@@ -25,11 +20,12 @@ public class CastleTower extends Dungeon {
     /**
      * Constructor Method
      * Calls the parent constructor (in Dungeon) 
-     * Instantiate the 6 chests with their description
+     * Instantiate the 2 locations with their description
      * @param reward The reward of the tower (Agahnim 1)
      */
     public CastleTower(Reward reward) {
         super(reward);
+        
         room03 = new Location("Castle Tower - Room 03");
         darkMaze = new Location("Castle Tower - Dark Maze");
     }
@@ -43,7 +39,7 @@ public class CastleTower extends Dungeon {
     public ArrayList<Location> locationsInLogic(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
-        if(closed(inventory)){
+        if (closed(inventory)){
             return inLogic;
         }
 
@@ -57,7 +53,7 @@ public class CastleTower extends Dungeon {
     /**
      * Check to see if there is a way to enter the tower
      * Castle Tower can be entered if either:
-     * 1) The Master Sword (or higher) is obtained
+     * 1) The Master Sword or higher (level 2 sword) is obtained
      * 2) The Cape is obtained
      * @param inventory The current inventory 
      * @return True or False if it's closed
@@ -65,7 +61,7 @@ public class CastleTower extends Dungeon {
     private boolean closed(Inventory inventory){
         if (((Sword)(inventory.getItem(Sword.SWORD))).getLevel() >= 2)
             return false;
-        
+
         return !inventory.getItem(Item.CAPE).isOwned();
     }
     
@@ -79,14 +75,12 @@ public class CastleTower extends Dungeon {
      */
     public boolean canFullClear(Inventory inventory) {
         //Takes care of checking for the cape for access
-        if(closed(inventory))
+        if (closed(inventory))
             return false;
         
-        //1) Check the Lantern
-        if(!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(Item.LANTERN).isOwned())
             return false;
         
-        //2) Check the Sword        
         return inventory.getItem(Sword.SWORD).isOwned();
     }
    
@@ -129,11 +123,11 @@ public class CastleTower extends Dungeon {
         
         if (room03.isAcquired() && 
                 room03.getContents().getDescription().equals(SMALL_KEY))
-            acquired+=1;
+            acquired++;
         
-        if(darkMaze.isAcquired() && 
+        if (darkMaze.isAcquired() && 
                 darkMaze.getContents().getDescription().equals(SMALL_KEY))
-            acquired+=1;
+            acquired++;
         
         return acquired;
     }

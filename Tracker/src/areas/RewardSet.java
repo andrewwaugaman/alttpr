@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package areas;
 
 import java.util.HashMap;
@@ -15,6 +10,10 @@ public class RewardSet {
     //A way to track all the different rewards
     private final HashMap<String,Reward> rewards;
 
+    /**
+     * Constructor Method
+     * Create all the different rewards and put them into the hash
+     */
     public RewardSet() {
         rewards = new HashMap<>();
         
@@ -35,6 +34,9 @@ public class RewardSet {
         rewards.put(Reward.AGAHNIM_2, new Reward(Reward.AGAHNIM_2));
     }
     
+    /**
+     * @return The set of rewards
+     */
     public HashMap<String,Reward> getRewards() {
         return rewards;
     }
