@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package items;
 
 /**
@@ -11,6 +6,7 @@ package items;
  */
 public class Item {
     
+    //The name of all the (non-progressive/bottles) items
     public final static String BOW = "Bow";
     public final static String SILVER_ARROWS = "Silver Arrows";
     public final static String BLUE_BOOMERANG = "Blue Boomerang";      
@@ -36,34 +32,55 @@ public class Item {
     public final static String FLIPPERS = "Zora's Flippers";
     public final static String MOON_PEARL = "Moon Pearl";
     
+    //The name of the item and if it's obtained
     private String description;
     private boolean owned;
     
+    /**
+     * Constructor Method
+     * Creates the item with a description of it
+     * @param description The name of the item
+     */
     public Item (String description) {
         this.description = description;
         owned = false;
     }
-    
-    public String getDescription() {
-        return description;
-    }
-    
-    public void updateDescription(String description) {
-        this.description = description;
-    }
-    
-    public boolean isOwned() {
-        return owned;
-    }
-    
-    public void setOwned (boolean status) {
-        owned = status;
-    }
-    
+   
+    /**
+     * Prints the description of the item along with if it's acquired
+     */
     public void print () {
         if (owned)
             System.out.println(description + ": Acquired");
         else
             System.out.println(description + ": Not Acquired");
-    }    
+    } 
+    
+    /**
+     * @return the item's description
+     */
+    public String getDescription() {
+        return description;
+    }
+    
+    /**
+     * @param description the item's new description (Used by Progressive Items)
+     */
+    public void updateDescription(String description) {
+        this.description = description;
+    }
+    
+    /**
+     * @return if the item is acquired or not
+     */
+    public boolean isOwned() {
+        return owned;
+    }
+    
+    /**
+     * @param status whether or not the item is owned
+     */
+    public void setOwned (boolean status) {
+        owned = status;
+    }   
 }
