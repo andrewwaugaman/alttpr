@@ -691,7 +691,7 @@ public class DarkPalace extends Dungeon {
     /**
      * @param contents The Helmasaur new item
      */
-    public void setArmosKnights(Item contents) {
+    public void setHelmasaur(Item contents) {
         helmasaur.setContents(contents);
     }
 }
