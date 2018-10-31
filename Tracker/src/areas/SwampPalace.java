@@ -26,7 +26,7 @@ public class SwampPalace extends Dungeon {
     
     private final Location aarghus; 
     
-    //Dark Palace has a Big Key and 1 Small Keys
+    //Swamp Palace has a Big Key and 1 Small Keys
     private final String SMALL_KEY = "Swamp Palace - Small Key";
     private final String BIG_KEY = "Swamp Palace - Big Key";
     
