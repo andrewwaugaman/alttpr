@@ -355,7 +355,8 @@ public class LightWorld extends Area {
         if (!sahasrahlasHutRight.isAcquired())
             inLogic.add(sahasrahlasHutRight);
            
-        if (!potionShop.isAcquired())
+        if (!potionShop.isAcquired() && 
+                inventory.getItem(Item.MUSHROOM).isOwned())
             inLogic.add(potionShop);
         
         return inLogic;

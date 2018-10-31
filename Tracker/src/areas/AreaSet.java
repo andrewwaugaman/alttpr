@@ -39,12 +39,18 @@ public class AreaSet {
                 rewards.getRewards().get(Reward.AGAHNIM_1)));
         areas.put(DarkPalace.NAME, new DarkPalace(
                 (DarkWorld)(areas.get(DarkWorld.NAME))));
+        areas.put(SwampPalace.NAME, new SwampPalace(
+                (DarkWorld)(areas.get(DarkWorld.NAME))));
+        areas.put(SkullWoods.NAME, new SkullWoods(
+                (DarkWorld)(areas.get(DarkWorld.NAME))));
         /*
-        areas.put(SwampPalace.NAME, new SwampPalace());
-        areas.put(SkullWoods.NAME, new SkullWoods());
-        areas.put(ThievesTown.NAME, new ThievesTown());
-        areas.put(IcePalace.NAME, new IcePalace());
-        areas.put(MiseryMire.NAME, new MiseryMire());
+        areas.put(ThievesTown.NAME, new ThievesTown(
+                (DarkWorld)(areas.get(DarkWorld.NAME))));
+        areas.put(IcePalace.NAME, new IcePalace(
+                (DarkWorld)(areas.get(DarkWorld.NAME))));
+        areas.put(MiseryMire.NAME, new MiseryMire(
+                (DarkWorld)(areas.get(DarkWorld.NAME))));
+
         areas.put(TurtleRock.NAME, new TurtleRock());
         
         areas.put(GanonsTower.NAME, new GanonsTower());
