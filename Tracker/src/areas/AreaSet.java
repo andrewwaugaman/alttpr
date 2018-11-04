@@ -45,9 +45,9 @@ public class AreaSet {
                 (DarkWorld)(areas.get(DarkWorld.NAME))));
         areas.put(ThievesTown.NAME, new ThievesTown(
                 (DarkWorld)(areas.get(DarkWorld.NAME))));
-        /*
         areas.put(IcePalace.NAME, new IcePalace(
                 (DarkWorld)(areas.get(DarkWorld.NAME))));
+        /*
         areas.put(MiseryMire.NAME, new MiseryMire(
                 (DarkWorld)(areas.get(DarkWorld.NAME))));
 

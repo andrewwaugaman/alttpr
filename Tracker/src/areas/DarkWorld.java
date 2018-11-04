@@ -237,7 +237,7 @@ public class DarkWorld extends Area {
     
     /**
      * Check to see if South Dark World is reachable
-     * Public Method so that it can be used by SwampPalace and IcePalace
+     * Public Method so that it can be used by SwampPalace
      * South Dark World is open if either:
      * 1) Agahnim is defeated and the Hammer or Hookshot is acquired
      * 2) The South Shore portal is open
@@ -246,7 +246,6 @@ public class DarkWorld extends Area {
      * @return True of False if it's accessible
      */
     public boolean southDarkAccess(Inventory inventory) {
-        
         if (closed(inventory))
             return false;
         
@@ -304,7 +303,6 @@ public class DarkWorld extends Area {
      * @return True of False if it's accessible
      */
     public boolean mireAreaAccess(Inventory inventory) {  
-        
         return portals.mirePortalOpen(inventory);
     }
 
@@ -326,6 +324,17 @@ public class DarkWorld extends Area {
     }   
     
     /**
+     * Check to see if Lake Hylia Dark World is reachable
+     * Public Method so that it can be used by IcePalace
+     * Lake Hylia Dark World is open if the Lake Hylia portal is open:
+     * @param inventory the current inventory
+     * @return True of False if it's accessible
+     */
+    public boolean lakeHyliaAccess(Inventory inventory) {
+        return portals.lakeHyliaPortalOpen(inventory);
+    }
+    
+    /**
      * Check to see if East Dark World is reachable
      * Public Method so that it can be used by PalaceOfDarkness
      * East Dark World is open if:
@@ -336,7 +345,6 @@ public class DarkWorld extends Area {
      * @return True of False if it's accessible
      */
     public boolean eastDarkAccess(Inventory inventory) {      
-        
         if (closed(inventory))
             return false;
         
@@ -406,7 +414,6 @@ public class DarkWorld extends Area {
      * @return True of False if it's accessible
      */
     public boolean eastDarkDeathMountainAccess(Inventory inventory) {      
-        
         if (closed(inventory))
             return false;
         
