@@ -31,6 +31,9 @@ public class Item {
     public final static String BOOTS = "Pegasus Boots";
     public final static String FLIPPERS = "Zora's Flippers";
     public final static String MOON_PEARL = "Moon Pearl";
+
+    //Used for entry into MiseryMire and TurtleRock
+    public final static String UNKNOWN_MEDALLION = "Unknown Medallion";
     
     //The name of the item and if it's obtained
     private String description;
