@@ -245,7 +245,7 @@ public class ThievesTown extends Dungeon {
         //Since this is reached, the big chest has to have the small key 
         //First check to see if it's opened, if not then the key could be
         //locked with poor key usage
-        if (bigKeyChest.isAcquired() && bigKeyChest.getContents()
+        if (bigChest.isAcquired() && bigChest.getContents()
                 .getDescription().equals(SMALL_KEY))
             numObtainedKeys++;
         
