@@ -407,20 +407,33 @@ public class DarkWorld extends Area {
     
     /**
      * Check to see if East Dark Death Mountain is reachable
-     * Public Method so that it can be used by TurtleRock
      * East Dark Death Mountain is open if either death 
      * moutain portal is open
      * @param inventory the current inventory
      * @return True of False if it's accessible
      */
-    public boolean eastDarkDeathMountainAccess(Inventory inventory) {      
+    private boolean eastDarkDeathMountainAccess(Inventory inventory) {      
         if (closed(inventory))
             return false;
         
         return portals.deathMountainNorthEastPortalOpen(inventory) || 
                 portals.deathMountainSouthEastPortalOpen(inventory);
     }
-
+    
+    /**
+     * Check to see if the Turtle Rock Platform is reachable
+     * Public Method so that it can be used by TurtleRock
+     * Turtle Rock Platform is open if the portal is open
+     * @param inventory the current inventory
+     * @return True of False if it's accessible
+     */
+    public boolean turtleRockPlatformAccess(Inventory inventory) {      
+        if (closed(inventory))
+            return false;
+        
+        return portals.deathMountainNorthEastPortalOpen(inventory);
+    }
+    
     /**
      * Get the locations that are currently in 
      * logic in the East Dark Death Mountain area

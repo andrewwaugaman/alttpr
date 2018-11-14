@@ -47,11 +47,12 @@ public class AreaSet {
                 (DarkWorld)(areas.get(DarkWorld.NAME))));
         areas.put(IcePalace.NAME, new IcePalace(
                 (DarkWorld)(areas.get(DarkWorld.NAME))));
-        /*
         areas.put(MiseryMire.NAME, new MiseryMire(
                 (DarkWorld)(areas.get(DarkWorld.NAME))));
 
-        areas.put(TurtleRock.NAME, new TurtleRock());
+        areas.put(TurtleRock.NAME, new TurtleRock(
+                (DarkWorld)(areas.get(DarkWorld.NAME))));
+        /*
         
         areas.put(GanonsTower.NAME, new GanonsTower());
         */
