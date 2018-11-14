@@ -86,32 +86,6 @@ public class MiseryMire extends Dungeon {
 
         return inLogic;
     }
-    
-    /*
-    if (logicBigChest(inventory))
-        inLogic.add(bigChest);
-
-    if (logicMapChest(inventory))
-        inLogic.add(mapChest);
-    if (logicMainLobby(inventory))
-        inLogic.add(mainLobby);        
-
-    //All keys can be used on doors that don't lead to any other items
-    //To get around this, check to see if the key is acquired, or if 
-    //it's inside the big chest and the hammer is obtained 
-    if (smallKeysAcquired() == TOTAL_SMALL_KEYS ||
-            (smallKeysLocked() == TOTAL_SMALL_KEYS && 
-            inventory.getItem(Item.HAMMER).isOwned())) {
-        if (logicAttic(inventory))
-            inLogic.add(attic);
-        if (logicBigChest(inventory))
-            inLogic.add(bigChest);
-        if (logicVitreous(inventory))
-            inLogic.add(vitreous);
-    }
-
-    if (logicVitreous(inventory))
-        inLogic.add(vitreous); */
        
     /**
      * Check to see if there is a way to enter the dungeon
