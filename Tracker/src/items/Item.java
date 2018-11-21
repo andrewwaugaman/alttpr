@@ -23,6 +23,7 @@ public class Item {
     public final static String HAMMER = "Hammer";
     public final static String FLUTE = "Flute";
     public final static String SHOVEL = "Shovel";
+    public final static String BUG_NET = "Bug Net";
     public final static String BOOK = "Book of Mudora";
     public final static String SOMARIA = "Cane of Somaria";
     public final static String BYRNA = "Cane of Byrna";

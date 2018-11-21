@@ -33,6 +33,7 @@ public class Inventory {
         inventory.put(Item.HAMMER, new Item(Item.HAMMER));
         inventory.put(Item.FLUTE, new Item(Item.FLUTE));
         inventory.put(Item.SHOVEL, new Item(Item.SHOVEL));
+        inventory.put(Item.BUG_NET, new Item(Item.BUG_NET));
         inventory.put(Item.BOOK, new Item(Item.BOOK));
         inventory.put(Bottles.BOTTLES, new Bottles());
         inventory.put(Item.SOMARIA, new Item(Item.SOMARIA));

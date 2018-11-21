@@ -16,6 +16,9 @@ public class Reward {
     public final static String BLUE_PENDANT = "Blue Pendant";
     public final static String RED_PENDANT = "Red Pendant";
     
+    public final static String PENDANTS[] = {GREEN_PENDANT, BLUE_PENDANT,
+        RED_PENDANT};
+    
     //The 7 Crystals
     public final static String CRYSTAL_1 = "Crystal 1";
     public final static String CRYSTAL_2 = "Crystal 2";
@@ -24,6 +27,9 @@ public class Reward {
     public final static String CRYSTAL_5 = "Crystal 5";
     public final static String CRYSTAL_6 = "Crystal 6";
     public final static String CRYSTAL_7 = "Crystal 7";
+    
+    public final static String CRYSTALS[] = {CRYSTAL_1, CRYSTAL_2, CRYSTAL_3, 
+        CRYSTAL_4, CRYSTAL_5, CRYSTAL_6, CRYSTAL_7};
     
     //Agahnim for checks
     public final static String AGAHNIM_1 = "Agahnim 1";

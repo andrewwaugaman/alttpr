@@ -407,12 +407,13 @@ public class DarkWorld extends Area {
     
     /**
      * Check to see if East Dark Death Mountain is reachable
+     * Public Method so that it can be used by GanonsTower
      * East Dark Death Mountain is open if either death 
      * moutain portal is open
      * @param inventory the current inventory
      * @return True of False if it's accessible
      */
-    private boolean eastDarkDeathMountainAccess(Inventory inventory) {      
+    public boolean eastDarkDeathMountainAccess(Inventory inventory) {      
         if (closed(inventory))
             return false;
         
