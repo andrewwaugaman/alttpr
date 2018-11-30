@@ -14,6 +14,9 @@ public class CastleTower extends Dungeon {
     //Castle Tower Palace has 2 Small Keys
     private final String SMALL_KEY = "Agahnims Tower Key";
     
+    //Prevent Magic Number
+    private final int TOTAL_SMALL_KEYS = 2;
+    
     //Name of the dungeon
     public final static String NAME = "Castle Tower";
     
@@ -30,26 +33,6 @@ public class CastleTower extends Dungeon {
         darkMaze = new Location("Castle Tower - Dark Maze");
     }
     
-    /**
-     * Get the locations that are currently in logic
-     * @param inventory The current inventory
-     * @return The locations that are in logic
-     */
-    @Override
-    public ArrayList<Location> locationsInLogic(Inventory inventory) {
-        ArrayList<Location> inLogic = new ArrayList();
-        
-        if (closed(inventory)){
-            return inLogic;
-        }
-
-        if (logicRoom03(inventory))
-            inLogic.add(room03);
-        if (logicDarkMaze(inventory))
-            inLogic.add(darkMaze);
-        return inLogic;
-    }
-       
     /**
      * Check to see if there is a way to enter the tower
      * Castle Tower can be entered if either:
@@ -83,6 +66,49 @@ public class CastleTower extends Dungeon {
         
         return inventory.getItem(Sword.SWORD).isOwned();
     }
+    
+    //No Big Key in the Castle Tower
+    
+    /**
+     * Check to see how many small keys have been picked up
+     * @return The number of small keys that have been acquired
+     */
+    private int smallKeysAcquired() {
+        int numSmallKeys = 0;
+        
+        Location[] possibleSmallKeys = {room03, darkMaze};
+        
+        for (Location location : possibleSmallKeys) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(SMALL_KEY))
+                numSmallKeys++;
+        }
+        
+        return numSmallKeys;
+    } 
+    
+    /**
+     * Get the locations that are currently in logic
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    @Override
+    public ArrayList<Location> locationsInLogic(Inventory inventory) {
+        ArrayList<Location> inLogic = new ArrayList();
+        
+        if (closed(inventory))
+            return inLogic;
+
+        if (logicRoom03(inventory))
+            inLogic.add(room03);
+        
+        //One key is needed to get to this location
+        if (smallKeysAcquired() == 1) 
+            if (logicDarkMaze(inventory))
+                inLogic.add(darkMaze);
+        
+        return inLogic;
+    }
    
     /**
      * Check to see if the room 03 chest is in logic
@@ -96,8 +122,7 @@ public class CastleTower extends Dungeon {
     
     /**
      * Check to see if the dark maze chest is in logic
-     * It's in logic if it's not opened, 1 small key is 
-     * acquired, and the lantern is acquired
+     * It's in logic if it's not opened and the lantern is acquired
      * @param inventory The current inventory
      * @return True or False if the chest is in logic
      */
@@ -105,31 +130,7 @@ public class CastleTower extends Dungeon {
         if (darkMaze.isAcquired())
             return false;
         
-        if (smallKeysAcquired() == 1)
-            return false;
-        
         return inventory.getItem(Item.LANTERN).isOwned();
-    }
-    
-    
-    /**
-     * Check to see how many small keys have been picked up
-     * @return True or False if the big key is acquired
-     * @return Number of keys acquired
-     */
-    private int smallKeysAcquired() {
-        
-        int acquired = 0;
-        
-        if (room03.isAcquired() && 
-                room03.getContents().getDescription().equals(SMALL_KEY))
-            acquired++;
-        
-        if (darkMaze.isAcquired() && 
-                darkMaze.getContents().getDescription().equals(SMALL_KEY))
-            acquired++;
-        
-        return acquired;
     }
     
     //Getters and Setters for the locations below

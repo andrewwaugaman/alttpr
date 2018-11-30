@@ -45,6 +45,41 @@ public class EasternPalace extends Dungeon {
         armosKnights = new Location("Eastern Palace - Armos Knights");
     }
     
+    //Note -- Eastern Palace is always open, no need for a closed method
+    
+    /**
+     * Check to see if it's possible to full clear the dungeon
+     * Eastern Palace requires the bow and the lantern to full clear
+     * (Since Bow is required, that can be used for Armos Knights)
+     * @param inventory The current inventory
+     * @return True or False if it can be full cleared
+     */
+    public boolean canFullClear(Inventory inventory) {
+        return (inventory.getItem(Item.BOW).isOwned() && 
+                inventory.getItem(Item.LANTERN).isOwned());      
+    }
+    
+    //Note -- Eastern Palace has no small keys in locations, no need for a check
+    
+    /**
+     * Check to see if the big key has been picked up
+     * This checks all the locations possible where the big key can be
+     * @return True or False if the big key is acquired
+     */
+    private boolean bigKeyAcquired() {
+        
+        Location[] possibleBigKey = {cannonballChest, mapChest, compassChest,
+            bigKeyChest};
+        
+        for (Location location : possibleBigKey) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(BIG_KEY))
+                return true;
+        }
+        
+        return false;
+    }
+    
     /**
      * Get the locations that are currently in logic
      * @param inventory The current inventory
@@ -64,26 +99,18 @@ public class EasternPalace extends Dungeon {
         if (logicBigKeyChest(inventory))
             inLogic.add(bigKeyChest);
         
-        if (logicBigChest(inventory))
-            inLogic.add(bigChest);
+        if (bigKeyAcquired()) {
+            if (logicBigChest(inventory))
+                inLogic.add(bigChest);
         
-        if (logicArmosKnights(inventory))
-            inLogic.add(armosKnights);  
+            if (logicArmosKnights(inventory))
+                inLogic.add(armosKnights);  
+        }
         
         return inLogic;
     }
     
-    /**
-     * Check to see if it's possible to full clear the dungeon
-     * Eastern Palace requires the bow and the lantern to full clear
-     * (Since Bow is required, that can be used for Armos Knights)
-     * @param inventory The current inventory
-     * @return True or False if it can be full cleared
-     */
-    public boolean canFullClear(Inventory inventory) {
-        return (inventory.getItem(Item.BOW).isOwned() && 
-                inventory.getItem(Item.LANTERN).isOwned());      
-    }
+    //Logic checks for the various locations
     
     /**
      * Check to see if the cannonball chest is in logic
@@ -127,29 +154,7 @@ public class EasternPalace extends Dungeon {
         
         return inventory.getItem(Item.LANTERN).isOwned();
     }
-    
-    /**
-     * Check to see if the big key has been picked up
-     * This checks all the locations possible without the big key
-     * @return True or False if the big key is acquired
-     */
-    private boolean bigKeyAcquired() {
-        if (cannonballChest.isAcquired() && 
-                cannonballChest.getContents().getDescription().equals(BIG_KEY))
-            return true;
         
-        if (mapChest.isAcquired() && 
-                mapChest.getContents().getDescription().equals(BIG_KEY))
-            return true;
-        
-        if (compassChest.isAcquired() &&
-                compassChest.getContents().getDescription().equals(BIG_KEY))
-            return true;
-        
-        return bigKeyChest.isAcquired() &&
-                bigKeyChest.getContents().getDescription().equals(BIG_KEY);
-    }
-    
     /**
      * Check to see if the big chest is in logic
      * It's in logic if it's not opened and the big key is acquired

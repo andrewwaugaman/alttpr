@@ -23,6 +23,9 @@ public class TowerOfHera extends Dungeon {
     private final String SMALL_KEY = "Tower of Hera - Small Key";
     private final String BIG_KEY = "Tower of Hera - Big Key";
     
+    //Prevent Magic Number
+    private final int TOTAL_SMALL_KEYS = 1;
+    
     public final static String NAME = "Tower of Hera";
     
     //Used to check if Tower of Hera is Open
@@ -49,37 +52,6 @@ public class TowerOfHera extends Dungeon {
         this.deathMountain = deathMountain;
     }
     
-    /**
-     * Get the locations that are currently in logic
-     * @param inventory The current inventory
-     * @return The locations that are in logic
-     */
-    @Override
-    public ArrayList<Location> locationsInLogic(Inventory inventory) {
-        ArrayList<Location> inLogic = new ArrayList();
-        
-        if (closed(inventory)){
-            return inLogic;
-        }
-
-        if (logicBasementCage(inventory))
-            inLogic.add(basementCage);
-        if (logicMapChest(inventory))
-            inLogic.add(mapChest);
-        
-        if (logicBigKeyChest(inventory))
-            inLogic.add(bigKeyChest);
-        
-        if (logicCompassChest(inventory))
-            inLogic.add(compassChest);
-        if (logicBigChest(inventory))
-            inLogic.add(bigChest);
-        if (logicMoldorm(inventory))
-            inLogic.add(moldorm);  
-        
-        return inLogic;
-    }
-       
     /**
      * Check to see if there is a way to enter the dungeon
      * Tower of Hera can be entered if Death Mountain is 
@@ -120,6 +92,77 @@ public class TowerOfHera extends Dungeon {
         return inventory.getItem(Item.HAMMER).isOwned() || 
                 inventory.getItem(Sword.SWORD).isOwned();
     }
+    
+    /**
+     * Check to see if the big key has been picked up
+     * This checks all the locations possible where the big key can be
+     * @return True or False if the big key is acquired
+     */
+    private boolean bigKeyAcquired() {
+        
+        Location[] possibleBigKey = {basementCage, mapChest, bigKeyChest};
+        
+        for (Location location : possibleBigKey) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(BIG_KEY))
+                return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check to see how many small keys have been picked up
+     * @return The number of small keys that have been acquired
+     */
+    private int smallKeysAcquired() {
+        int numSmallKeys = 0;
+        
+        Location[] possibleSmallKeys = {basementCage, mapChest, compassChest,
+            bigChest, moldorm};
+        
+        for (Location location : possibleSmallKeys) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(SMALL_KEY))
+                numSmallKeys++;
+        }
+        
+        return numSmallKeys;
+    } 
+    
+    /**
+     * Get the locations that are currently in logic
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    @Override
+    public ArrayList<Location> locationsInLogic(Inventory inventory) {
+        ArrayList<Location> inLogic = new ArrayList();
+        
+        if (closed(inventory))
+            return inLogic;
+
+        if (logicBasementCage(inventory))
+            inLogic.add(basementCage);
+        if (logicMapChest(inventory))
+            inLogic.add(mapChest);
+        
+        if (smallKeysAcquired() == TOTAL_SMALL_KEYS) {
+            if (logicBigKeyChest(inventory))
+                inLogic.add(bigKeyChest);  
+        }
+
+        if (bigKeyAcquired()) {
+            if (logicCompassChest(inventory))
+                inLogic.add(compassChest);
+            if (logicBigChest(inventory))
+                inLogic.add(bigChest);
+            if (logicMoldorm(inventory))
+                inLogic.add(moldorm);  
+        }
+        
+        return inLogic;
+    }
    
     /**
      * Check to see if the basement cage is in logic
@@ -142,35 +185,8 @@ public class TowerOfHera extends Dungeon {
     }    
     
     /**
-     * Check to see if the small key has been picked up
-     * This checks all the locations possible without the big key
-     * @return True or False if the big key is acquired
-     */
-    private boolean smallKeyAcquired() {
-        if (mapChest.isAcquired() && 
-                mapChest.getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        if (basementCage.isAcquired() && 
-                basementCage.getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        if (compassChest.isAcquired() &&
-                compassChest.getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        if (bigChest.isAcquired() &&
-                bigChest.getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        return moldorm.isAcquired() && 
-               moldorm.getContents().getDescription().equals(SMALL_KEY);
-    }
-    
-    /**
      * Check to see if the big key chest is in logic
-     * It's in logic if it's not opened, the small key is acquired,
-     * and a fire source is acquired
+     * It's in logic if it's not opened and a fire source is acquired
      * @param inventory The current inventory
      * @return True or False if the chest is in logic
      */
@@ -178,61 +194,34 @@ public class TowerOfHera extends Dungeon {
         if (bigKeyChest.isAcquired())
             return false;
         
-        if (!smallKeyAcquired())
-            return false;
-        
         return inventory.getItem(Item.FIRE_ROD).isOwned() || 
                 inventory.getItem(Item.LANTERN).isOwned();
-    }
-    
-    /**
-     * Check to see if the big key has been picked up
-     * This checks all the locations possible without the big key
-     * @return True or False if the big key is acquired
-     */
-    private boolean bigKeyAcquired() {
-        if (basementCage.isAcquired() &&
-                basementCage.getContents().getDescription().equals(BIG_KEY))
-            return true;
-                
-        if (mapChest.isAcquired() && 
-                mapChest.getContents().getDescription().equals(BIG_KEY))
-            return true;
-        
-        return bigKeyChest.isAcquired() &&
-                bigKeyChest.getContents().getDescription().equals(BIG_KEY);
     }
 
     /**
      * Check to see if the compass chest is in logic
-     * It's in logic if it's not opened and the big key is acquired
+     * It's in logic if it's not opened
      * @param inventory The current inventory (unused)
      * @return True or False if the chest is in logic
      */
     private boolean logicCompassChest(Inventory inventory) {
-        if (compassChest.isAcquired())
-            return false;
-        
-        return bigKeyAcquired();
+        return !compassChest.isAcquired();
+
     }
     
     /**
      * Check to see if the big chest is in logic
-     * It's in logic if it's not opened and the big key is acquired
+     * It's in logic if it's not opened
      * @param inventory The current inventory (unusued)
      * @return True or False if the big key chest is in logic
      */
     private boolean logicBigChest(Inventory inventory) {
-        if (bigChest.isAcquired())
-            return false;
-    
-        return bigKeyAcquired();
+        return !bigChest.isAcquired();
     }
     
     /**
      * Check to see Moldorm is in logic
-     * They're in logic if the item isn't acquired and 
-     * the big key is acquired.  
+     * They're in logic if the item isn't acquired
      * Items Required:
      * 1) A weapon to kill Moldorm 
      *    - Hammer or Sword 
@@ -241,9 +230,6 @@ public class TowerOfHera extends Dungeon {
      */
     private boolean logicMoldorm(Inventory inventory) {
         if (moldorm.isAcquired())
-            return false;
-        
-        if (!bigKeyAcquired())
             return false;
         
         return inventory.getItem(Item.HAMMER).isOwned() || 

@@ -290,7 +290,8 @@ public class LightWorld extends Area {
                
         //Access through dark world
         if (inventory.getItem(Item.FLUTE).isOwned() &&
-                ((Gloves)(inventory.getItem(Gloves.GLOVES))).getLevel() == 2) {
+                ((Gloves)(inventory.getItem(Gloves.GLOVES))).getDescription()
+                .equals(Gloves.TITANS_MITTS)) {
             if(!desertLedge.isAcquired())
                 inLogic.add(desertLedge);
             if(!checkerboardCave.isAcquired())

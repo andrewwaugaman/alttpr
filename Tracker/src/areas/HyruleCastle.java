@@ -29,10 +29,12 @@ public class HyruleCastle extends Area {
     
     private final Location sanctuary;
     
-    //Hyrule Castle has a Small Key in a chest 
-    //(Note -- It has multiple keys in guards and a big key in)
-    //(a guard but the small key is the main one for logic)
+    //Hyrule Castle has a Small Key in a location
+    //Note -- The Big Keys is in a guard
     private final String SMALL_KEY = "Sewers Key";
+    
+    //Prevent Magic Number
+    private final int TOTAL_SMALL_KEYS = 1;
     
     public final static String NAME = "Hyrule Castle";
     
@@ -53,43 +55,6 @@ public class HyruleCastle extends Area {
         
         sanctuary = new Location("Sanctuary");
     }
- 
-    /**
-     * Get the locations that are currently in logic
-     * @param inventory The current inventory
-     * @return The locations that are in logic
-     */
-    @Override
-    public ArrayList<Location> locationsInLogic(Inventory inventory) {
-        ArrayList<Location> inLogic = new ArrayList();
-        
-        if(closed(inventory)){
-            return inLogic;
-        }
-        
-        if (logicLinksUncle(inventory))
-            inLogic.add(linksUncle);
-        if (logicSecretPassage(inventory))
-            inLogic.add(secretPassage);
-        
-        if (logicMapChest(inventory))
-            inLogic.add(mapChest);
-        if (logicBoomerangChest(inventory))
-            inLogic.add(boomerangChest);
-        if (logicZeldasCell(inventory))
-            inLogic.add(zeldasCell);
-        
-        if (logicSewersDarkCross(inventory))
-            inLogic.add(sewersDarkCross);
-        
-        inLogic.addAll(logicSewersSecretRoom(inventory));
-        
-        if (logicSanctuary(inventory))
-            inLogic.add(sanctuary);
-        
-        return inLogic;
-    }
-    
     
     /**
      * Check to see if there is a way to enter the dungeon
@@ -111,6 +76,66 @@ public class HyruleCastle extends Area {
     public boolean canFullClear(Inventory inventory) {
         return (inventory.getItem(Item.LANTERN).isOwned() && 
                 inventory.getItem(Gloves.GLOVES).isOwned());      
+    }
+    
+    //No Big Key in a location
+    
+    /**
+     * Check to see how many small keys have been picked up
+     * @return The number of small keys that have been acquired
+     */
+    private int smallKeysAcquired() {
+        int numSmallKeys = 0;
+        
+        Location[] possibleSmallKeys = {mapChest, sewersDarkCross, 
+            sewersSecretRoomLeft, sewersSecretRoomMiddle, 
+            sewersSecretRoomRight};
+        
+        for (Location location : possibleSmallKeys) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(SMALL_KEY))
+                numSmallKeys++;
+        }
+        
+        return numSmallKeys;
+    } 
+ 
+    /**
+     * Get the locations that are currently in logic
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    @Override
+    public ArrayList<Location> locationsInLogic(Inventory inventory) {
+        ArrayList<Location> inLogic = new ArrayList();
+        
+        if(closed(inventory))
+            return inLogic;
+        
+        if (logicLinksUncle(inventory))
+            inLogic.add(linksUncle);
+        if (logicSecretPassage(inventory))
+            inLogic.add(secretPassage);
+        
+        if (logicMapChest(inventory))
+            inLogic.add(mapChest);
+        
+        if (smallKeysAcquired() == TOTAL_SMALL_KEYS) {
+            if (logicBoomerangChest(inventory))
+                inLogic.add(boomerangChest);
+            if (logicZeldasCell(inventory))
+                inLogic.add(zeldasCell);
+        }
+        
+        if (logicSewersDarkCross(inventory))
+            inLogic.add(sewersDarkCross);
+        
+        inLogic.addAll(logicSewersSecretRoom(inventory));
+        
+        if (logicSanctuary(inventory))
+            inLogic.add(sanctuary);
+        
+        return inLogic;
     }
     
     /**
@@ -144,62 +169,23 @@ public class HyruleCastle extends Area {
     }
     
     /**
-     * Check to see if the small key has been picked up
-     * This checks all the locations possible without the big key
-     * @return True or False if the big key is acquired
-     */
-    private boolean smallKeyAcquired() {
-        if(mapChest.isAcquired() && 
-                mapChest.getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        if(sewersDarkCross.isAcquired() && sewersDarkCross
-                .getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        if(sewersSecretRoomLeft.isAcquired() && sewersSecretRoomLeft
-                .getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        if(sewersSecretRoomMiddle.isAcquired() && sewersSecretRoomMiddle
-                .getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        if(sewersSecretRoomRight.isAcquired() && sewersSecretRoomRight
-                .getContents().getDescription().equals(SMALL_KEY))
-            return true;
-        
-        return sanctuary.isAcquired() && 
-               sanctuary.getContents().getDescription().equals(SMALL_KEY);
-    }
-
-    
-    /**
      * Check to see if the boomerang chest is in logic
-     * It's in logic if the item is not obtained and the 
-     * sewers key has been obtained (a guard key could 
-     * be stolen and used in the sewers instead)
+     * It's in logic if the item is not obtained 
      * @param inventory The current inventory (unused)
      * @return True or False if the chest is in logic
      */
     private boolean logicBoomerangChest(Inventory inventory) {
-        if (smallKeyAcquired())
-            return !boomerangChest.isAcquired();
-        return false;
+        return !boomerangChest.isAcquired();
     }
     
     /**
      * Check to see if the boomerang chest is in logic
-     * It's in logic if the item is not obtained and the 
-     * sewers key has been obtained (a guard key could 
-     * be stolen and used in the sewers instead)
+     * It's in logic if the item is not obtained
      * @param inventory The current inventory (unused)
      * @return True or False if the chest is in logic
      */
     private boolean logicZeldasCell(Inventory inventory) {
-        if (smallKeyAcquired())
-            return !zeldasCell.isAcquired();
-        return false;
+        return !zeldasCell.isAcquired();
     }
     
     /**
@@ -210,9 +196,10 @@ public class HyruleCastle extends Area {
      * @return True or False if the chest is in logic
      */
     private boolean logicSewersDarkCross(Inventory inventory) {
-        if (inventory.getItem(Item.LANTERN).isOwned())
-            return !sewersDarkCross.isAcquired();
-        return false;
+        if (sewersDarkCross.isAcquired())
+            return false;
+            
+        return inventory.getItem(Item.LANTERN).isOwned();
     }
     
     /**
@@ -228,9 +215,8 @@ public class HyruleCastle extends Area {
         ArrayList<Location> inLogic = new ArrayList();
         
         if (inventory.getItem(Gloves.GLOVES).isOwned() || 
-                (smallKeyAcquired() && 
-                inventory.getItem(Item.LANTERN).isOwned()))
-        {
+                (smallKeysAcquired() == TOTAL_SMALL_KEYS && 
+                inventory.getItem(Item.LANTERN).isOwned())) {
             if (!sewersSecretRoomLeft.isAcquired())
                 inLogic.add(sewersSecretRoomLeft);
             if (!sewersSecretRoomMiddle.isAcquired())
