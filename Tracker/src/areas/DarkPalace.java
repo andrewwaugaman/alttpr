@@ -82,35 +82,6 @@ public class DarkPalace extends Dungeon {
     }
     
     /**
-     * Get the locations that are currently in logic
-     * @param inventory The current inventory
-     * @return The locations that are in logic
-     */
-    @Override
-    public ArrayList<Location> locationsInLogic(Inventory inventory) {
-        ArrayList<Location> inLogic = new ArrayList();
-        
-        if (closed(inventory)) 
-            return inLogic;
-        
-        if (logicShooterRoom(inventory))
-            inLogic.add(shooterRoom); 
-        
-        if (logicMapChest(inventory))
-            inLogic.add(mapChest);
-        if (logicArenaLedge(inventory))
-            inLogic.add(arenaLedge);
-        
-        if (inventory.getItem(Item.BOW).isOwned() &&
-            inventory.getItem(Item.HAMMER).isOwned())
-                inLogic.addAll(keyLogicBowAndHammer(inventory));
-        else
-            inLogic.addAll(keyLogicFront(inventory));
- 
-        return inLogic;
-    }
-       
-    /**
      * Check to see if there is a way to enter the dungeon
      * Dark Palace can be entered if the east side of the
      * Dark World is accessible (no additional requirements)
@@ -144,39 +115,24 @@ public class DarkPalace extends Dungeon {
     }
     
     /**
-     * Check to see if the shooter room is in logic
-     * It's in logic if it's not opened
-     * @param inventory The current inventory (unused)
-     * @return True or False if the location is in logic
+     * Check to see if the big key has been picked up
+     * This checks all the locations possible where the big key can be
+     * @return True or False if the big key is acquired
      */
-    private boolean logicShooterRoom(Inventory inventory) {
-        return !shooterRoom.isAcquired();
-    }
-    
-    /**
-     * Check to see if the map chest room is in logic
-     * It's in logic if it's not opened and the bow is acquired
-     * @param inventory The current inventory 
-     * @return True or False if the chest is in logic
-     */
-    private boolean logicMapChest(Inventory inventory) {
-        if (mapChest.isAcquired())
-            return false;
+    private boolean bigKeyAcquired() {
         
-        return inventory.getItem(Item.BOW).isOwned();
-    }
-    
-    /**
-     * Check to see if the arena ledge chest is in logic
-     * It's in logic if it's not opened and the bow is acquired
-     * @param inventory The current inventory 
-     * @return True or False if the location is in logic
-     */
-    private boolean logicArenaLedge(Inventory inventory) {
-        if (mapChest.isAcquired())
-            return false;
+        Location[] possibleBigKey = {shooterRoom, mapChest, arenaLedge, 
+            arenaBridge, stalfosBasement, compassChest, darkBasementLeft,
+            darkBasementRight, darkMazeTop, darkMazeBottom, bigKeyChest,
+            harmlessHellway};
         
-        return inventory.getItem(Item.BOW).isOwned();
+        for (Location location : possibleBigKey) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(BIG_KEY))
+                return true;
+        }
+        
+        return false;
     }
     
     /**
@@ -238,6 +194,78 @@ public class DarkPalace extends Dungeon {
             numObtainedKeys++;
         
         return TOTAL_SMALL_KEYS - numObtainedKeys;
+    }
+    
+    /**
+     * Get the locations that are currently in logic
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    @Override
+    public ArrayList<Location> locationsInLogic(Inventory inventory) {
+        ArrayList<Location> inLogic = new ArrayList();
+        
+        if (closed(inventory)) 
+            return inLogic;
+        
+        if (logicShooterRoom(inventory))
+            inLogic.add(shooterRoom); 
+        
+        if (logicMapChest(inventory))
+            inLogic.add(mapChest);
+        if (logicArenaLedge(inventory))
+            inLogic.add(arenaLedge);
+        
+        if (inventory.getItem(Item.BOW).isOwned() &&
+            inventory.getItem(Item.HAMMER).isOwned())
+                inLogic.addAll(keyLogicBowAndHammer(inventory));
+        else
+            inLogic.addAll(keyLogicFront(inventory));
+        
+        //These checks are in place in case an area is reached and an item is
+        //found in one of the chests that could change the logic, then the rest
+        //of the chests in that area need to be added to list of ones in logic
+        //
+        //Example: If the compass chest is reached when the player has the bow 
+        //and the lantern, but does not have the hammer (only 3 keys are needed
+        //for the location to be logic) and finds the hammer in the chest,  the
+        //chests in the dark basement will not be listed in logic (because the 
+        //door to Helmasaur can now be accessed, so the logic would expect 4
+        //keys to reach the back are)
+        
+        //Used by the checks to see if a location is obtained
+        boolean locationAcquired = false;
+        
+        //Check the Back Area
+        Location[] backArea = {compassChest, darkBasementLeft, 
+            darkBasementRight};
+        for (int i = 0; i < backArea.length; i++) {
+            //Loop through the locations and see if any have been obtained
+            if (backArea[i].isAcquired()) {
+                //A location has been acquired, break the loop and check
+                //if all the other locations are in the list
+                locationAcquired = true;
+                break;
+            }
+        }
+        //If a location has been acquired, check if all the other locations 
+        //are the in list of available locations
+        if (locationAcquired) {
+            ArrayList<Location> back = new ArrayList();
+            if (logicCompassChest(inventory))
+                back.add(compassChest);
+            if (logicDarkBasementLeft(inventory))
+                back.add(darkBasementLeft);
+            if (logicDarkBasementRight(inventory))
+                back.add(darkBasementRight);
+            for (int i = 0; i < back.size(); i++) {
+                //If the location isn't in the list, add it
+                if (!inLogic.contains(back.get(i)))
+                    inLogic.add(back.get(i));
+            }
+        }
+ 
+        return inLogic;
     }
     
     /**
@@ -340,6 +368,42 @@ public class DarkPalace extends Dungeon {
     }
     
     /**
+     * Check to see if the shooter room is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the location is in logic
+     */
+    private boolean logicShooterRoom(Inventory inventory) {
+        return !shooterRoom.isAcquired();
+    }
+    
+    /**
+     * Check to see if the map chest room is in logic
+     * It's in logic if it's not opened and the bow is acquired
+     * @param inventory The current inventory 
+     * @return True or False if the chest is in logic
+     */
+    private boolean logicMapChest(Inventory inventory) {
+        if (mapChest.isAcquired())
+            return false;
+        
+        return inventory.getItem(Item.BOW).isOwned();
+    }
+    
+    /**
+     * Check to see if the arena ledge chest is in logic
+     * It's in logic if it's not opened and the bow is acquired
+     * @param inventory The current inventory 
+     * @return True or False if the location is in logic
+     */
+    private boolean logicArenaLedge(Inventory inventory) {
+        if (mapChest.isAcquired())
+            return false;
+        
+        return inventory.getItem(Item.BOW).isOwned();
+    }
+    
+    /**
      * Check to see if the arena bridge is in logic
      * It's in logic if it's not opened 
      * @param inventory The current inventory (unused)
@@ -435,27 +499,6 @@ public class DarkPalace extends Dungeon {
             return false;
         
         return inventory.getItem(Item.LANTERN).isOwned();
-    }
-    
-    /**
-     * Check to see if the big key has been picked up
-     * This checks all the locations possible where the big key can be
-     * @return True or False if the big key is acquired
-     */
-    private boolean bigKeyAcquired() {
-        
-        Location[] possibleBigKey = {shooterRoom, mapChest, arenaLedge, 
-            arenaBridge, stalfosBasement, compassChest, darkBasementLeft,
-            darkBasementRight, darkMazeTop, darkMazeBottom, bigKeyChest,
-            harmlessHellway};
-        
-        for (Location location : possibleBigKey) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(BIG_KEY))
-                return true;
-        }
-        
-        return false;
     }
     
     /**

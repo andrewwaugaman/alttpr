@@ -59,6 +59,74 @@ public class SkullWoods extends Dungeon {
     }
     
     /**
+     * Check to see if there is a way to enter the dungeon
+     * Skull Woods can be entered if the north west side of 
+     * the Dark World is accessible
+     * @param inventory The current inventory 
+     * @return True or False if it's closed
+     */
+    private boolean closed(Inventory inventory) {
+        return !darkWorld.northWestDarkAccess(inventory);
+    }
+    
+    /**
+     * Check to see if it's possible to full clear the dungeon
+     * Skull Woods requires the following to full clear:
+     * 1) Fire Rod
+     * 2) A sword (any level - Cut curtains to get to Mothula)
+     * @param inventory The current inventory
+     * @return True or False if it can be full cleared
+     */
+    public boolean canFullClear(Inventory inventory) {
+        if (closed(inventory))
+            return false;
+        
+        if (!inventory.getItem(Item.FIRE_ROD).isOwned())
+            return false;
+        
+        return inventory.getItem(Sword.SWORD).isOwned();
+    }
+    
+    /**
+     * Check to see if the big key has been picked up
+     * This checks all the locations possible where the big key can be
+     * @return True or False if the big key is acquired
+     */
+    private boolean bigKeyAcquired() {
+        
+        Location[] possibleBigKey = {compassChest, potPrison, pinballRoom,
+            mapChest, bigKeyChest, bridgeRoom, mothula};
+        
+        for (Location location : possibleBigKey) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(BIG_KEY))
+                return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check to see how many small keys have been picked up
+     * Note -- Not all locations in Skull Woods can be keys
+     * @return The number of small keys that have been acquired
+     */
+    private int smallKeysAcquired() {
+        int numSmallKeys = 0;
+        
+        Location[] possibleSmallKeys = {compassChest, potPrison, pinballRoom,
+            mapChest, bigKeyChest, bigChest, bridgeRoom};
+        
+        for (Location location : possibleSmallKeys) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(SMALL_KEY))
+                numSmallKeys++;
+        }
+        
+        return numSmallKeys;
+    }    
+    
+    /**
      * Get the locations that are currently in logic
      * @param inventory The current inventory
      * @return The locations that are in logic
@@ -93,35 +161,6 @@ public class SkullWoods extends Dungeon {
                 inLogic.add(mothula);
         
         return inLogic;
-    }
-       
-    /**
-     * Check to see if there is a way to enter the dungeon
-     * Skull Woods can be entered if the north west side of 
-     * the Dark World is accessible
-     * @param inventory The current inventory 
-     * @return True or False if it's closed
-     */
-    private boolean closed(Inventory inventory) {
-        return !darkWorld.northWestDarkAccess(inventory);
-    }
-    
-    /**
-     * Check to see if it's possible to full clear the dungeon
-     * Skull Woods requires the following to full clear:
-     * 1) Fire Rod
-     * 2) A sword (any level - Cut curtains to get to Mothula)
-     * @param inventory The current inventory
-     * @return True or False if it can be full cleared
-     */
-    public boolean canFullClear(Inventory inventory) {
-        if (closed(inventory))
-            return false;
-        
-        if (!inventory.getItem(Item.FIRE_ROD).isOwned())
-            return false;
-        
-        return inventory.getItem(Sword.SWORD).isOwned();
     }
     
     /**
@@ -183,26 +222,7 @@ public class SkullWoods extends Dungeon {
     private boolean logicBigChest(Inventory inventory) {
         return !bigChest.isAcquired();
     }
-    
-    /**
-     * Check to see if the big key has been picked up
-     * This checks all the locations possible where the big key can be
-     * @return True or False if the big key is acquired
-     */
-    private boolean bigKeyAcquired() {
-        
-        Location[] possibleBigKey = {compassChest, potPrison, pinballRoom,
-            mapChest, bigKeyChest, bridgeRoom, mothula};
-        
-        for (Location location : possibleBigKey) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(BIG_KEY))
-                return true;
-        }
-        
-        return false;
-    }
-    
+  
     /**
      * Check to see if the bridge room chest is in logic
      * It's in logic if it's not opened and the fire rod is acquired
@@ -214,26 +234,6 @@ public class SkullWoods extends Dungeon {
             return false;
         
         return inventory.getItem(Item.FIRE_ROD).isOwned();
-    }
-    
-    /**
-     * Check to see how many small keys have been picked up
-     * Note -- Not all locations in Skull Woods can be keys
-     * @return The number of small keys that have been acquired
-     */
-    private int smallKeysAcquired() {
-        int numSmallKeys = 0;
-        
-        Location[] possibleSmallKeys = {compassChest, potPrison, pinballRoom,
-            mapChest, bigKeyChest, bigChest, bridgeRoom};
-        
-        for (Location location : possibleSmallKeys) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(SMALL_KEY))
-                numSmallKeys++;
-        }
-        
-        return numSmallKeys;
     }
     
     /**

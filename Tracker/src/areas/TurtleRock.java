@@ -81,30 +81,6 @@ public class TurtleRock extends Dungeon {
     }
     
     /**
-     * Get the locations that are currently in logic
-     * @param inventory The current inventory
-     * @return The locations that are in logic
-     */
-    @Override
-    public ArrayList<Location> locationsInLogic(Inventory inventory) {
-        ArrayList<Location> inLogic = new ArrayList();
-        
-        if (closed(inventory)) 
-            return inLogic;
-        
-        if (logicCompassChest(inventory))
-            inLogic.add(compassChest);
-        if (logicRollerRoomLeft(inventory))
-            inLogic.add(rollerRoomLeft);
-        if (logicRollerRoomRight(inventory))
-            inLogic.add(rollerRoomRight);
-        
-        inLogic.addAll(keyLogic(inventory));
-
-        return inLogic;
-    }
-       
-    /**
      * Check to see if there is a way to enter the dungeon
      * Turtle Rock can be entered if:
      * 1) East Dark Death Mountain is accessible 
@@ -159,6 +135,167 @@ public class TurtleRock extends Dungeon {
             return true;
         
         return inventory.getItem(Item.BYRNA).isOwned();
+    }
+    
+    /**
+     * Check to see if the big key has been picked up
+     * This checks all the locations possible where the big key can be
+     * @return True or False if the big key is acquired
+     */
+    private boolean bigKeyAcquired() {
+        
+        Location[] possibleBigKey = {compassChest, rollerRoomLeft, 
+            rollerRoomRight, chainChomps, bigKeyChest};
+        
+        for (Location location : possibleBigKey) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(BIG_KEY))
+                return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check to see how many small keys have been picked up
+     * @return The number of small keys that have been acquired
+     */
+    private int smallKeysAcquired() {
+        int numSmallKeys = 0;
+        
+        Location[] possibleSmallKeys = {compassChest, rollerRoomLeft, 
+            rollerRoomRight, chainChomps, bigKeyChest, bigChest, 
+            crystarollerRoom, eyeBridgeTopRight, eyeBridgeTopLeft,
+            eyeBridgeBottomRight, eyeBridgeBottomLeft};
+        
+        for (Location location : possibleSmallKeys) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(SMALL_KEY))
+                numSmallKeys++;
+        }
+        
+        return numSmallKeys;
+    }
+    
+    /**
+     * Check to see if there are any small keys that can be locked
+     * A small key can be locked if it is in a room that requires a 
+     * small key to access.  In Turtle Rock a small key could be 
+     * locked in the big key chest
+     * @return The number of small keys that could be locked
+     */
+    private int smallKeysLocked() {
+        int numObtainedKeys = 0;
+        
+        Location[] possibleSmallKeys = {compassChest, rollerRoomLeft, 
+            rollerRoomRight, chainChomps, bigChest, crystarollerRoom, 
+            eyeBridgeTopRight, eyeBridgeTopLeft, eyeBridgeBottomRight, 
+            eyeBridgeBottomLeft};
+        
+        //If there's a location outside of the big key chest 
+        //that hasn't been checked exit the check
+        for (Location location : possibleSmallKeys) {
+            if (!location.isAcquired())
+                return 0;
+            else
+                if (location.getContents().getDescription().equals(SMALL_KEY))
+                    numObtainedKeys++;
+        }
+        
+        //Since this is reached, the big key chest has to have the small key 
+        //First check to see if it's opened, if not then the key could be
+        //locked with poor key usage
+        if (bigKeyChest.isAcquired() && bigKeyChest.getContents()
+                .getDescription().equals(SMALL_KEY))
+            numObtainedKeys++;
+        
+        return TOTAL_SMALL_KEYS - numObtainedKeys;
+    }
+    
+    /**
+     * Get the locations that are currently in logic
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    @Override
+    public ArrayList<Location> locationsInLogic(Inventory inventory) {
+        ArrayList<Location> inLogic = new ArrayList();
+        
+        if (closed(inventory)) 
+            return inLogic;
+        
+        if (logicCompassChest(inventory))
+            inLogic.add(compassChest);
+        if (logicRollerRoomLeft(inventory))
+            inLogic.add(rollerRoomLeft);
+        if (logicRollerRoomRight(inventory))
+            inLogic.add(rollerRoomRight);
+        
+        inLogic.addAll(keyLogic(inventory));
+
+        return inLogic;
+    }
+
+    /**
+     * The item locations that are in logic depend on how many 
+     * keys have been acquired 
+     * @param inventory The current inventory
+     * @return A list of items that are available
+     */
+    private ArrayList<Location> keyLogic(Inventory inventory) {
+        ArrayList<Location> inLogic = new ArrayList();
+
+        //One key is required to reach the chain chomps room
+        if (smallKeysAcquired() >= 1)
+            if (logicChainChomps(inventory))
+                inLogic.add(chainChomps);
+        
+        //Two keys are required to reach the next section (Northwest door
+        //the main room and the chain chomps door both require a key)
+        //Note - The room before chain chomps has a key inside it that must
+        //be used on that door
+        if (smallKeysAcquired() >= 2) {            
+            //If the big key isn't obtained (Ex - Locked in Roller Room and no 
+            //Fire Rod), the big key chest is in logic due to the key in the 
+            //room before only being able to be used on the door leading to it
+            if (!bigKeyAcquired()) {
+                if (logicBigKeyChest(inventory))
+                    inLogic.add(bigKeyChest);
+            }
+            //Since the Big Key is obtained, the Big Chest 
+            //and the Crystaroller Room are in logic.  
+            else {
+                if (logicBigChest(inventory))
+                    inLogic.add(bigChest);
+                if (logicCrystarollerRoom(inventory))
+                    inLogic.add(crystarollerRoom);
+                
+                //A 3rd key is required to reach the laser bridge (There's 
+                //a key in the room before the big key chest that could be 
+                //used on the door to the big key chest, this would be the 
+                //only available option)
+                if (smallKeysAcquired() >= 3)
+                    inLogic.addAll(logicLaserBridge(inventory));
+                
+                //All 4 keys are required to reach Trinexx and the big key
+                //chest (the key from in front of it could be stolen to use
+                //on the door in the crystaroller room and then the 3rd key
+                //from a location could be used on the door leading to 
+                //Trinexx.  If it's used in the intended way, a 4th key is
+                //required to use on the door to Trinexx).  A key could be 
+                //"locked" in the big key chest if all the other keys are 
+                //used and the door before it was never opened, so checking
+                //to see if that was a possiblity
+                if (smallKeysAcquired() + smallKeysLocked() == 
+                        TOTAL_SMALL_KEYS) {
+                    if (logicBigKeyChest(inventory))
+                        inLogic.add(bigKeyChest);
+                    if (logicTrinexx(inventory))
+                        inLogic.add(trinexx);
+                }
+            }                
+        }
+        return inLogic;
     }
     
     /**
@@ -266,147 +403,7 @@ public class TurtleRock extends Dungeon {
 
         return inLogic;
     }  
-        
-    /**
-     * Check to see if the big key has been picked up
-     * This checks all the locations possible where the big key can be
-     * @return True or False if the big key is acquired
-     */
-    private boolean bigKeyAcquired() {
-        
-        Location[] possibleBigKey = {compassChest, rollerRoomLeft, 
-            rollerRoomRight, chainChomps, bigKeyChest};
-        
-        for (Location location : possibleBigKey) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(BIG_KEY))
-                return true;
-        }
-        
-        return false;
-    }
     
-    /**
-     * Check to see how many small keys have been picked up
-     * @return The number of small keys that have been acquired
-     */
-    private int smallKeysAcquired() {
-        int numSmallKeys = 0;
-        
-        Location[] possibleSmallKeys = {compassChest, rollerRoomLeft, 
-            rollerRoomRight, chainChomps, bigKeyChest, bigChest, 
-            crystarollerRoom, eyeBridgeTopRight, eyeBridgeTopLeft,
-            eyeBridgeBottomRight, eyeBridgeBottomLeft};
-        
-        for (Location location : possibleSmallKeys) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(SMALL_KEY))
-                numSmallKeys++;
-        }
-        
-        return numSmallKeys;
-    }
-    
-    /**
-     * Check to see what's in logic if the big key is not acquired
-     * The item locations that are in logic depend on how many 
-     * keys have been acquired 
-     * Note -- One less locked door is accessible because the big 
-     * key is required to reach the Rupee Room 
-     * @param inventory The current inventory
-     * @return A list of items that are available
-     */
-    private ArrayList<Location> keyLogic(Inventory inventory) {
-        ArrayList<Location> inLogic = new ArrayList();
-
-        //One key is required to reach the chain chomps room
-        if (smallKeysAcquired() >= 1)
-            if (logicChainChomps(inventory))
-                inLogic.add(chainChomps);
-        
-        //Two keys are required to reach the next section (Northwest door
-        //the main room and the chain chomps door both require a key)
-        //Note - The room before chain chomps has a key inside it that must
-        //be used on that door
-        if (smallKeysAcquired() >= 2) {            
-            //If the big key isn't obtained (Ex - Locked in Roller Room and no 
-            //Fire Rod), the big key chest is in logic due to the key in the 
-            //room before only being able to be used on the door leading to it
-            if (!bigKeyAcquired()) {
-                if (logicBigKeyChest(inventory))
-                    inLogic.add(bigKeyChest);
-            }
-            //Since the Big Key is obtained, the Big Chest 
-            //and the Crystaroller Room are in logic.  
-            else {
-                if (logicBigChest(inventory))
-                    inLogic.add(bigChest);
-                if (logicCrystarollerRoom(inventory))
-                    inLogic.add(crystarollerRoom);
-                
-                //A 3rd key is required to reach the laser bridge (There's 
-                //a key in the room before the big key chest that could be 
-                //used on the door to the big key chest, this would be the 
-                //only available option)
-                if (smallKeysAcquired() >= 3)
-                    inLogic.addAll(logicLaserBridge(inventory));
-                
-                //All 4 keys are required to reach Trinexx and the big key
-                //chest (the key from in front of it could be stolen to use
-                //on the door in the crystaroller room and then the 3rd key
-                //from a location could be used on the door leading to 
-                //Trinexx.  If it's used in the intended way, a 4th key is
-                //required to use on the door to Trinexx).  A key could be 
-                //"locked" in the big key chest if all the other keys are 
-                //used and the door before it was never opened, so checking
-                //to see if that was a possiblity
-                if (smallKeysAcquired() + smallKeysLocked() == 
-                        TOTAL_SMALL_KEYS) {
-                    if (logicBigKeyChest(inventory))
-                        inLogic.add(bigKeyChest);
-                    if (logicTrinexx(inventory))
-                        inLogic.add(trinexx);
-                }
-            }                
-        }
-        return inLogic;
-    }
-    
-    /**
-     * Check to see if there are any small keys that can be locked
-     * A small key can be locked if it is in a room that requires a 
-     * small key to access.  In Turtle Rock a small key could be 
-     * locked in the big key chest
-     * @return The number of small keys that could be locked
-     */
-    private int smallKeysLocked() {
-        int numObtainedKeys = 0;
-        
-        Location[] possibleSmallKeys = {compassChest, rollerRoomLeft, 
-            rollerRoomRight, chainChomps, bigChest, crystarollerRoom, 
-            eyeBridgeTopRight, eyeBridgeTopLeft, eyeBridgeBottomRight, 
-            eyeBridgeBottomLeft};
-        
-        //If there's a location outside of the big key chest 
-        //that hasn't been checked exit the check
-        for (Location location : possibleSmallKeys) {
-            if (!location.isAcquired())
-                return 0;
-            else
-                if (location.getContents().getDescription().equals(SMALL_KEY))
-                    numObtainedKeys++;
-        }
-        
-        //Since this is reached, the big key chest has to have the small key 
-        //First check to see if it's opened, if not then the key could be
-        //locked with poor key usage
-        if (bigKeyChest.isAcquired() && bigKeyChest.getContents()
-                .getDescription().equals(SMALL_KEY))
-            numObtainedKeys++;
-        
-        return TOTAL_SMALL_KEYS - numObtainedKeys;
-    }
-        
     /**
      * Check to see if Trinexx is in logic
      * It's in logic if the item isn't acquired and:

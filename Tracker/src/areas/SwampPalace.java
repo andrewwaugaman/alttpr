@@ -30,6 +30,9 @@ public class SwampPalace extends Dungeon {
     private final String SMALL_KEY = "Swamp Palace - Small Key";
     private final String BIG_KEY = "Swamp Palace - Big Key";
     
+    //Prevent Magic Number
+    private final int TOTAL_SMALL_KEYS = 1;
+    
     public final static String NAME = "Swamp Palace";
     
     //Used to check if Swamp Palace is Open
@@ -62,50 +65,7 @@ public class SwampPalace extends Dungeon {
         
         this.darkWorld = darkWorld;
     }
-    
-    /**
-     * Get the locations that are currently in logic
-     * @param inventory The current inventory
-     * @return The locations that are in logic
-     */
-    @Override
-    public ArrayList<Location> locationsInLogic(Inventory inventory) {
-        ArrayList<Location> inLogic = new ArrayList();
-        
-        if (closed(inventory)) 
-            return inLogic;
-        
-        if (logicEntrance(inventory))
-            inLogic.add(entrance); 
-        
-        if (smallKeyAcquired()) {
-            if (logicMapChest(inventory))
-                inLogic.add(mapChest);
-            
-            if (logicCompassChest(inventory))
-                inLogic.add(compassChest);
-            if (logicWestChest(inventory))
-                inLogic.add(westChest);
-            if (logicBigKeyChest(inventory))
-                inLogic.add(bigKeyChest);
-            
-            if (logicBigChest(inventory))
-                inLogic.add(bigChest);
-            
-            if (logicFloodedRoomLeft(inventory))
-                inLogic.add(floodedRoomLeft);
-            if (logicFloodedRoomRight(inventory))
-                inLogic.add(floodedRoomRight);
-            if (logicWaterfallRoom(inventory))
-                inLogic.add(waterfallRoom);
-            
-            if (logicAarghus(inventory))
-                inLogic.add(aarghus);
-        }
- 
-        return inLogic;
-    }
-       
+   
     /**
      * Check to see if there is a way to enter the dungeon
      * Dark Palace can be entered if the south side of the
@@ -144,13 +104,23 @@ public class SwampPalace extends Dungeon {
     }
     
     /**
-     * Check to see if the entrance is in logic
-     * It's in logic if it's not opened
-     * @param inventory The current inventory (unused)
-     * @return True or False if the location is in logic
+     * Check to see if the big key has been picked up
+     * This checks all the locations possible where the big key can be
+     * @return True or False if the big key is acquired
      */
-    private boolean logicEntrance(Inventory inventory) {
-        return !entrance.isAcquired();
+    private boolean bigKeyAcquired() {
+        
+        Location[] possibleBigKey = {entrance, mapChest, compassChest, 
+            westChest, bigKeyChest, floodedRoomLeft, floodedRoomRight,
+            waterfallRoom, aarghus};
+        
+        for (Location location : possibleBigKey) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(BIG_KEY))
+                return true;
+        }
+        
+        return false;
     }
     
     /**
@@ -158,17 +128,71 @@ public class SwampPalace extends Dungeon {
      * Note -- Only the entrance in Swamp Palace can be a key
      * @return Whether or not the small key has been picked up
      */
-    private boolean smallKeyAcquired() {
+    private int smallKeysAcquired() {      
+        int numSmallKeys = 0;
         
         Location[] possibleSmallKeys = {entrance};
         
         for (Location location : possibleSmallKeys) {
             if (location.isAcquired() && location.getContents()
                     .getDescription().equals(SMALL_KEY))
-                return true;
+                numSmallKeys++;
         }
         
-        return false;
+        return numSmallKeys;
+    }
+    
+    /**
+     * Get the locations that are currently in logic
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    @Override
+    public ArrayList<Location> locationsInLogic(Inventory inventory) {
+        ArrayList<Location> inLogic = new ArrayList();
+        
+        if (closed(inventory)) 
+            return inLogic;
+        
+        if (logicEntrance(inventory))
+            inLogic.add(entrance); 
+        
+        if (smallKeysAcquired() == TOTAL_SMALL_KEYS) {
+            if (logicMapChest(inventory))
+                inLogic.add(mapChest);
+            
+            if (logicCompassChest(inventory))
+                inLogic.add(compassChest);
+            if (logicWestChest(inventory))
+                inLogic.add(westChest);
+            if (logicBigKeyChest(inventory))
+                inLogic.add(bigKeyChest);
+            
+            if (logicBigChest(inventory))
+                inLogic.add(bigChest);
+            
+            if (logicFloodedRoomLeft(inventory))
+                inLogic.add(floodedRoomLeft);
+            if (logicFloodedRoomRight(inventory))
+                inLogic.add(floodedRoomRight);
+            if (logicWaterfallRoom(inventory))
+                inLogic.add(waterfallRoom);
+            
+            if (logicAarghus(inventory))
+                inLogic.add(aarghus);
+        }
+ 
+        return inLogic;
+    }
+    
+    /**
+     * Check to see if the entrance is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the location is in logic
+     */
+    private boolean logicEntrance(Inventory inventory) {
+        return !entrance.isAcquired();
     }
     
     /**
@@ -227,33 +251,13 @@ public class SwampPalace extends Dungeon {
      * @return True or False if the big key chest is in logic
      */
     private boolean logicBigChest(Inventory inventory) {
-        if(bigChest.isAcquired())
+        if (bigChest.isAcquired())
             return false;
        
-        if(!bigKeyAcquired())
+        if (!bigKeyAcquired())
             return false;
         
         return inventory.getItem(Item.HAMMER).isOwned();
-    }
-    
-    /**
-     * Check to see if the big key has been picked up
-     * This checks all the locations possible where the big key can be
-     * @return True or False if the big key is acquired
-     */
-    private boolean bigKeyAcquired() {
-        
-        Location[] possibleBigKey = {entrance, mapChest, compassChest, 
-            westChest, bigKeyChest, floodedRoomLeft, floodedRoomRight,
-            waterfallRoom, aarghus};
-        
-        for (Location location : possibleBigKey) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(BIG_KEY))
-                return true;
-        }
-        
-        return false;
     }
     
     /**

@@ -61,6 +61,104 @@ public class IcePalace extends Dungeon {
     }
     
     /**
+     * Check to see if there is a way to enter the dungeon
+     * Ice Palace can be entered if the north west side of 
+     * the Dark World is accessible and either:
+     * 1) The fire rod is acquired
+     * 2) Bombos and a sword are acquired
+     * @param inventory The current inventory 
+     * @return True or False if it's closed
+     */
+    private boolean closed(Inventory inventory) {
+        if (!darkWorld.lakeHyliaAccess(inventory))
+            return true;
+        
+        if (inventory.getItem(Item.FIRE_ROD).isOwned())
+            return false;
+        
+        return !(inventory.getItem(Item.BOMBOS).isOwned() && 
+                inventory.getItem(Sword.SWORD).isOwned());
+    }
+    
+    /**
+     * Check to see if it's possible to full clear the dungeon
+     * Ice Palace requires the following to full clear:
+     * 1) Hammer
+     * 2) Hookshot (Don't know key logic)
+     * 3) Cane of Somaria (Don't know key logic)
+     * @param inventory The current inventory
+     * @return True or False if it can be full cleared
+     */
+    public boolean canFullClear(Inventory inventory) {
+        if (closed(inventory))
+            return false;
+        
+        if (!inventory.getItem(Item.HAMMER).isOwned())
+            return false;
+        
+        if (!inventory.getItem(Item.HOOKSHOT).isOwned())
+            return false;
+        
+        return inventory.getItem(Item.SOMARIA).isOwned();
+    }
+    
+    /**
+     * Check to see if the big key has been picked up
+     * This checks all the locations possible where the big key can be
+     * @return True or False if the big key is acquired
+     */
+    private boolean bigKeyAcquired() {
+        
+        Location[] possibleBigKey = {compassChest, freezorChest, icedTRoom,
+            spikeRoom, mapChest, bigKeyChest};
+        
+        for (Location location : possibleBigKey) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(BIG_KEY))
+                return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check to see how many small keys have been picked up
+     * Note -- All locations in Ice Palace can be keys
+     * @return The number of small keys that have been acquired
+     */
+    private int smallKeysAcquired() {
+        int numSmallKeys = 0;
+        
+        Location[] possibleSmallKeys = {compassChest, freezorChest, icedTRoom,
+            bigChest, spikeRoom, mapChest, bigKeyChest, kholdstare};
+        
+        for (Location location : possibleSmallKeys) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(SMALL_KEY))
+                numSmallKeys++;
+        }
+        
+        return numSmallKeys;
+    }
+    
+    /**
+     * Check to see if it's possible to reach the small key in the map room
+     * Note -- will only be called if the spike room is accessible
+     * It can be reached if the following are true:
+     * 1) The hookshot, cape or Cane of Byrna are acquired 
+     *          (To get past the spike room)
+     * 2) The hammer is acquired
+     */
+    private boolean canReachSmallKeyInMapRoom(Inventory inventory) {
+        if (!(inventory.getItem(Item.HOOKSHOT).isOwned() 
+                || inventory.getItem(Item.CAPE).isOwned() 
+                || inventory.getItem(Item.BYRNA).isOwned()))
+            return false;
+        
+        return inventory.getItem(Item.HAMMER).isOwned();              
+    }
+    
+    /**
      * Get the locations that are currently in logic
      * @param inventory The current inventory
      * @return The locations that are in logic
@@ -107,110 +205,6 @@ public class IcePalace extends Dungeon {
         }
         
         return inLogic;
-    }
-       
-    /**
-     * Check to see if there is a way to enter the dungeon
-     * Ice Palace can be entered if the north west side of 
-     * the Dark World is accessible and either:
-     * 1) The fire rod is acquired
-     * 2) Bombos and a sword are acquired
-     * @param inventory The current inventory 
-     * @return True or False if it's closed
-     */
-    private boolean closed(Inventory inventory) {
-        if (!darkWorld.lakeHyliaAccess(inventory))
-            return true;
-        
-        if (inventory.getItem(Item.FIRE_ROD).isOwned())
-            return false;
-        
-        return !(inventory.getItem(Item.BOMBOS).isOwned() && 
-                inventory.getItem(Sword.SWORD).isOwned());
-    }
-    
-    /**
-     * Check to see if it's possible to full clear the dungeon
-     * Ice Palace requires the following to full clear:
-     * 1) Hammer
-     * 2) Hookshot (Don't know key logic)
-     * 3) Cane of Somaria (Don't know key logic)
-     * @param inventory The current inventory
-     * @return True or False if it can be full cleared
-     */
-    public boolean canFullClear(Inventory inventory) {
-        if (closed(inventory))
-            return false;
-        
-        if (!inventory.getItem(Item.HAMMER).isOwned())
-            return false;
-        
-        if (!inventory.getItem(Item.HOOKSHOT).isOwned())
-            return false;
-        
-        return inventory.getItem(Item.SOMARIA).isOwned();
-    }
-    
-    /**
-     * Check to see if the compass chest is in logic
-     * It's in logic if it's not opened
-     * @param inventory The current inventory (unused)
-     * @return True or False if the chest is in logic
-     */
-    private boolean logicCompassChest(Inventory inventory) {
-        return !compassChest.isAcquired();
-    }
-    
-    /**
-     * Check to see if the freezor chest is in logic
-     * It's in logic if it's not opened
-     * @param inventory The current inventory (unused)
-     * @return True or False if the chest is in logic
-     */
-    private boolean logicFreezorChest(Inventory inventory) {
-        return !freezorChest.isAcquired();
-    }
-    
-    /**
-     * Check to see if the iced t room is in logic
-     * It's in logic if it's not opened
-     * @param inventory The current inventory (unused)
-     * @return True or False if the chest is in logic
-     */
-    private boolean logicIcedTRoom(Inventory inventory) {
-        return !icedTRoom.isAcquired();
-    }
-    
-    /**
-     * Check to see if the big chest is in logic
-     * It's in logic if it's not opened
-     * @param inventory The current inventory (unused)
-     * @return True or False if the big key chest is in logic
-     */
-    private boolean logicBigChest(Inventory inventory) {
-        if (bigChest.isAcquired())
-            return false;
-        
-        return bigKeyAcquired();
-    }
-    
-    /**
-     * Check to see if the big key has been picked up
-     * This checks all the locations possible where the big key can be
-     * @return True or False if the big key is acquired
-     */
-    private boolean bigKeyAcquired() {
-        
-        Location[] possibleBigKey = {compassChest, freezorChest, icedTRoom,
-            spikeRoom, mapChest, bigKeyChest};
-        
-        for (Location location : possibleBigKey) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(BIG_KEY))
-                return true;
-        }
-        
-        return false;
     }
     
     /**
@@ -272,23 +266,46 @@ public class IcePalace extends Dungeon {
     }
     
     /**
-     * Check to see how many small keys have been picked up
-     * Note -- All locations in Ice Palace can be keys
-     * @return The number of small keys that have been acquired
+     * Check to see if the compass chest is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the chest is in logic
      */
-    private int smallKeysAcquired() {
-        int numSmallKeys = 0;
+    private boolean logicCompassChest(Inventory inventory) {
+        return !compassChest.isAcquired();
+    }
+    
+    /**
+     * Check to see if the freezor chest is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the chest is in logic
+     */
+    private boolean logicFreezorChest(Inventory inventory) {
+        return !freezorChest.isAcquired();
+    }
+    
+    /**
+     * Check to see if the iced t room is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the chest is in logic
+     */
+    private boolean logicIcedTRoom(Inventory inventory) {
+        return !icedTRoom.isAcquired();
+    }
+    
+    /**
+     * Check to see if the big chest is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the big key chest is in logic
+     */
+    private boolean logicBigChest(Inventory inventory) {
+        if (bigChest.isAcquired())
+            return false;
         
-        Location[] possibleSmallKeys = {compassChest, freezorChest, icedTRoom,
-            bigChest, spikeRoom, mapChest, bigKeyChest, kholdstare};
-        
-        for (Location location : possibleSmallKeys) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(SMALL_KEY))
-                numSmallKeys++;
-        }
-        
-        return numSmallKeys;
+        return bigKeyAcquired();
     }
     
     /**
@@ -348,23 +365,6 @@ public class IcePalace extends Dungeon {
         return inventory.getItem(Item.HOOKSHOT).isOwned() ||
                 inventory.getItem(Item.CAPE).isOwned() ||
                 inventory.getItem(Item.BYRNA).isOwned();
-    }
-    
-    /**
-     * Check to see if it's possible to reach the small key in the map room
-     * Note -- will only be called if the spike room is accessible
-     * It can be reached if the following are true:
-     * 1) The hookshot, cape or Cane of Byrna are acquired 
-     *          (To get past the spike room)
-     * 2) The hammer is acquired
-     */
-    private boolean canReachSmallKeyInMapRoom(Inventory inventory) {
-        if (!(inventory.getItem(Item.HOOKSHOT).isOwned() 
-                || inventory.getItem(Item.CAPE).isOwned() 
-                || inventory.getItem(Item.BYRNA).isOwned()))
-            return false;
-        
-        return inventory.getItem(Item.HAMMER).isOwned();              
     }
     
     /**

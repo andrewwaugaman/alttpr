@@ -61,6 +61,102 @@ public class ThievesTown extends Dungeon {
     }
     
     /**
+     * Check to see if there is a way to enter the dungeon
+     * Thieves Town can be entered if the north west side of 
+     * the Dark World is accessible
+     * @param inventory The current inventory 
+     * @return True or False if it's closed
+     */
+    private boolean closed(Inventory inventory) {
+        return !darkWorld.northWestDarkAccess(inventory);
+    }
+    
+    /**
+     * Check to see if it's possible to full clear the dungeon
+     * Thieves Town requires the hammer to full clear:
+     * @param inventory The current inventory
+     * @return True or False if it can be full cleared
+     */
+    public boolean canFullClear(Inventory inventory) {
+        if (closed(inventory))
+            return false;
+              
+        return inventory.getItem(Item.HAMMER).isOwned();
+    }
+    
+    /**
+     * Check to see if the big key has been picked up
+     * This checks all the locations possible where the big key can be
+     * @return True or False if the big key is acquired
+     */
+    private boolean bigKeyAcquired() {
+        
+        Location[] possibleBigKey = {mapChest, ambushChest, compassChest, 
+            bigKeyChest};
+        
+        for (Location location : possibleBigKey) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(BIG_KEY))
+                return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check to see how many small keys have been picked up
+     * Note -- Not all chests in Thieves Town can be keys
+     * @return The number of small keys that have been acquired
+     */
+    private int smallKeysAcquired() {
+        int numSmallKeys = 0;
+        
+        Location[] possibleSmallKeys = {mapChest, ambushChest, compassChest, 
+            bigKeyChest, blindsCell, bigChest};
+        
+        for (Location location : possibleSmallKeys) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(SMALL_KEY))
+                numSmallKeys++;
+        }
+        
+        return numSmallKeys;
+    }
+    
+    /**
+     * Check to see if there are any small keys that can be locked
+     * A small key can be locked if it is in a room that requires a 
+     * small key to access.  In Thieves Town a small key could be 
+     * locked in the big chest
+     * @return The number of small keys that could be locked
+     */
+    private int smallKeysLocked() {
+        int numObtainedKeys = 0;
+        
+        Location[] possibleSmallKeys = {mapChest, ambushChest, compassChest, 
+            bigKeyChest, blindsCell};
+        
+        //If there's a location outside of the big chest 
+        //that hasn't been checked exit the check
+        for (Location location : possibleSmallKeys) {
+            if (!location.isAcquired())
+                return 0;
+            else
+                if (location.getContents().getDescription().equals(SMALL_KEY))
+                    numObtainedKeys++;
+        }
+        
+        //Since this is reached, the big chest has to have the small key 
+        //First check to see if it's opened, if not then the key could be
+        //locked with poor key usage
+        if (bigChest.isAcquired() && bigChest.getContents()
+                .getDescription().equals(SMALL_KEY))
+            numObtainedKeys++;
+        
+        return TOTAL_SMALL_KEYS - numObtainedKeys;
+    }    
+    
+    /**
      * Get the locations that are currently in logic
      * @param inventory The current inventory
      * @return The locations that are in logic
@@ -105,30 +201,6 @@ public class ThievesTown extends Dungeon {
         
         return inLogic;
     }
-       
-    /**
-     * Check to see if there is a way to enter the dungeon
-     * Thieves Town can be entered if the north west side of 
-     * the Dark World is accessible
-     * @param inventory The current inventory 
-     * @return True or False if it's closed
-     */
-    private boolean closed(Inventory inventory) {
-        return !darkWorld.northWestDarkAccess(inventory);
-    }
-    
-    /**
-     * Check to see if it's possible to full clear the dungeon
-     * Thieves Town requires the hammer to full clear:
-     * @param inventory The current inventory
-     * @return True or False if it can be full cleared
-     */
-    public boolean canFullClear(Inventory inventory) {
-        if (closed(inventory))
-            return false;
-              
-        return inventory.getItem(Item.HAMMER).isOwned();
-    }
     
     /**
      * Check to see if the map chest is in logic
@@ -171,25 +243,6 @@ public class ThievesTown extends Dungeon {
     }
     
     /**
-     * Check to see if the big key has been picked up
-     * This checks all the locations possible where the big key can be
-     * @return True or False if the big key is acquired
-     */
-    private boolean bigKeyAcquired() {
-        
-        Location[] possibleBigKey = {mapChest, ambushChest, compassChest, 
-            bigKeyChest};
-        
-        for (Location location : possibleBigKey) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(BIG_KEY))
-                return true;
-        }
-        
-        return false;
-    }
-    
-    /**
      * Check to see if the big key chest is in logic
      * It's in logic if it's not opened
      * @param inventory The current inventory (unused)
@@ -200,60 +253,6 @@ public class ThievesTown extends Dungeon {
     }
     
     /**
-     * Check to see how many small keys have been picked up
-     * Note -- Not all chests in Thieves Town can be keys
-     * @return The number of small keys that have been acquired
-     */
-    private int smallKeysAcquired() {
-        int numSmallKeys = 0;
-        
-        Location[] possibleSmallKeys = {mapChest, ambushChest, compassChest, 
-            bigKeyChest, blindsCell, bigChest};
-        
-        for (Location location : possibleSmallKeys) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(SMALL_KEY))
-                numSmallKeys++;
-        }
-        
-        return numSmallKeys;
-    }
-    
-    /**
-     * Check to see if there are any small keys that can be locked
-     * A small key can be locked if it is in a room that requires a 
-     * small key to access.  In Dark Palace a small key could be 
-     * locked in either the big key chest or the harmless hellway
-     * @return The number of small keys that could be locked
-     */
-    private int smallKeysLocked() {
-        int numObtainedKeys = 0;
-        
-        Location[] possibleSmallKeys = {mapChest, ambushChest, compassChest, 
-            bigKeyChest, blindsCell};
-        
-        //If there's a location outside of the big chest 
-        //that hasn't been checked exit the check
-        for (Location location : possibleSmallKeys) {
-            if (!location.isAcquired())
-                return 0;
-            else
-                if (location.getContents().getDescription().equals(SMALL_KEY))
-                    numObtainedKeys++;
-        }
-        
-        //Since this is reached, the big chest has to have the small key 
-        //First check to see if it's opened, if not then the key could be
-        //locked with poor key usage
-        if (bigChest.isAcquired() && bigChest.getContents()
-                .getDescription().equals(SMALL_KEY))
-            numObtainedKeys++;
-        
-        return TOTAL_SMALL_KEYS - numObtainedKeys;
-    }
-    
-    
-    /**
      * Check to see if the attic chest is in logic
      * It's in logic if it's not opened 
      * @param inventory The current inventory (unused)
@@ -262,7 +261,6 @@ public class ThievesTown extends Dungeon {
     private boolean logicAttic(Inventory inventory) {
         return !attic.isAcquired();
     }
-    
     
     /**
      * Check to see if the big chest is in logic

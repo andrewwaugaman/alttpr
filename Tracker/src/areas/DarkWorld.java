@@ -37,9 +37,6 @@ public class DarkWorld extends Area {
     //Special -- Can be obtained without Moon Perl
     private final Location pyramid;
     
-    private final Location pyramidFairyLeft;
-    private final Location pyramidFairyRight;
-    
     private final Location catfish;
     
     private final Location spikeCave;
@@ -51,6 +48,9 @@ public class DarkWorld extends Area {
     private final Location hookshotCaveTopLeft;
     private final Location hookshotCaveBottomLeft;
     private final Location hookshotCaveBottomRight;
+    
+    private final Location pyramidFairyLeft;
+    private final Location pyramidFairyRight;
     
     //Used to check if Dark World is Open
     private final Portals portals;
@@ -91,9 +91,6 @@ public class DarkWorld extends Area {
         
         pyramid = new Location("Pyramid");
         
-        pyramidFairyLeft = new Location("Pyramid Fairy - Left");
-        pyramidFairyRight = new Location("Pyramid Fairy - Right");
-        
         catfish = new Location("Catfish");
         
         spikeCave = new Location("Spike Cave");
@@ -106,7 +103,19 @@ public class DarkWorld extends Area {
         hookshotCaveBottomLeft = new Location("Hookshot Cave - Bottom Left");
         hookshotCaveBottomRight = new Location("Hookshot Cave - Bottom Right");
         
+        pyramidFairyLeft = new Location("Pyramid Fairy - Left");
+        pyramidFairyRight = new Location("Pyramid Fairy - Right");
+        
         portals = new Portals(deathMountain, agahnim);
+    }
+    
+    /**
+     * Check to see if there is a way to enter the dark world as Link
+     * The Dark World can be entered as Link if the Moon Peal is obtained
+     * @return True or False if it's closed
+     */
+    private boolean closed(Inventory inventory) {
+        return !inventory.getItem(Item.MOON_PEARL).isOwned();
     }
     
     /**
@@ -151,15 +160,6 @@ public class DarkWorld extends Area {
          * and their own method due to special requirements
          * (The requirements aren't just an inventory item)
          */
-    }
-    
-    /**
-     * Check to see if there is a way to enter the dark world as Link
-     * The Dark World can be entered as Link if the Moon Peal is obtained
-     * @return True or False if it's closed
-     */
-    private boolean closed(Inventory inventory) {
-        return !inventory.getItem(Item.MOON_PEARL).isOwned();
     }
     
     /**
@@ -219,8 +219,7 @@ public class DarkWorld extends Area {
             inLogic.add(brewery);
         
         if (inventory.getItem(Gloves.GLOVES).getDescription()
-                .equals(Gloves.TITANS_MITTS)) {
-            
+                .equals(Gloves.TITANS_MITTS)) {   
             if (inventory.getItem(Item.HAMMER).isOwned())
                 if (!hammerPegs.isAcquired())
                     inLogic.add(hammerPegs);
@@ -326,7 +325,7 @@ public class DarkWorld extends Area {
     /**
      * Check to see if Lake Hylia Dark World is reachable
      * Public Method so that it can be used by IcePalace
-     * Lake Hylia Dark World is open if the Lake Hylia portal is open:
+     * Lake Hylia Dark World is open if the Lake Hylia portal is open
      * @param inventory the current inventory
      * @return True of False if it's accessible
      */

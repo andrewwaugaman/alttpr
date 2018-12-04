@@ -61,31 +61,6 @@ public class MiseryMire extends Dungeon {
         this.darkWorld = darkWorld;
         medallion = new Item(Item.UNKNOWN_MEDALLION);
     }
-    
-    /**
-     * Get the locations that are currently in logic
-     * @param inventory The current inventory
-     * @return The locations that are in logic
-     */
-    @Override
-    public ArrayList<Location> locationsInLogic(Inventory inventory) {
-        ArrayList<Location> inLogic = new ArrayList();
-        
-        if (closed(inventory)) 
-            return inLogic;
-        
-        if (logicBridgeChest(inventory))
-            inLogic.add(bridgeChest);
-        if (logicSpikeChest(inventory))
-            inLogic.add(spikeChest);
-        
-        if (bigKeyAcquired())
-            inLogic.addAll(bigKeyLogic(inventory));
-        else
-            inLogic.addAll(smallKeyLogic(inventory));
-
-        return inLogic;
-    }
        
     /**
      * Check to see if there is a way to enter the dungeon
@@ -126,26 +101,6 @@ public class MiseryMire extends Dungeon {
     }
     
     /**
-     * Check to see if the bridge chest is in logic
-     * It's in logic if it's not opened
-     * @param inventory The current inventory (unused)
-     * @return True or False if the chest is in logic
-     */
-    private boolean logicBridgeChest(Inventory inventory) {
-        return !mapChest.isAcquired();
-    }
- 
-    /**
-     * Check to see if the spike chest is in logic
-     * It's in logic if it's not opened
-     * @param inventory The current inventory (unused)
-     * @return True or False if the chest is in logic
-     */
-    private boolean logicSpikeChest(Inventory inventory) {
-        return !mapChest.isAcquired();
-    }
-    
-    /**
      * Check to see if the big key has been picked up
      * This checks all the locations possible where the big key can be
      * @return True or False if the big key is acquired
@@ -162,6 +117,50 @@ public class MiseryMire extends Dungeon {
         }
         
         return false;
+    }
+
+    /**
+     * Check to see how many small keys have been picked up
+     * @return The number of small keys that have been acquired
+     */
+    private int smallKeysAcquired() {
+        int numSmallKeys = 0;
+        
+        Location[] possibleSmallKeys = {bridgeChest, spikeChest, mapChest,
+            bigChest, mainLobby, compassChest, bigKeyChest, vitreous};
+        
+        for (Location location : possibleSmallKeys) {
+            if (location.isAcquired() && location.getContents()
+                    .getDescription().equals(SMALL_KEY))
+                numSmallKeys++;
+        }
+        
+        return numSmallKeys;
+    }
+    
+    /**
+     * Get the locations that are currently in logic
+     * @param inventory The current inventory
+     * @return The locations that are in logic
+     */
+    @Override
+    public ArrayList<Location> locationsInLogic(Inventory inventory) {
+        ArrayList<Location> inLogic = new ArrayList();
+        
+        if (closed(inventory)) 
+            return inLogic;
+        
+        if (logicBridgeChest(inventory))
+            inLogic.add(bridgeChest);
+        if (logicSpikeChest(inventory))
+            inLogic.add(spikeChest);
+        
+        if (bigKeyAcquired())
+            inLogic.addAll(bigKeyLogic(inventory));
+        else
+            inLogic.addAll(smallKeyLogic(inventory));
+
+        return inLogic;
     }
     
     /**
@@ -235,35 +234,6 @@ public class MiseryMire extends Dungeon {
     }
     
     /**
-     * Check to see if the big chest is in logic
-     * It's in logic if it's not opened and the hammer is acquired
-     * @param inventory The current inventory 
-     * @return True or False if the big key chest is in logic
-     */
-    private boolean logicBigChest(Inventory inventory) {
-        return !bigChest.isAcquired();
-    }
-    
-    /**
-     * Check to see how many small keys have been picked up
-     * @return The number of small keys that have been acquired
-     */
-    private int smallKeysAcquired() {
-        int numSmallKeys = 0;
-        
-        Location[] possibleSmallKeys = {bridgeChest, spikeChest, mapChest,
-            bigChest, mainLobby, compassChest, bigKeyChest, vitreous};
-        
-        for (Location location : possibleSmallKeys) {
-            if (location.isAcquired() && location.getContents()
-                    .getDescription().equals(SMALL_KEY))
-                numSmallKeys++;
-        }
-        
-        return numSmallKeys;
-    }
-    
-    /**
      * Check to see what's in logic if the big key is not acquired
      * The item locations that are in logic depend on how many 
      * keys have been acquired 
@@ -304,6 +274,36 @@ public class MiseryMire extends Dungeon {
         }
 
         return inLogic;
+    }
+       
+    /**
+     * Check to see if the bridge chest is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the chest is in logic
+     */
+    private boolean logicBridgeChest(Inventory inventory) {
+        return !mapChest.isAcquired();
+    }
+ 
+    /**
+     * Check to see if the spike chest is in logic
+     * It's in logic if it's not opened
+     * @param inventory The current inventory (unused)
+     * @return True or False if the chest is in logic
+     */
+    private boolean logicSpikeChest(Inventory inventory) {
+        return !mapChest.isAcquired();
+    }
+    
+    /**
+     * Check to see if the big chest is in logic
+     * It's in logic if it's not opened and the hammer is acquired
+     * @param inventory The current inventory 
+     * @return True or False if the big key chest is in logic
+     */
+    private boolean logicBigChest(Inventory inventory) {
+        return !bigChest.isAcquired();
     }
     
     /**

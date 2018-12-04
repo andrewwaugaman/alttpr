@@ -675,7 +675,6 @@ public class GanonsTower extends Dungeon {
     
     //Logic checks for the various locations
     //Key Logic isn't checked for any of these since it's checked above
-
     
     /**
      * Check to see if Bob's Torch is in logic

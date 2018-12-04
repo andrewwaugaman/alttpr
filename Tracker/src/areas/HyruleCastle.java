@@ -39,6 +39,7 @@ public class HyruleCastle extends Area {
     public final static String NAME = "Hyrule Castle";
     
     public HyruleCastle() {
+        super();
         
         linksUncle = new Location("Link's Uncle");
         secretPassage = new Location("Secret Passage");

@@ -86,6 +86,7 @@ public class LightWorld extends Area {
      * Instantiate the 50 locations with their description
      */
     public LightWorld() {
+        super();
                 
         kakarikoWellTop = new Location("Kakariko Well - Top");
         kakarikoWellLeft = new Location("Kakariko Well - Left");
