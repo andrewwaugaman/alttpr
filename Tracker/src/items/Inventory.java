@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Inventory {
             
     //The current inventory of items
-    private final HashMap<String,Item> inventory;
+    private final HashMap<String,KeyItem> inventory;
     
     /**
      * Constructor Method
@@ -17,32 +17,35 @@ public class Inventory {
      */
     public Inventory() {
         inventory = new HashMap<>();
-        inventory.put(Item.BOW, new Item(Item.BOW));
-        inventory.put(Item.SILVER_ARROWS, new Item(Item.SILVER_ARROWS));
-        inventory.put(Item.BLUE_BOOMERANG, new Item(Item.BLUE_BOOMERANG));
-        inventory.put(Item.RED_BOOMERANG, new Item(Item.RED_BOOMERANG));
-        inventory.put(Item.HOOKSHOT, new Item(Item.HOOKSHOT));
-        inventory.put(Item.MUSHROOM, new Item(Item.MUSHROOM));
-        inventory.put(Item.POWDER, new Item(Item.POWDER));
-        inventory.put(Item.FIRE_ROD, new Item(Item.FIRE_ROD));
-        inventory.put(Item.ICE_ROD, new Item(Item.ICE_ROD));
-        inventory.put(Item.BOMBOS, new Item(Item.BOMBOS));
-        inventory.put(Item.ETHER, new Item(Item.ETHER));
-        inventory.put(Item.QUAKE, new Item(Item.QUAKE));
-        inventory.put(Item.LANTERN, new Item(Item.LANTERN));
-        inventory.put(Item.HAMMER, new Item(Item.HAMMER));
-        inventory.put(Item.FLUTE, new Item(Item.FLUTE));
-        inventory.put(Item.SHOVEL, new Item(Item.SHOVEL));
-        inventory.put(Item.BUG_NET, new Item(Item.BUG_NET));
-        inventory.put(Item.BOOK, new Item(Item.BOOK));
+        inventory.put(KeyItem.BOW, new KeyItem(KeyItem.BOW));
+        inventory.put(KeyItem.SILVER_ARROWS, 
+                new KeyItem(KeyItem.SILVER_ARROWS));
+        inventory.put(KeyItem.BLUE_BOOMERANG, 
+                new KeyItem(KeyItem.BLUE_BOOMERANG));
+        inventory.put(KeyItem.RED_BOOMERANG, 
+                new KeyItem(KeyItem.RED_BOOMERANG));
+        inventory.put(KeyItem.HOOKSHOT, new KeyItem(KeyItem.HOOKSHOT));
+        inventory.put(KeyItem.MUSHROOM, new KeyItem(KeyItem.MUSHROOM));
+        inventory.put(KeyItem.POWDER, new KeyItem(KeyItem.POWDER));
+        inventory.put(KeyItem.FIRE_ROD, new KeyItem(KeyItem.FIRE_ROD));
+        inventory.put(KeyItem.ICE_ROD, new KeyItem(KeyItem.ICE_ROD));
+        inventory.put(KeyItem.BOMBOS, new KeyItem(KeyItem.BOMBOS));
+        inventory.put(KeyItem.ETHER, new KeyItem(KeyItem.ETHER));
+        inventory.put(KeyItem.QUAKE, new KeyItem(KeyItem.QUAKE));
+        inventory.put(KeyItem.LANTERN, new KeyItem(KeyItem.LANTERN));
+        inventory.put(KeyItem.HAMMER, new KeyItem(KeyItem.HAMMER));
+        inventory.put(KeyItem.FLUTE, new KeyItem(KeyItem.FLUTE));
+        inventory.put(KeyItem.SHOVEL, new KeyItem(KeyItem.SHOVEL));
+        inventory.put(KeyItem.BUG_NET, new KeyItem(KeyItem.BUG_NET));
+        inventory.put(KeyItem.BOOK, new KeyItem(KeyItem.BOOK));
         inventory.put(Bottles.BOTTLES, new Bottles());
-        inventory.put(Item.SOMARIA, new Item(Item.SOMARIA));
-        inventory.put(Item.BYRNA, new Item(Item.BYRNA));
-        inventory.put(Item.CAPE, new Item(Item.CAPE));
-        inventory.put(Item.MIRROR, new Item(Item.MIRROR));
-        inventory.put(Item.BOOTS, new Item(Item.BOOTS));
-        inventory.put(Item.FLIPPERS, new Item(Item.FLIPPERS));
-        inventory.put(Item.MOON_PEARL, new Item(Item.MOON_PEARL));
+        inventory.put(KeyItem.SOMARIA, new KeyItem(KeyItem.SOMARIA));
+        inventory.put(KeyItem.BYRNA, new KeyItem(KeyItem.BYRNA));
+        inventory.put(KeyItem.CAPE, new KeyItem(KeyItem.CAPE));
+        inventory.put(KeyItem.MIRROR, new KeyItem(KeyItem.MIRROR));
+        inventory.put(KeyItem.BOOTS, new KeyItem(KeyItem.BOOTS));
+        inventory.put(KeyItem.FLIPPERS, new KeyItem(KeyItem.FLIPPERS));
+        inventory.put(KeyItem.MOON_PEARL, new KeyItem(KeyItem.MOON_PEARL));
         inventory.put(Gloves.GLOVES, new Gloves());
         inventory.put(Sword.SWORD, new Sword());
         inventory.put(Shield.SHIELD, new Shield());
@@ -80,7 +83,7 @@ public class Inventory {
      * Print the current inventory for each item and if it's obtained
      */
     public void printInventory() {
-        for (Item value : inventory.values())
+        for (KeyItem value : inventory.values())
             value.print();
     }
     
@@ -89,14 +92,14 @@ public class Inventory {
      * @param key The name of the item to obtain
      * @return The item matching the key from the inventory
      */
-    public Item getItem(String key) {
+    public KeyItem getItem(String key) {
         return inventory.get(key);
     }
 
     /**
      * @return The current inventory
      */
-    public HashMap<String,Item> getInventory() {
+    public HashMap<String,KeyItem> getInventory() {
         return inventory;
     }
 }

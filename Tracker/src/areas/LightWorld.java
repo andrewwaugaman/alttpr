@@ -250,7 +250,7 @@ public class LightWorld extends Area {
         if (!kakarikoTavern.isAcquired())
             inLogic.add(kakarikoTavern);
         
-        if (!library.isAcquired() && inventory.getItem(Item.BOOTS).isOwned())
+        if (!library.isAcquired() && inventory.getItem(KeyItem.BOOTS).isOwned())
             inLogic.add(library);
         if (!mazeRace.isAcquired())
             inLogic.add(mazeRace);
@@ -268,7 +268,7 @@ public class LightWorld extends Area {
         if (fluteSpot.isAcquired())
             return false;
         
-        return inventory.getItem(Item.SHOVEL).isOwned();
+        return inventory.getItem(KeyItem.SHOVEL).isOwned();
     }
     
     /**
@@ -290,7 +290,7 @@ public class LightWorld extends Area {
         ArrayList<Location> inLogic = new ArrayList();
                
         //Access through dark world
-        if (inventory.getItem(Item.FLUTE).isOwned() &&
+        if (inventory.getItem(KeyItem.FLUTE).isOwned() &&
                 ((Gloves)(inventory.getItem(Gloves.GLOVES))).getDescription()
                 .equals(Gloves.TITANS_MITTS)) {
             if(!desertLedge.isAcquired())
@@ -299,7 +299,7 @@ public class LightWorld extends Area {
                 inLogic.add(checkerboardCave);
         }
         else
-            if (inventory.getItem(Item.BOOK).isOwned())
+            if (inventory.getItem(KeyItem.BOOK).isOwned())
                 if (!desertLedge.isAcquired())
                     inLogic.add(desertLedge);
         
@@ -347,7 +347,7 @@ public class LightWorld extends Area {
     private ArrayList<Location> logicEastHyrule(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
                
-        if (!hobo.isAcquired() && inventory.getItem(Item.FLIPPERS).isOwned())
+        if (!hobo.isAcquired() && inventory.getItem(KeyItem.FLIPPERS).isOwned())
             inLogic.add(sunkenTreasure);
         
         if (!sahasrahlasHutLeft.isAcquired())
@@ -358,7 +358,7 @@ public class LightWorld extends Area {
             inLogic.add(sahasrahlasHutRight);
            
         if (!potionShop.isAcquired() && 
-                inventory.getItem(Item.MUSHROOM).isOwned())
+                inventory.getItem(KeyItem.MUSHROOM).isOwned())
             inLogic.add(potionShop);
         
         return inLogic;
@@ -373,19 +373,19 @@ public class LightWorld extends Area {
         ArrayList<Location> inLogic = new ArrayList();
         
         if (!waterfallFairyLeft.isAcquired() &&
-                inventory.getItem(Item.FLIPPERS).isOwned())
+                inventory.getItem(KeyItem.FLIPPERS).isOwned())
             inLogic.add(waterfallFairyLeft);
         if (!waterfallFairyRight.isAcquired() &&
-                inventory.getItem(Item.FLIPPERS).isOwned())
+                inventory.getItem(KeyItem.FLIPPERS).isOwned())
             inLogic.add(waterfallFairyRight);
         
         if (!kingZora.isAcquired() && 
-                (inventory.getItem(Item.FLIPPERS).isOwned() || 
+                (inventory.getItem(KeyItem.FLIPPERS).isOwned() || 
                 inventory.getItem(Gloves.GLOVES).isOwned()))
             inLogic.add(kingZora);
 
         if (!zorasLedge.isAcquired() &&
-                inventory.getItem(Item.FLIPPERS).isOwned())
+                inventory.getItem(KeyItem.FLIPPERS).isOwned())
             inLogic.add(zorasLedge);
         
         return inLogic;
@@ -401,7 +401,7 @@ public class LightWorld extends Area {
         if (pegasusRocks.isAcquired())
             return false;
         
-        return inventory.getItem(Item.BOOTS).isOwned();
+        return inventory.getItem(KeyItem.BOOTS).isOwned();
     }
     
     /**

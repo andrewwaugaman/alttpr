@@ -79,10 +79,10 @@ public class SwampPalace extends Dungeon {
         if (!darkWorld.southDarkAccess(inventory))
             return true;
         
-        if (!inventory.getItem(Item.MIRROR).isOwned())
+        if (!inventory.getItem(KeyItem.MIRROR).isOwned())
             return true;
         
-        return !inventory.getItem(Item.FLIPPERS).isOwned();
+        return !inventory.getItem(KeyItem.FLIPPERS).isOwned();
     }
     
     /**
@@ -97,10 +97,10 @@ public class SwampPalace extends Dungeon {
         if (closed(inventory))
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned();
     }
     
     /**
@@ -215,7 +215,7 @@ public class SwampPalace extends Dungeon {
         if (compassChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.HAMMER).isOwned();
     }
     
     /**
@@ -228,7 +228,7 @@ public class SwampPalace extends Dungeon {
         if (westChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.HAMMER).isOwned();
     }
  
     /**
@@ -241,7 +241,7 @@ public class SwampPalace extends Dungeon {
         if (bigKeyChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.HAMMER).isOwned();
     }
     
     /**
@@ -257,7 +257,7 @@ public class SwampPalace extends Dungeon {
         if (!bigKeyAcquired())
             return false;
         
-        return inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.HAMMER).isOwned();
     }
     
     /**
@@ -272,10 +272,10 @@ public class SwampPalace extends Dungeon {
         if (floodedRoomLeft.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned();
     }
     
     /**
@@ -290,10 +290,10 @@ public class SwampPalace extends Dungeon {
         if (floodedRoomRight.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned();
     }
     
     /**
@@ -308,10 +308,10 @@ public class SwampPalace extends Dungeon {
         if (waterfallRoom.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned();
     }
     
     /**
@@ -326,10 +326,10 @@ public class SwampPalace extends Dungeon {
         if (aarghus.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned();
     }          
     
     //Getters and Setters for the locations below

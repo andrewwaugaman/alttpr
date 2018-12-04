@@ -115,7 +115,7 @@ public class DarkWorld extends Area {
      * @return True or False if it's closed
      */
     private boolean closed(Inventory inventory) {
-        return !inventory.getItem(Item.MOON_PEARL).isOwned();
+        return !inventory.getItem(KeyItem.MOON_PEARL).isOwned();
     }
     
     /**
@@ -190,7 +190,7 @@ public class DarkWorld extends Area {
             return false;
         
         if (portals.agahnimPortalOpen() && 
-                inventory.getItem(Item.HOOKSHOT).isOwned())
+                inventory.getItem(KeyItem.HOOKSHOT).isOwned())
             return true;
         
         return portals.kakarikoPortalOpen(inventory);
@@ -206,7 +206,7 @@ public class DarkWorld extends Area {
         ArrayList<Location> inLogic = new ArrayList();
          
         if (!bumperCave.isAcquired() && 
-                inventory.getItem(Item.MIRROR).isOwned())
+                inventory.getItem(KeyItem.MIRROR).isOwned())
             inLogic.add(bumperCave);
   
         if (!cShapedHouse.isAcquired())
@@ -220,7 +220,7 @@ public class DarkWorld extends Area {
         
         if (inventory.getItem(Gloves.GLOVES).getDescription()
                 .equals(Gloves.TITANS_MITTS)) {   
-            if (inventory.getItem(Item.HAMMER).isOwned())
+            if (inventory.getItem(KeyItem.HAMMER).isOwned())
                 if (!hammerPegs.isAcquired())
                     inLogic.add(hammerPegs);
             
@@ -249,9 +249,9 @@ public class DarkWorld extends Area {
             return false;
         
         if (portals.agahnimPortalOpen()) {
-            if (inventory.getItem(Item.HAMMER).isOwned())
+            if (inventory.getItem(KeyItem.HAMMER).isOwned())
                 return true;
-            if (inventory.getItem(Item.HOOKSHOT).isOwned())
+            if (inventory.getItem(KeyItem.HOOKSHOT).isOwned())
                 return true;
         }
         
@@ -351,7 +351,7 @@ public class DarkWorld extends Area {
             return true;
         
         return portals.kakarikoPortalOpen(inventory) &&
-                inventory.getItem(Item.FLIPPERS).isOwned();
+                inventory.getItem(KeyItem.FLIPPERS).isOwned();
     }
 
     /**
@@ -391,7 +391,7 @@ public class DarkWorld extends Area {
         if (portals.deathMountainWestPortalOpen(inventory))
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
         if (!inventory.getItem(Gloves.GLOVES).isOwned())
@@ -400,8 +400,8 @@ public class DarkWorld extends Area {
         if (!inventory.getItem(Bottles.BOTTLES).isOwned())
             return false;
         
-        return inventory.getItem(Item.BYRNA).isOwned() || 
-                inventory.getItem(Item.CAPE).isOwned();   
+        return inventory.getItem(KeyItem.BYRNA).isOwned() || 
+                inventory.getItem(KeyItem.CAPE).isOwned();   
     }
     
     /**
@@ -450,7 +450,7 @@ public class DarkWorld extends Area {
         if (!superbunnyCaveBottom.isAcquired())
             inLogic.add(superbunnyCaveBottom);
         
-        if (inventory.getItem(Item.HOOKSHOT).isOwned()) {
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned()) {
             if (!hookshotCaveTopRight.isAcquired())
                 inLogic.add(hookshotCaveTopRight);
             if (!hookshotCaveTopLeft.isAcquired())
@@ -461,7 +461,7 @@ public class DarkWorld extends Area {
                 inLogic.add(hookshotCaveBottomRight);
         }
         else
-            if (inventory.getItem(Item.BOOTS).isOwned())
+            if (inventory.getItem(KeyItem.BOOTS).isOwned())
                 if (!hookshotCaveBottomRight.isAcquired())
                     inLogic.add(hookshotCaveBottomRight);                
 
@@ -485,8 +485,8 @@ public class DarkWorld extends Area {
         
         if (crystal5.isAcquired() && crystal6.isAcquired() && 
                 southDarkAccess(inventory)) { 
-            if (inventory.getItem(Item.HAMMER).isOwned() ||
-                    (inventory.getItem(Item.MIRROR).isOwned() &&
+            if (inventory.getItem(KeyItem.HAMMER).isOwned() ||
+                    (inventory.getItem(KeyItem.MIRROR).isOwned() &&
                     portals.agahnimPortalOpen())) {
                 inLogic.add(pyramidFairyLeft);
                 inLogic.add(pyramidFairyRight);
@@ -494,6 +494,387 @@ public class DarkWorld extends Area {
         }
         
         return inLogic;
+    }
+    
+    //Getters and Setters for the locations below
+    //Private class for the portals is after
+    
+    /**
+     * @return the bumperCave
+     */
+    public Location getBumperCave() {
+        return bumperCave;
+    }
+    
+    /**
+     * @param contents The new contents of the cave
+     */
+    public void setBumperCave(Item contents) {
+        bumperCave.setContents(contents);
+    }
+
+    /**
+     * @return the cShapedHouse
+     */
+    public Location getCShapedHouse() {
+        return cShapedHouse;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setCShapedHouse(Item contents) {
+        cShapedHouse.setContents(contents);
+    }
+
+    /**
+     * @return the chestGame
+     */
+    public Location getChestGame() {
+        return chestGame;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setChestGame(Item contents) {
+        chestGame.setContents(contents);
+    }
+    
+    /**
+     * @return the brewery
+     */
+    public Location getBrewery() {
+        return brewery;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setBrewery(Item contents) {
+        brewery.setContents(contents);
+    }
+    
+    /**
+     * @return the hammerPegs
+     */
+    public Location getHammerPegs() {
+        return hammerPegs;
+    }
+    
+    /**
+     * @param contents The new contents of the cave
+     */
+    public void setHammerPegs(Item contents) {
+        hammerPegs.setContents(contents);
+    }
+
+    /**
+     * @return the blacksmith
+     */
+    public Location getBlacksmith() {
+        return blacksmith;
+    }
+
+    /**
+     * @param contents The new contents of the blacksmiths
+     */
+    public void setBlacksmith(Item contents) {
+        blacksmith.setContents(contents);
+    }
+    
+    /**
+     * @return the purpleChest
+     */
+    public Location getPurpleChest() {
+        return purpleChest;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setPurpleChest(Item contents) {
+        purpleChest.setContents(contents);
+    }
+
+    /**
+     * @return the diggingGame
+     */
+    public Location getDiggingGame() {
+        return diggingGame;
+    }
+    
+    /**
+     * @param contents The new contents of the game
+     */
+    public void setDiggingGame(Item contents) {
+        diggingGame.setContents(contents);
+    }
+
+    /**
+     * @return stumpy
+     */
+    public Location getStumpy() {
+        return stumpy;
+    }
+    
+    /**
+     * @param contents The new contents of stumpy
+     */
+    public void setStumpy(Item contents) {
+        stumpy.setContents(contents);
+    }
+
+    /**
+     * @return the hypeCaveTop
+     */
+    public Location getHypeCaveTop() {
+        return hypeCaveTop;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHypeCaveTop(Item contents) {
+        hypeCaveTop.setContents(contents);
+    }
+
+    /**
+     * @return the hypeCaveMiddleRight
+     */
+    public Location getHypeCaveMiddleRight() {
+        return hypeCaveMiddleRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHypeCaveMiddleRight(Item contents) {
+        hypeCaveMiddleRight.setContents(contents);
+    }
+    
+    /**
+     * @return the hypeCaveMiddleLeft
+     */
+    public Location getHypeCaveMiddleLeft() {
+        return hypeCaveMiddleLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHypeCaveMiddleLeft(Item contents) {
+        hypeCaveMiddleLeft.setContents(contents);
+    }
+    
+    /**
+     * @return the hypeCaveBottom
+     */
+    public Location getHypeCaveBottom() {
+        return hypeCaveBottom;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHypeCaveBottom(Item contents) {
+        hypeCaveBottom.setContents(contents);
+    }
+    
+    /**
+     * @return the hypeCaveNPC
+     */
+    public Location getHypeCaveNPC() {
+        return hypeCaveNPC;
+    }
+    
+    /**
+     * @param contents The new contents of the NPC
+     */
+    public void setHypeCaveNPC(Item contents) {
+        hypeCaveNPC.setContents(contents);
+    }
+    
+    /**
+     * @return the mireShedLeft
+     */
+    public Location getMireShedLeft() {
+        return mireShedLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the mireShedLeft
+     */
+    public void setMireShedLeft(Item contents) {
+        mireShedLeft.setContents(contents);
+    }
+    
+    /**
+     * @return the mireShedRight
+     */
+    public Location getMireShedRight() {
+        return mireShedRight;
+    }
+    
+    /**
+     * @param contents The new contents of the mireShedRight
+     */
+    public void setMireShedRight(Item contents) {
+        mireShedRight.setContents(contents);
+    }
+
+    /**
+     * @return the pyramid
+     */
+    public Location getPyramid() {
+        return pyramid;
+    }
+    
+    /**
+     * @param contents The new contents of the pyramid
+     */
+    public void setPyramid(Item contents) {
+        pyramid.setContents(contents);
+    }
+
+    /**
+     * @return the catfish
+     */
+    public Location getCatfish() {
+        return catfish;
+    }
+
+    /**
+     * @param contents Catfish's new item
+     */
+    public void setCatfish(Item contents) {
+        catfish.setContents(contents);
+    }
+    
+    /**
+     * @return the spikeCave
+     */
+    public Location getSpikeCave() {
+        return spikeCave;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setSpikeCave(Item contents) {
+        spikeCave.setContents(contents);
+    }
+
+    /**
+     * @return the superbunnyCaveTop
+     */
+    public Location getSuperbunnyCaveTop() {
+        return superbunnyCaveTop;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setSuperbunnyCaveTop(Item contents) {
+        superbunnyCaveTop.setContents(contents);
+    }
+    
+    /**
+     * @return the superbunnyCaveBottom
+     */
+    public Location getSuperbunnyCaveBottom() {
+        return superbunnyCaveBottom;
+    }
+
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setSuperbunnyCaveBottom(Item contents) {
+        superbunnyCaveBottom.setContents(contents);
+    }
+    
+    /**
+     * @return the hookshotCaveTopRight
+     */
+    public Location getHookshotCaveTopRight() {
+        return hookshotCaveTopRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHookshotCaveTopRight(Item contents) {
+        hookshotCaveTopRight.setContents(contents);
+    }
+    
+    /**
+     * @return the hookshotCaveTopLeft
+     */
+    public Location getHookshotCaveTopLeft() {
+        return hookshotCaveTopLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHookshotCaveTopLeft(Item contents) {
+        hookshotCaveTopLeft.setContents(contents);
+    }
+    
+    /**
+     * @return the hookshotCaveBottomLeft
+     */
+    public Location getHookshotCaveBottomLeft() {
+        return hookshotCaveBottomLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHookshotCaveBottomLeft(Item contents) {
+        hookshotCaveBottomLeft.setContents(contents);
+    }
+    
+    /**
+     * @return the hookshotCaveBottomRight
+     */
+    public Location getHookshotCaveBottomRight() {
+        return hookshotCaveBottomRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setHookshotCaveBottomRight(Item contents) {
+        hookshotCaveBottomRight.setContents(contents);
+    }
+    
+    /**
+     * @return the pyramidFairyLeft
+     */
+    public Location getPyramidFairyLeft() {
+        return pyramidFairyLeft;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setPyramidFairyLeft(Item contents) {
+        pyramidFairyLeft.setContents(contents);
+    }
+    
+    /**
+     * @return the pyramidFairyRight
+     */
+    public Location getPyramidFairyRight() {
+        return pyramidFairyRight;
+    }
+    
+    /**
+     * @param contents The new contents of the chest
+     */
+    public void setPyramidFairyRight(Item contents) {
+        pyramidFairyRight.setContents(contents);
     }
     
     /**
@@ -538,7 +919,7 @@ public class DarkWorld extends Area {
             return inventory.getItem(Gloves.GLOVES).getDescription()
                     .equals(Gloves.TITANS_MITTS) ||
                     (inventory.getItem(Gloves.GLOVES).isOwned() &&
-                    inventory.getItem(Item.HAMMER).isOwned());
+                    inventory.getItem(KeyItem.HAMMER).isOwned());
         }
        
         /**
@@ -552,7 +933,7 @@ public class DarkWorld extends Area {
         public boolean mirePortalOpen(Inventory inventory) {
             return inventory.getItem(Gloves.GLOVES).getDescription()
                     .equals(Gloves.TITANS_MITTS) &&
-                    inventory.getItem(Item.FLUTE).isOwned();
+                    inventory.getItem(KeyItem.FLUTE).isOwned();
         }
         
         /**
@@ -565,7 +946,7 @@ public class DarkWorld extends Area {
          */
         public boolean southShorePortalOpen(Inventory inventory) {
             return inventory.getItem(Gloves.GLOVES).isOwned() &&
-                    inventory.getItem(Item.HAMMER).isOwned();
+                    inventory.getItem(KeyItem.HAMMER).isOwned();
         }
         
        /**
@@ -579,7 +960,7 @@ public class DarkWorld extends Area {
         public boolean lakeHyliaPortalOpen(Inventory inventory) {
             return inventory.getItem(Gloves.GLOVES).getDescription()
                     .equals(Gloves.TITANS_MITTS) &&
-                    inventory.getItem(Item.FLIPPERS).isOwned();
+                    inventory.getItem(KeyItem.FLIPPERS).isOwned();
         }
         
         /**
@@ -592,7 +973,7 @@ public class DarkWorld extends Area {
          */
         public boolean eastHyrulePortalOpen(Inventory inventory) {
             return inventory.getItem(Gloves.GLOVES).isOwned() &&
-                    inventory.getItem(Item.HAMMER).isOwned();            
+                    inventory.getItem(KeyItem.HAMMER).isOwned();            
         }
         
         /**
@@ -632,7 +1013,7 @@ public class DarkWorld extends Area {
             if (deathMountain.eastDeathMountainAccess(inventory))
                 return inventory.getItem(Gloves.GLOVES).getDescription()
                         .equals(Gloves.TITANS_MITTS) && 
-                        inventory.getItem(Item.HAMMER).isOwned();
+                        inventory.getItem(KeyItem.HAMMER).isOwned();
                     
             return false;            
         }

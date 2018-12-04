@@ -45,7 +45,7 @@ public class CastleTower extends Dungeon {
         if (((Sword)(inventory.getItem(Sword.SWORD))).getLevel() >= 2)
             return false;
 
-        return !inventory.getItem(Item.CAPE).isOwned();
+        return !inventory.getItem(KeyItem.CAPE).isOwned();
     }
     
     /**
@@ -61,7 +61,7 @@ public class CastleTower extends Dungeon {
         if (closed(inventory))
             return false;
         
-        if (!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(KeyItem.LANTERN).isOwned())
             return false;
         
         return inventory.getItem(Sword.SWORD).isOwned();
@@ -130,7 +130,7 @@ public class CastleTower extends Dungeon {
         if (darkMaze.isAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     //Getters and Setters for the locations below

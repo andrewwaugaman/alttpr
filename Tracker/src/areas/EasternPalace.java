@@ -55,8 +55,8 @@ public class EasternPalace extends Dungeon {
      * @return True or False if it can be full cleared
      */
     public boolean canFullClear(Inventory inventory) {
-        return (inventory.getItem(Item.BOW).isOwned() && 
-                inventory.getItem(Item.LANTERN).isOwned());      
+        return (inventory.getItem(KeyItem.BOW).isOwned() && 
+                inventory.getItem(KeyItem.LANTERN).isOwned());      
     }
     
     //Note -- Eastern Palace has no small keys in locations, no need for a check
@@ -152,7 +152,7 @@ public class EasternPalace extends Dungeon {
         if (bigKeyChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
         
     /**
@@ -184,10 +184,10 @@ public class EasternPalace extends Dungeon {
         if (!bigKeyAcquired())
             return false;
         
-        if (!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(KeyItem.LANTERN).isOwned())
             return false;
         
-        return inventory.getItem(Item.BOW).isOwned();
+        return inventory.getItem(KeyItem.BOW).isOwned();
     }          
     
     //Getters and Setters for the locations below

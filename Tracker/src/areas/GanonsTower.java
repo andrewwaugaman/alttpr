@@ -167,20 +167,20 @@ public class GanonsTower extends Dungeon {
         if (closed(inventory))
             return false;
         
-        if (!inventory.getItem(Item.BOOTS).isOwned())
+        if (!inventory.getItem(KeyItem.BOOTS).isOwned())
             return false;
               
-        if (!inventory.getItem(Item.HOOKSHOT).isOwned())
+        if (!inventory.getItem(KeyItem.HOOKSHOT).isOwned())
             return false;
         
-        if (!inventory.getItem(Item.SOMARIA).isOwned())
+        if (!inventory.getItem(KeyItem.SOMARIA).isOwned())
             return false;
         
-        if (!inventory.getItem(Item.BOW).isOwned())
+        if (!inventory.getItem(KeyItem.BOW).isOwned())
             return false;
         
         return inventory.getItem(Sword.SWORD).isOwned() || 
-                inventory.getItem(Item.BUG_NET).isOwned();
+                inventory.getItem(KeyItem.BUG_NET).isOwned();
     }
     
     /**
@@ -294,13 +294,13 @@ public class GanonsTower extends Dungeon {
         //The left side of the basement is locked by the hookshot.  The
         //right side of the basement is locked by the cane of Somaria.  Each
         //item (obtained or not obtained) causes the key logic to change
-        if (inventory.getItem(Item.HOOKSHOT).isOwned())
-            if (inventory.getItem(Item.SOMARIA).isOwned())
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned())
+            if (inventory.getItem(KeyItem.SOMARIA).isOwned())
                 inLogic.addAll(keyLogicHookshotAndSomaria(inventory));
             else
                 inLogic.addAll(keyLogicHookshot(inventory));
         else
-            if (inventory.getItem(Item.SOMARIA).isOwned())
+            if (inventory.getItem(KeyItem.SOMARIA).isOwned())
                 inLogic.addAll(keyLogicSomaria(inventory));
             else
                 inLogic.addAll(keyLogicUpstairsOnly(inventory));
@@ -460,7 +460,7 @@ public class GanonsTower extends Dungeon {
         
         //Check to see if the Fire Rod is acquired, this prevents part of the 
         //Right side of the basement from being accessible
-        if (inventory.getItem(Item.FIRE_ROD).isOwned()) {
+        if (inventory.getItem(KeyItem.FIRE_ROD).isOwned()) {
             //If two keys or three keys are used (depending on upstairs access), 
             //either the door past the firesnake room or the door past the 
             //compass room warp is opened and these chests are then in logic
@@ -618,7 +618,7 @@ public class GanonsTower extends Dungeon {
         
         //Check to see if the Fire Rod is acquired, this opens up locations in 
         //the right side of the basement
-        if (inventory.getItem(Item.FIRE_ROD).isOwned()) {
+        if (inventory.getItem(KeyItem.FIRE_ROD).isOwned()) {
             //If one or two keys are used (depending on upstairs access),
             //all the remaining locations are accessible
             if (smallKeysAcquired() >= 1 + upstairsDoor) {
@@ -686,7 +686,7 @@ public class GanonsTower extends Dungeon {
         if (bobsTorch.isAcquired())
             return false;
         
-        return inventory.getItem(Item.BOOTS).isOwned();
+        return inventory.getItem(KeyItem.BOOTS).isOwned();
     }
     
     /**
@@ -698,7 +698,7 @@ public class GanonsTower extends Dungeon {
     private ArrayList<Location> logicDMRoom(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
-        if (inventory.getItem(Item.HOOKSHOT).isOwned()) {
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned()) {
             if (!dmRoomTopLeft.isAcquired())
                 inLogic.add(dmRoomTopLeft);
             if (!dmRoomTopRight.isAcquired())
@@ -722,7 +722,7 @@ public class GanonsTower extends Dungeon {
         if (mapChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned();
     }
     
     /**
@@ -735,7 +735,7 @@ public class GanonsTower extends Dungeon {
         if (firesnakeRoom.isAcquired())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned();
     }
     
     /**
@@ -747,7 +747,7 @@ public class GanonsTower extends Dungeon {
     private ArrayList<Location> logicRandomizerRoom(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
-        if (inventory.getItem(Item.HOOKSHOT).isOwned()) {
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned()) {
             if (!randomizerRoomTopLeft.isAcquired())
                 inLogic.add(randomizerRoomTopLeft);
             if (!randomizerRoomTopRight.isAcquired())
@@ -791,7 +791,7 @@ public class GanonsTower extends Dungeon {
         if (tileRoom.isAcquired())
             return false;
         
-        return inventory.getItem(Item.SOMARIA).isOwned();
+        return inventory.getItem(KeyItem.SOMARIA).isOwned();
     }
     
     /**
@@ -804,8 +804,8 @@ public class GanonsTower extends Dungeon {
     private ArrayList<Location> logicCompassRoom(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
-        if (inventory.getItem(Item.SOMARIA).isOwned() && 
-                inventory.getItem(Item.FIRE_ROD).isOwned()) {
+        if (inventory.getItem(KeyItem.SOMARIA).isOwned() && 
+                inventory.getItem(KeyItem.FIRE_ROD).isOwned()) {
             if (!compassRoomTopLeft.isAcquired())
                 inLogic.add(compassRoomTopLeft);
             if (!compassRoomTopRight.isAcquired())
@@ -831,11 +831,11 @@ public class GanonsTower extends Dungeon {
         if (bobsChest.isAcquired())
             return false;
         
-        if (inventory.getItem(Item.HOOKSHOT).isOwned())
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned())
             return true;
         
-        return inventory.getItem(Item.SOMARIA).isOwned() &&
-                inventory.getItem(Item.FIRE_ROD).isOwned();
+        return inventory.getItem(KeyItem.SOMARIA).isOwned() &&
+                inventory.getItem(KeyItem.FIRE_ROD).isOwned();
     }
     
     /**
@@ -850,9 +850,9 @@ public class GanonsTower extends Dungeon {
     private ArrayList<Location> logicBigKeyChestRoom(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
-        if (inventory.getItem(Item.HOOKSHOT).isOwned() || 
-                (inventory.getItem(Item.SOMARIA).isOwned() && 
-                inventory.getItem(Item.FIRE_ROD).isOwned())) {
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned() || 
+                (inventory.getItem(KeyItem.SOMARIA).isOwned() && 
+                inventory.getItem(KeyItem.FIRE_ROD).isOwned())) {
             if (!bigKeyChest.isAcquired())
                 inLogic.add(bigKeyChest);
             if (!bigKeyChestRoomLeft.isAcquired())
@@ -880,11 +880,11 @@ public class GanonsTower extends Dungeon {
         if (!bigKeyAcquired())
             return false;
         
-        if (inventory.getItem(Item.HOOKSHOT).isOwned())
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned())
             return true;
         
-        return inventory.getItem(Item.SOMARIA).isOwned() &&
-                inventory.getItem(Item.FIRE_ROD).isOwned();
+        return inventory.getItem(KeyItem.SOMARIA).isOwned() &&
+                inventory.getItem(KeyItem.FIRE_ROD).isOwned();
     }
  
     /**
@@ -927,7 +927,7 @@ public class GanonsTower extends Dungeon {
         if (moldormChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned();
     }
     
     //Getters and Setters for the locations below

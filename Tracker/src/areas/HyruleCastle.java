@@ -75,7 +75,7 @@ public class HyruleCastle extends Area {
      * @return True or False if it can be full cleared
      */
     public boolean canFullClear(Inventory inventory) {
-        return (inventory.getItem(Item.LANTERN).isOwned() && 
+        return (inventory.getItem(KeyItem.LANTERN).isOwned() && 
                 inventory.getItem(Gloves.GLOVES).isOwned());      
     }
     
@@ -200,7 +200,7 @@ public class HyruleCastle extends Area {
         if (sewersDarkCross.isAcquired())
             return false;
             
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -217,7 +217,7 @@ public class HyruleCastle extends Area {
         
         if (inventory.getItem(Gloves.GLOVES).isOwned() || 
                 (smallKeysAcquired() == TOTAL_SMALL_KEYS && 
-                inventory.getItem(Item.LANTERN).isOwned())) {
+                inventory.getItem(KeyItem.LANTERN).isOwned())) {
             if (!sewersSecretRoomLeft.isAcquired())
                 inLogic.add(sewersSecretRoomLeft);
             if (!sewersSecretRoomMiddle.isAcquired())
@@ -251,7 +251,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents Link's Uncle new item
      */    
-    public void setLinksUncle(Item contents) {
+    public void setLinksUncle(KeyItem contents) {
         linksUncle.setContents(contents);
     }
     
@@ -265,7 +265,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setSecretPassage(Item contents) {
+    public void setSecretPassage(KeyItem contents) {
         secretPassage.setContents(contents);
     }
     
@@ -279,7 +279,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setMapChest(Item contents) {
+    public void setMapChest(KeyItem contents) {
         mapChest.setContents(contents);
     }
     
@@ -293,7 +293,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setBoomerangChest(Item contents) {
+    public void setBoomerangChest(KeyItem contents) {
         boomerangChest.setContents(contents);
     }   
     
@@ -307,7 +307,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setZeldasCell(Item contents) {
+    public void setZeldasCell(KeyItem contents) {
         secretPassage.setContents(contents);
     }
     
@@ -321,7 +321,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setSewersDarkCross(Item contents) {
+    public void setSewersDarkCross(KeyItem contents) {
         sewersDarkCross.setContents(contents);
     }   
     
@@ -335,7 +335,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setSewersSecretRoomLeft(Item contents) {
+    public void setSewersSecretRoomLeft(KeyItem contents) {
         sewersSecretRoomLeft.setContents(contents);
     }   
     
@@ -349,7 +349,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setSewersSecretRoomMiddle(Item contents) {
+    public void setSewersSecretRoomMiddle(KeyItem contents) {
         sewersSecretRoomMiddle.setContents(contents);
     }   
 
@@ -363,7 +363,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setSewersSecretRoomRight(Item contents) {
+    public void setSewersSecretRoomRight(KeyItem contents) {
         sewersSecretRoomRight.setContents(contents);
     }  
     
@@ -377,7 +377,7 @@ public class HyruleCastle extends Area {
     /**
      * @param contents The new contents of the chest
      */    
-    public void setSanctuary(Item contents) {
+    public void setSanctuary(KeyItem contents) {
         sanctuary.setContents(contents);
     }   
 }

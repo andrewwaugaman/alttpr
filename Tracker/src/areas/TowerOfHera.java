@@ -65,11 +65,11 @@ public class TowerOfHera extends Dungeon {
         if (deathMountain.closed(inventory))
             return true; 
 
-        if (inventory.getItem(Item.MIRROR).isOwned())
+        if (inventory.getItem(KeyItem.MIRROR).isOwned())
             return false;
         
-        return !(inventory.getItem(Item.HOOKSHOT).isOwned()
-                && inventory.getItem(Item.HAMMER).isOwned());
+        return !(inventory.getItem(KeyItem.HOOKSHOT).isOwned()
+                && inventory.getItem(KeyItem.HAMMER).isOwned());
     }
     
     /**
@@ -85,11 +85,11 @@ public class TowerOfHera extends Dungeon {
         if(closed(inventory))
             return false;
         
-        if(!inventory.getItem(Item.FIRE_ROD).isOwned() && 
-                !inventory.getItem(Item.LANTERN).isOwned())
+        if(!inventory.getItem(KeyItem.FIRE_ROD).isOwned() && 
+                !inventory.getItem(KeyItem.LANTERN).isOwned())
             return false;
         
-        return inventory.getItem(Item.HAMMER).isOwned() || 
+        return inventory.getItem(KeyItem.HAMMER).isOwned() || 
                 inventory.getItem(Sword.SWORD).isOwned();
     }
     
@@ -194,8 +194,8 @@ public class TowerOfHera extends Dungeon {
         if (bigKeyChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.FIRE_ROD).isOwned() || 
-                inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.FIRE_ROD).isOwned() || 
+                inventory.getItem(KeyItem.LANTERN).isOwned();
     }
 
     /**
@@ -232,7 +232,7 @@ public class TowerOfHera extends Dungeon {
         if (moldorm.isAcquired())
             return false;
         
-        return inventory.getItem(Item.HAMMER).isOwned() || 
+        return inventory.getItem(KeyItem.HAMMER).isOwned() || 
                 inventory.getItem(Sword.SWORD).isOwned();
     }          
     

@@ -4,7 +4,7 @@ package items;
  *
  * @author Andrew
  */
-public class Bottles extends Item {
+public class Bottles extends KeyItem {
     
     //Name, used for a key value in inventory
     public final static String BOTTLES = "Bottles";

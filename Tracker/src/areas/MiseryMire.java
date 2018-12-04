@@ -34,7 +34,7 @@ public class MiseryMire extends Dungeon {
     
     //Used to check if Misery Mire is Open
     private final DarkWorld darkWorld;
-    private Item medallion;
+    private KeyItem medallion;
     
     /**
      * Constructor Method
@@ -59,7 +59,7 @@ public class MiseryMire extends Dungeon {
         vitreous = new Location("Misery Mire - Vitreous");
         
         this.darkWorld = darkWorld;
-        medallion = new Item(Item.UNKNOWN_MEDALLION);
+        medallion = new KeyItem(KeyItem.UNKNOWN_MEDALLION);
     }
        
     /**
@@ -75,15 +75,15 @@ public class MiseryMire extends Dungeon {
         if (!darkWorld.mireAreaAccess(inventory))
             return true;
         
-        if (medallion.getDescription().equals(Item.UNKNOWN_MEDALLION))
+        if (medallion.getDescription().equals(KeyItem.UNKNOWN_MEDALLION))
             return true;
         else
             if (!(inventory.getItem(medallion.getDescription()).isOwned() &&
                     inventory.getItem(Sword.SWORD).isOwned()))
                 return true;
         
-        return !(inventory.getItem(Item.HOOKSHOT).isOwned() &&
-               inventory.getItem(Item.BOOTS).isOwned());
+        return !(inventory.getItem(KeyItem.HOOKSHOT).isOwned() &&
+               inventory.getItem(KeyItem.BOOTS).isOwned());
     }
     
     /**
@@ -97,7 +97,7 @@ public class MiseryMire extends Dungeon {
         if (closed(inventory))
             return false;
               
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -180,7 +180,7 @@ public class MiseryMire extends Dungeon {
         //If the lantern is acquired, Vitreous and a peg 
         //switch are immediately accessible (which opens 
         //the map chest and the main lobby chest)
-        if (inventory.getItem(Item.LANTERN).isOwned()) {
+        if (inventory.getItem(KeyItem.LANTERN).isOwned()) {
             if (logicVitreous(inventory))
                 inLogic.add(vitreous);
             if (logicMapChest(inventory))
@@ -336,10 +336,10 @@ public class MiseryMire extends Dungeon {
         if (compassChest.isAcquired())
             return false;
         
-        if (inventory.getItem(Item.FIRE_ROD).isOwned())
+        if (inventory.getItem(KeyItem.FIRE_ROD).isOwned())
             return true;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -352,10 +352,10 @@ public class MiseryMire extends Dungeon {
         if (bigKeyChest.isAcquired())
             return false;
         
-        if (inventory.getItem(Item.FIRE_ROD).isOwned())
+        if (inventory.getItem(KeyItem.FIRE_ROD).isOwned())
             return true;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
         
     /**
@@ -369,7 +369,7 @@ public class MiseryMire extends Dungeon {
         if (vitreous.isAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }          
     
     //Getters and Setters for the locations below
@@ -489,14 +489,14 @@ public class MiseryMire extends Dungeon {
     /**
      * @return the medallion to open Mire
      */
-    public Item getMedallion() {
+    public KeyItem getMedallion() {
         return medallion;
     }
     
     /**
      * @param medallion The new medallion to open Mire
      */
-    public void setMedallion(Item medallion) {
+    public void setMedallion(KeyItem medallion) {
         this.medallion = medallion;
     }
 } 

@@ -41,7 +41,7 @@ public class TurtleRock extends Dungeon {
     
     //Used to check if Turtle Rock is Open
     private final DarkWorld darkWorld;
-    private Item medallion;
+    private KeyItem medallion;
     
     /**
      * Constructor Method
@@ -77,7 +77,7 @@ public class TurtleRock extends Dungeon {
         trinexx = new Location("Turtle Rock - Trinexx");
         
         this.darkWorld = darkWorld;
-        medallion = new Item(Item.UNKNOWN_MEDALLION);
+        medallion = new KeyItem(KeyItem.UNKNOWN_MEDALLION);
     }
     
     /**
@@ -93,14 +93,14 @@ public class TurtleRock extends Dungeon {
         if (!darkWorld.turtleRockPlatformAccess(inventory))
             return true;
         
-        if (medallion.getDescription().equals(Item.UNKNOWN_MEDALLION))
+        if (medallion.getDescription().equals(KeyItem.UNKNOWN_MEDALLION))
             return true;
         else
             if (!(inventory.getItem(medallion.getDescription()).isOwned() &&
                     inventory.getItem(Sword.SWORD).isOwned()))
                 return true;
         
-        return !(inventory.getItem(Item.SOMARIA).isOwned());
+        return !(inventory.getItem(KeyItem.SOMARIA).isOwned());
     }
     
     /**
@@ -118,23 +118,23 @@ public class TurtleRock extends Dungeon {
         if (closed(inventory))
             return false;
               
-        if (!inventory.getItem(Item.FIRE_ROD).isOwned())
+        if (!inventory.getItem(KeyItem.FIRE_ROD).isOwned())
             return false;
         
-        if (!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(KeyItem.LANTERN).isOwned())
             return false;
         
-        if (!inventory.getItem(Item.ICE_ROD).isOwned())
+        if (!inventory.getItem(KeyItem.ICE_ROD).isOwned())
             return false;
         
         if (((Shield)(inventory.getItem(Shield.SHIELD))).getDescription()
                 .equals(Shield.MIRROR_SHIELD))
             return true;
         
-        if (inventory.getItem(Item.CAPE).isOwned())
+        if (inventory.getItem(KeyItem.CAPE).isOwned())
             return true;
         
-        return inventory.getItem(Item.BYRNA).isOwned();
+        return inventory.getItem(KeyItem.BYRNA).isOwned();
     }
     
     /**
@@ -318,7 +318,7 @@ public class TurtleRock extends Dungeon {
         if (rollerRoomLeft.isAcquired())
             return false;
         
-        return inventory.getItem(Item.FIRE_ROD).isOwned();
+        return inventory.getItem(KeyItem.FIRE_ROD).isOwned();
     }
     
     /**
@@ -331,7 +331,7 @@ public class TurtleRock extends Dungeon {
         if (rollerRoomRight.isAcquired())
             return false;
         
-        return inventory.getItem(Item.FIRE_ROD).isOwned();    
+        return inventory.getItem(KeyItem.FIRE_ROD).isOwned();    
     }
     
     /**
@@ -384,13 +384,13 @@ public class TurtleRock extends Dungeon {
     private ArrayList<Location> logicLaserBridge(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
         
-        if (!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(KeyItem.LANTERN).isOwned())
             return inLogic;
         
         if (((Shield)(inventory.getItem(Shield.SHIELD))).getDescription()
                 .equals(Shield.MIRROR_SHIELD) || 
-                inventory.getItem(Item.CAPE).isOwned() ||
-                inventory.getItem(Item.BYRNA).isOwned()) {
+                inventory.getItem(KeyItem.CAPE).isOwned() ||
+                inventory.getItem(KeyItem.BYRNA).isOwned()) {
             if (!eyeBridgeTopRight.isAcquired())
                 inLogic.add(eyeBridgeTopRight);
             if (!eyeBridgeTopLeft.isAcquired())
@@ -416,10 +416,10 @@ public class TurtleRock extends Dungeon {
         if (trinexx.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(KeyItem.LANTERN).isOwned())
             return false;
         
-        return inventory.getItem(Item.ICE_ROD).isOwned();
+        return inventory.getItem(KeyItem.ICE_ROD).isOwned();
     }          
     
     //Getters and Setters for the locations below
@@ -595,14 +595,14 @@ public class TurtleRock extends Dungeon {
     /**
      * @return the medallion to open Mire
      */
-    public Item getMedallion() {
+    public KeyItem getMedallion() {
         return medallion;
     }
     
     /**
      * @param medallion The new medallion to open Mire
      */
-    public void setMedallion(Item medallion) {
+    public void setMedallion(KeyItem medallion) {
         this.medallion = medallion;
     }
 } 

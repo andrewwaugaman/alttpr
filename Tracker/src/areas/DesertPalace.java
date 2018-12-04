@@ -59,13 +59,13 @@ public class DesertPalace extends Dungeon {
      * @return True or False if it's closed
      */
     private boolean closed(Inventory inventory) {
-        if (inventory.getItem(Item.BOOK).isOwned())
+        if (inventory.getItem(KeyItem.BOOK).isOwned())
             return false;
         
-        return !((inventory.getItem(Item.FLUTE).isOwned() &&
+        return !((inventory.getItem(KeyItem.FLUTE).isOwned() &&
                 ((ProgressiveItem)inventory.getItem(Gloves.GLOVES))
                         .getDescription().equals(Gloves.TITANS_MITTS)
-                && inventory.getItem(Item.MIRROR).isOwned()));
+                && inventory.getItem(KeyItem.MIRROR).isOwned()));
     }
     
     /**
@@ -84,7 +84,7 @@ public class DesertPalace extends Dungeon {
         if (closed(inventory))
             return false;
         
-        if (!inventory.getItem(Item.BOOTS).isOwned())
+        if (!inventory.getItem(KeyItem.BOOTS).isOwned())
             return false;
         
         if (!inventory.getItem(Gloves.GLOVES).isOwned())
@@ -92,26 +92,26 @@ public class DesertPalace extends Dungeon {
         
         //Check the Fire Source
         //Fire Rod works as a fire source and a weapon
-        if (inventory.getItem(Item.FIRE_ROD).isOwned())
+        if (inventory.getItem(KeyItem.FIRE_ROD).isOwned())
             return true;
         
         //No Fire Rod, Check the Lantern
-        if (!inventory.getItem(Item.LANTERN).isOwned())
+        if (!inventory.getItem(KeyItem.LANTERN).isOwned())
             return false;
         
-        if (inventory.getItem(Item.BOW).isOwned())
+        if (inventory.getItem(KeyItem.BOW).isOwned())
             return true;
         
-        if (inventory.getItem(Item.ICE_ROD).isOwned())
+        if (inventory.getItem(KeyItem.ICE_ROD).isOwned())
             return true;
         
-        if (inventory.getItem(Item.HAMMER).isOwned())
+        if (inventory.getItem(KeyItem.HAMMER).isOwned())
             return true;
         
-        if (inventory.getItem(Item.SOMARIA).isOwned())
+        if (inventory.getItem(KeyItem.SOMARIA).isOwned())
             return true;
         
-        if (inventory.getItem(Item.BYRNA).isOwned())
+        if (inventory.getItem(KeyItem.BYRNA).isOwned())
             return true;
         
         return inventory.getItem(Sword.SWORD).isOwned();
@@ -212,7 +212,7 @@ public class DesertPalace extends Dungeon {
         if (torch.isAcquired())
             return false;
         
-        return inventory.getItem(Item.BOOTS).isOwned();
+        return inventory.getItem(KeyItem.BOOTS).isOwned();
     }  
 
     /**
@@ -273,26 +273,26 @@ public class DesertPalace extends Dungeon {
         
         //Check the Fire Source
         //Fire Rod works as a fire source and a weapon
-        if(inventory.getItem(Item.FIRE_ROD).isOwned())
+        if(inventory.getItem(KeyItem.FIRE_ROD).isOwned())
             return true;
         
         //No Fire Rod, Check the Lantern
-        if(!inventory.getItem(Item.LANTERN).isOwned())
+        if(!inventory.getItem(KeyItem.LANTERN).isOwned())
             return false;
         
-        if(inventory.getItem(Item.BOW).isOwned())
+        if(inventory.getItem(KeyItem.BOW).isOwned())
             return true;
         
-        if(inventory.getItem(Item.ICE_ROD).isOwned())
+        if(inventory.getItem(KeyItem.ICE_ROD).isOwned())
             return true;
         
-        if(inventory.getItem(Item.HAMMER).isOwned())
+        if(inventory.getItem(KeyItem.HAMMER).isOwned())
             return true;
         
-        if(inventory.getItem(Item.SOMARIA).isOwned())
+        if(inventory.getItem(KeyItem.SOMARIA).isOwned())
             return true;
         
-        if(inventory.getItem(Item.BYRNA).isOwned())
+        if(inventory.getItem(KeyItem.BYRNA).isOwned())
             return true;
         
         return inventory.getItem(Sword.SWORD).isOwned();

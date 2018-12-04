@@ -81,7 +81,7 @@ public class ThievesTown extends Dungeon {
         if (closed(inventory))
             return false;
               
-        return inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.HAMMER).isOwned();
     }
     
     /**
@@ -189,7 +189,7 @@ public class ThievesTown extends Dungeon {
             //it's inside the big chest and the hammer is obtained 
             if (smallKeysAcquired() == TOTAL_SMALL_KEYS ||
                     (smallKeysLocked() == TOTAL_SMALL_KEYS && 
-                    inventory.getItem(Item.HAMMER).isOwned())) {
+                    inventory.getItem(KeyItem.HAMMER).isOwned())) {
                 if (logicAttic(inventory))
                     inLogic.add(attic);
                 if (logicBigChest(inventory))
@@ -272,7 +272,7 @@ public class ThievesTown extends Dungeon {
         if (bigChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.HAMMER).isOwned();
     }
         
     /**
@@ -292,13 +292,13 @@ public class ThievesTown extends Dungeon {
         if (inventory.getItem(Sword.SWORD).isOwned())
             return true;
 
-        if (inventory.getItem(Item.SOMARIA).isOwned())
+        if (inventory.getItem(KeyItem.SOMARIA).isOwned())
             return true;
 
-        if (inventory.getItem(Item.BYRNA).isOwned())
+        if (inventory.getItem(KeyItem.BYRNA).isOwned())
             return true;
         
-        return inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.HAMMER).isOwned();
     }          
     
     //Getters and Setters for the locations below

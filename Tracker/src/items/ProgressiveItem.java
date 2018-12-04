@@ -4,7 +4,7 @@ package items;
  *
  * @author Andrew
  */
-public abstract class ProgressiveItem extends Item {
+public abstract class ProgressiveItem extends KeyItem {
     
     //The level of the item
     private int level;

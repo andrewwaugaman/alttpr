@@ -105,13 +105,13 @@ public class DarkPalace extends Dungeon {
         if (closed(inventory))
             return false;
         
-        if (!inventory.getItem(Item.BOW).isOwned())
+        if (!inventory.getItem(KeyItem.BOW).isOwned())
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -216,8 +216,8 @@ public class DarkPalace extends Dungeon {
         if (logicArenaLedge(inventory))
             inLogic.add(arenaLedge);
         
-        if (inventory.getItem(Item.BOW).isOwned() &&
-            inventory.getItem(Item.HAMMER).isOwned())
+        if (inventory.getItem(KeyItem.BOW).isOwned() &&
+            inventory.getItem(KeyItem.HAMMER).isOwned())
                 inLogic.addAll(keyLogicBowAndHammer(inventory));
         else
             inLogic.addAll(keyLogicFront(inventory));
@@ -387,7 +387,7 @@ public class DarkPalace extends Dungeon {
         if (mapChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.BOW).isOwned();
+        return inventory.getItem(KeyItem.BOW).isOwned();
     }
     
     /**
@@ -400,7 +400,7 @@ public class DarkPalace extends Dungeon {
         if (mapChest.isAcquired())
             return false;
         
-        return inventory.getItem(Item.BOW).isOwned();
+        return inventory.getItem(KeyItem.BOW).isOwned();
     }
     
     /**
@@ -443,7 +443,7 @@ public class DarkPalace extends Dungeon {
         if(darkBasementLeft.isAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -456,7 +456,7 @@ public class DarkPalace extends Dungeon {
         if(darkBasementRight.isAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -469,7 +469,7 @@ public class DarkPalace extends Dungeon {
         if(darkMazeTop.isAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -482,7 +482,7 @@ public class DarkPalace extends Dungeon {
         if(darkMazeBottom.isAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -498,7 +498,7 @@ public class DarkPalace extends Dungeon {
         if(!bigKeyAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -537,7 +537,7 @@ public class DarkPalace extends Dungeon {
         if(!bigKeyAcquired())
             return false;
                
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }          
     
     //Getters and Setters for the locations below

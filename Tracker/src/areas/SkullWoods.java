@@ -81,7 +81,7 @@ public class SkullWoods extends Dungeon {
         if (closed(inventory))
             return false;
         
-        if (!inventory.getItem(Item.FIRE_ROD).isOwned())
+        if (!inventory.getItem(KeyItem.FIRE_ROD).isOwned())
             return false;
         
         return inventory.getItem(Sword.SWORD).isOwned();
@@ -233,7 +233,7 @@ public class SkullWoods extends Dungeon {
         if (bridgeRoom.isAcquired())
             return false;
         
-        return inventory.getItem(Item.FIRE_ROD).isOwned();
+        return inventory.getItem(KeyItem.FIRE_ROD).isOwned();
     }
     
     /**
@@ -248,7 +248,7 @@ public class SkullWoods extends Dungeon {
         if (mothula.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.FIRE_ROD).isOwned())
+        if (!inventory.getItem(KeyItem.FIRE_ROD).isOwned())
             return false;
         
         return inventory.getItem(Sword.SWORD).isOwned();

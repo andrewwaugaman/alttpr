@@ -73,10 +73,10 @@ public class IcePalace extends Dungeon {
         if (!darkWorld.lakeHyliaAccess(inventory))
             return true;
         
-        if (inventory.getItem(Item.FIRE_ROD).isOwned())
+        if (inventory.getItem(KeyItem.FIRE_ROD).isOwned())
             return false;
         
-        return !(inventory.getItem(Item.BOMBOS).isOwned() && 
+        return !(inventory.getItem(KeyItem.BOMBOS).isOwned() && 
                 inventory.getItem(Sword.SWORD).isOwned());
     }
     
@@ -93,13 +93,13 @@ public class IcePalace extends Dungeon {
         if (closed(inventory))
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        if (!inventory.getItem(Item.HOOKSHOT).isOwned())
+        if (!inventory.getItem(KeyItem.HOOKSHOT).isOwned())
             return false;
         
-        return inventory.getItem(Item.SOMARIA).isOwned();
+        return inventory.getItem(KeyItem.SOMARIA).isOwned();
     }
     
     /**
@@ -150,12 +150,12 @@ public class IcePalace extends Dungeon {
      * 2) The hammer is acquired
      */
     private boolean canReachSmallKeyInMapRoom(Inventory inventory) {
-        if (!(inventory.getItem(Item.HOOKSHOT).isOwned() 
-                || inventory.getItem(Item.CAPE).isOwned() 
-                || inventory.getItem(Item.BYRNA).isOwned()))
+        if (!(inventory.getItem(KeyItem.HOOKSHOT).isOwned() 
+                || inventory.getItem(KeyItem.CAPE).isOwned() 
+                || inventory.getItem(KeyItem.BYRNA).isOwned()))
             return false;
         
-        return inventory.getItem(Item.HAMMER).isOwned();              
+        return inventory.getItem(KeyItem.HAMMER).isOwned();              
     }
     
     /**
@@ -180,7 +180,7 @@ public class IcePalace extends Dungeon {
         if (logicBigChest(inventory))
             inLogic.add(bigChest);
          
-        if (inventory.getItem(Item.HOOKSHOT).isOwned()) 
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned()) 
             inLogic.addAll(keyLogicHookshot(inventory));
         else
             inLogic.addAll(keyLogicNoHookshot(inventory));
@@ -199,7 +199,7 @@ public class IcePalace extends Dungeon {
                 numSmallKeys++;
             
             if (numSmallKeys == 3 || (numSmallKeys == 2 && 
-                    inventory.getItem(Item.SOMARIA).isOwned()))
+                    inventory.getItem(KeyItem.SOMARIA).isOwned()))
                 if (logicKholdstare(inventory))
                     inLogic.add(kholdstare);
         }
@@ -320,11 +320,11 @@ public class IcePalace extends Dungeon {
         if (spikeRoom.isAcquired())
             return false;
         
-        if (inventory.getItem(Item.HOOKSHOT).isOwned())
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned())
             return true;
         
-        return inventory.getItem(Item.CAPE).isOwned() || 
-                inventory.getItem(Item.BYRNA).isOwned();
+        return inventory.getItem(KeyItem.CAPE).isOwned() || 
+                inventory.getItem(KeyItem.BYRNA).isOwned();
     }
     
     /**
@@ -339,12 +339,12 @@ public class IcePalace extends Dungeon {
         if (mapChest.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned() ||
-                inventory.getItem(Item.CAPE).isOwned() ||
-                inventory.getItem(Item.BYRNA).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned() ||
+                inventory.getItem(KeyItem.CAPE).isOwned() ||
+                inventory.getItem(KeyItem.BYRNA).isOwned();
     }
     
     /**
@@ -359,12 +359,12 @@ public class IcePalace extends Dungeon {
         if (bigKeyChest.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.HAMMER).isOwned())
+        if (!inventory.getItem(KeyItem.HAMMER).isOwned())
             return false;
         
-        return inventory.getItem(Item.HOOKSHOT).isOwned() ||
-                inventory.getItem(Item.CAPE).isOwned() ||
-                inventory.getItem(Item.BYRNA).isOwned();
+        return inventory.getItem(KeyItem.HOOKSHOT).isOwned() ||
+                inventory.getItem(KeyItem.CAPE).isOwned() ||
+                inventory.getItem(KeyItem.BYRNA).isOwned();
     }
     
     /**
@@ -377,7 +377,7 @@ public class IcePalace extends Dungeon {
         if (kholdstare.isAcquired())
             return false;
                
-        return inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.HAMMER).isOwned();
     }          
     
     //Getters and Setters for the locations below

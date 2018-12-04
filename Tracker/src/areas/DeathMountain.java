@@ -2,7 +2,7 @@ package areas;
 
 import items.Gloves;
 import items.Inventory;
-import items.Item;
+import items.KeyItem;
 import items.Location;
 import items.Sword;
 import java.util.ArrayList;
@@ -127,11 +127,11 @@ public class DeathMountain extends Area {
      * @return True or False if it's accessible
      */
     public boolean closed(Inventory inventory) {
-        if (inventory.getItem(Item.LANTERN).isOwned() && 
+        if (inventory.getItem(KeyItem.LANTERN).isOwned() && 
                 inventory.getItem(Gloves.GLOVES).isOwned())
             return false;
 
-        return !inventory.getItem(Item.FLUTE).isOwned();
+        return !inventory.getItem(KeyItem.FLUTE).isOwned();
     }
     
     /**
@@ -144,11 +144,11 @@ public class DeathMountain extends Area {
      * @return True of False if it's accessible
      */
     public boolean eastDeathMountainAccess(Inventory inventory) {
-        if (inventory.getItem(Item.HOOKSHOT).isOwned())
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned())
             return true;
         
-        return inventory.getItem(Item.MIRROR).isOwned() &&
-                inventory.getItem(Item.HAMMER).isOwned();
+        return inventory.getItem(KeyItem.MIRROR).isOwned() &&
+                inventory.getItem(KeyItem.HAMMER).isOwned();
     }
     
     /**
@@ -161,7 +161,7 @@ public class DeathMountain extends Area {
         if (oldMan.isAcquired())
             return false;
         
-        return inventory.getItem(Item.LANTERN).isOwned();
+        return inventory.getItem(KeyItem.LANTERN).isOwned();
     }
     
     /**
@@ -184,7 +184,7 @@ public class DeathMountain extends Area {
         if (spectacleRock.isAcquired())
             return false;
         
-        return inventory.getItem(Item.MIRROR).isOwned();
+        return inventory.getItem(KeyItem.MIRROR).isOwned();
     }
     
     /**
@@ -202,17 +202,17 @@ public class DeathMountain extends Area {
         if (etherTablet.isAcquired())
             return false;
         
-        if (!inventory.getItem(Item.BOOK).isOwned())
+        if (!inventory.getItem(KeyItem.BOOK).isOwned())
             return false;
         
         if (((Sword)(inventory.getItem(Sword.SWORD))).getLevel() < 2)
             return false;
         
-        if (inventory.getItem(Item.HOOKSHOT).isOwned() &&
-                inventory.getItem(Item.HAMMER).isOwned())
+        if (inventory.getItem(KeyItem.HOOKSHOT).isOwned() &&
+                inventory.getItem(KeyItem.HAMMER).isOwned())
             return true;
         
-        return inventory.getItem(Item.MIRROR).isOwned();
+        return inventory.getItem(KeyItem.MIRROR).isOwned();
     }
     
     /**
@@ -300,7 +300,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The old man's item
      */
-    public void setOldMan(Item contents) {
+    public void setOldMan(KeyItem contents) {
         oldMan.setContents(contents);
     }
 
@@ -314,7 +314,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of spectacle rock cave
      */
-    public void setSpectacleRockCave(Item contents) {
+    public void setSpectacleRockCave(KeyItem contents) {
         spectacleRockCave.setContents(contents);
     }
     
@@ -328,7 +328,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new item on spectacle rock
      */
-    public void setSpectacleRock(Item contents) {
+    public void setSpectacleRock(KeyItem contents) {
         spectacleRock.setContents(contents);
     }
 
@@ -342,7 +342,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the tablet
      */
-    public void setEtherTablet(Item contents) {
+    public void setEtherTablet(KeyItem contents) {
         etherTablet.setContents(contents);
     }
 
@@ -356,7 +356,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setSpiralCave(Item contents) {
+    public void setSpiralCave(KeyItem contents) {
         spiralCave.setContents(contents);
     }
 
@@ -370,7 +370,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setParadoxCaveLowerFarLeft(Item contents) {
+    public void setParadoxCaveLowerFarLeft(KeyItem contents) {
         paradoxCaveLowerFarLeft.setContents(contents);
     }
 
@@ -384,7 +384,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setParadoxCaveLowerLeft(Item contents) {
+    public void setParadoxCaveLowerLeft(KeyItem contents) {
         paradoxCaveLowerLeft.setContents(contents);
     }
 
@@ -398,7 +398,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setParadoxCaveLowerRight(Item contents) {
+    public void setParadoxCaveLowerRight(KeyItem contents) {
         paradoxCaveLowerRight.setContents(contents);
     }
 
@@ -412,7 +412,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setParadoxCaveLowerFarRight(Item contents) {
+    public void setParadoxCaveLowerFarRight(KeyItem contents) {
         paradoxCaveLowerFarRight.setContents(contents);
     }
 
@@ -426,7 +426,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setParadoxCaveLowerMiddle(Item contents) {
+    public void setParadoxCaveLowerMiddle(KeyItem contents) {
         paradoxCaveLowerMiddle.setContents(contents);
     }
 
@@ -440,7 +440,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setParadoxCaveUpperLeft(Item contents) {
+    public void setParadoxCaveUpperLeft(KeyItem contents) {
         paradoxCaveUpperLeft.setContents(contents);
     }
 
@@ -454,7 +454,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setParadoxCaveUpperRight(Item contents) {
+    public void setParadoxCaveUpperRight(KeyItem contents) {
         paradoxCaveUpperRight.setContents(contents);
     }
 
@@ -468,7 +468,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new item on the floating island
      */
-    public void setFloatingIsland(Item contents) {
+    public void setFloatingIsland(KeyItem contents) {
         floatingIsland.setContents(contents);
     }
     
@@ -482,7 +482,7 @@ public class DeathMountain extends Area {
     /**
      * @param contents The new contents of the chest
      */
-    public void setMimicCave(Item contents) {
+    public void setMimicCave(KeyItem contents) {
         mimicCave.setContents(contents);
     }
 }
