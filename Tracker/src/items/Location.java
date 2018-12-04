@@ -35,6 +35,8 @@ public class Location {
     public void setContents(Item contents) {
         this.contents = contents;
         acquired = true;
+        if (contents instanceof KeyItem)
+            ((KeyItem)(contents)).setOwned(true);
     }
     
     /**
@@ -45,6 +47,8 @@ public class Location {
     public void setContents(Item contents, boolean acquired) {
         this.contents = contents;
         this.acquired = acquired;
+        if (contents instanceof KeyItem)
+            ((KeyItem)(contents)).setOwned(acquired);
     }
     
     /**
