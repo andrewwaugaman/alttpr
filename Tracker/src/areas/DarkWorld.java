@@ -366,8 +366,9 @@ public class DarkWorld extends Area {
         if (!pyramid.isAcquired())
             inLogic.add(pyramid);
    
-        if (!catfish.isAcquired())
-            inLogic.add(catfish);
+        if (inventory.getItem(Gloves.GLOVES).isOwned())
+            if (!catfish.isAcquired())
+                inLogic.add(catfish);
 
         return inLogic;
     }    
