@@ -216,9 +216,14 @@ public class DarkPalace extends Dungeon {
         if (logicArenaLedge(inventory))
             inLogic.add(arenaLedge);
         
-        if (inventory.getItem(KeyItem.BOW).isOwned() &&
-            inventory.getItem(KeyItem.HAMMER).isOwned())
+        if (inventory.getItem(KeyItem.BOW).isOwned()) {          
+            if(logicArenaBridge(inventory))
+                inLogic.add(arenaBridge);
+            if(logicStalfosBasement(inventory))
+                inLogic.add(stalfosBasement);
+            if (inventory.getItem(KeyItem.HAMMER).isOwned())
                 inLogic.addAll(keyLogicBowAndHammer(inventory));
+        }
         else
             inLogic.addAll(keyLogicFront(inventory));
         
@@ -277,11 +282,6 @@ public class DarkPalace extends Dungeon {
      */
     private ArrayList<Location> keyLogicBowAndHammer(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
-        
-        if(logicArenaBridge(inventory))
-            inLogic.add(arenaBridge);
-        if(logicStalfosBasement(inventory))
-            inLogic.add(stalfosBasement);
         
         //4 keys means the back of Dark Palace is now open
         if (smallKeysAcquired() >= 4) {
