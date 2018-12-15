@@ -422,7 +422,8 @@ public class GanonsTower extends Dungeon {
         //Used if upstairs is accessible
         int upstairsDoor = 0;
         
-        if (bigKeyAcquired()) {
+        //Upstairs requires the big key and the bow to advance
+        if (bigKeyAcquired() && inventory.getItem(KeyItem.BOW).isOwned()) {
             //There's one door upstairs that a key could be used on before
             //the basement doors, so set that for the basement logic check
             //Note -- There's two doors upstairs, but there is one key 
@@ -520,7 +521,8 @@ public class GanonsTower extends Dungeon {
         //Used if upstairs is accessible
         int upstairsDoor = 0;
         
-        if (bigKeyAcquired()) {
+        //Upstairs requires the big key and the bow to advance
+        if (bigKeyAcquired() && inventory.getItem(KeyItem.BOW).isOwned()) {
             //There's one door upstairs that a key could be used on before
             //the basement doors, so set that for the basement logic check
             //Note -- There's two doors upstairs, but there is one key 
@@ -593,7 +595,8 @@ public class GanonsTower extends Dungeon {
         //Used if upstairs is accessible
         int upstairsDoor = 0;
         
-        if (bigKeyAcquired()) {
+        //Upstairs requires the big key and the bow to advance
+        if (bigKeyAcquired() && inventory.getItem(KeyItem.BOW).isOwned()) {
             //There's one door upstairs that a key could be used on before
             //the basement doors, so set that for the basement logic check
             //Note -- There's two doors upstairs, but there is one key 
@@ -647,8 +650,9 @@ public class GanonsTower extends Dungeon {
     private ArrayList<Location> keyLogicUpstairsOnly(Inventory inventory) {
         ArrayList<Location> inLogic = new ArrayList();
 
-        //The big key locks upstairs
-        if (bigKeyAcquired()) {
+        //The big key and the bow locks upstairs
+        //Upstairs requires the big key and the bow to advance
+        if (bigKeyAcquired() && inventory.getItem(KeyItem.BOW).isOwned()) {
             
             //These chests don't require any keys except the big key to reach
             if (logicMiniHelmasaurRoomLeft(inventory))
