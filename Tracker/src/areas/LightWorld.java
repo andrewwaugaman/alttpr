@@ -193,21 +193,6 @@ public class LightWorld extends Area {
             inLogic.add(mushroom);
         
         return inLogic;
-        
-        /**
-         * The Following Locations will be checked by AreaSet 
-         * and their own method due to special requirements
-         * (The requirements aren't just an inventory item)
-         * 1) Magic Bat
-         * 2) Cave 45
-         * 3) Bombos Tablet
-         * 4) Lake Hylia Island
-         * 5) Sahasrahla
-         * 6) King's Tomb
-         * 7) Graveyard Ledge
-         * 8) Lumberjack Tree
-         * 9) Master Sword Pedestal
-         */
     }  
     
     /**
@@ -424,15 +409,36 @@ public class LightWorld extends Area {
         return !mushroom.isAcquired();
     }    
     
-    /**
-    public Location logicMagicBat(Inventory inventory, DarkWorld darkWorld){
+    public ArrayList<Location> extraLocations(
+            Inventory inventory, RewardSet rewards, DarkWorld darkWorld) {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(logicMagicBat(inventory, darkWorld));
+        locations.add(logicCave45(inventory, darkWorld));
+        locations.add(logicBombosTable(inventory, darkWorld));
+        locations.add(logicLakeHyliaIsland(inventory, darkWorld));
+        locations.add(logicSahasrahla(rewards.getRewards().get(
+                Reward.GREEN_PENDANT)));
+        locations.add(logicKingsTomb(inventory, darkWorld));
+        locations.add(logicGraveyardLedge(inventory, darkWorld));
+        locations.add(logicLumberjackTree(inventory, rewards.getRewards().get(
+                Reward.AGAHNIM_1)));
+        locations.add(logicMasterSwordPedestal(rewards.getRewards().get(
+                Reward.GREEN_PENDANT), rewards.getRewards().get(
+                Reward.BLUE_PENDANT), rewards.getRewards().get(
+                Reward.RED_PENDANT)));
+
+        return locations;
+    }
+    
+    private Location logicMagicBat(Inventory inventory, DarkWorld darkWorld){
         if (!magicBat.isAcquired()) {
-            if (inventory.getItem(Item.HAMMER).isOwned() && 
-                    inventory.getItem(Item.POWDER).isOwned())
+            if (inventory.getItem(KeyItem.HAMMER).isOwned() && 
+                    inventory.getItem(KeyItem.POWDER).isOwned())
                 return magicBat;
-            if (darkWorld.northEastAccess(inventory) && 
-                    inventory.getItem(Item.MIRROR).isOwned() &&
-                    inventory.getItem(Item.POWDER).isOwned())
+            if (darkWorld.northWestDarkAccess(inventory) && 
+                    inventory.getItem(KeyItem.MIRROR).isOwned() &&
+                    inventory.getItem(KeyItem.POWDER).isOwned())
                 return magicBat;
         }
         
@@ -441,8 +447,8 @@ public class LightWorld extends Area {
         
     public Location logicCave45(Inventory inventory, DarkWorld darkWorld){
         if (!cave45.isAcquired())
-            if (darkWorld.southAccess(inventory) && 
-                    inventory.getItem(Item.MIRROR).isOwned())
+            if (darkWorld.southDarkAccess(inventory) && 
+                    inventory.getItem(KeyItem.MIRROR).isOwned())
                 return cave45;
             
         return null;
@@ -450,9 +456,9 @@ public class LightWorld extends Area {
     
     public Location logicBombosTable(Inventory inventory, DarkWorld darkWorld){
         if (!bombosTablet.isAcquired())
-            if (darkWorld.southAccess(inventory) &&
-                    inventory.getItem(Item.MIRROR).isOwned() &&
-                    inventory.getItem(Item.BOOK).isOwned() &&
+            if (darkWorld.southDarkAccess(inventory) &&
+                    inventory.getItem(KeyItem.MIRROR).isOwned() &&
+                    inventory.getItem(KeyItem.BOOK).isOwned() &&
                     ((Sword)(inventory.getItem(Sword.SWORD))).getLevel() >= 2)
                 return bombosTablet;
         
@@ -462,9 +468,10 @@ public class LightWorld extends Area {
     public Location logicLakeHyliaIsland(Inventory inventory, 
             DarkWorld darkWorld){
         if (!lakeHyliaIsland.isAcquired())
-            if (!darkWorld.isClosed(inventory) && 
-                    inventory.getItem(Item.MIRROR).isOwned() &&
-                    inventory.getItem(Item.FLIPPERS).isOwned())
+            if ((darkWorld.southDarkAccess(inventory) || 
+                    darkWorld.eastDarkAccess(inventory)) &&
+                    inventory.getItem(KeyItem.MIRROR).isOwned() &&
+                    inventory.getItem(KeyItem.FLIPPERS).isOwned())
             return lakeHyliaIsland;
         
         return null;
@@ -480,13 +487,13 @@ public class LightWorld extends Area {
     
     public Location logicKingsTomb(Inventory inventory, DarkWorld darkWorld){
         if (!kingsTomb.isAcquired()) {
-            if (inventory.getItem(Item.BOOTS).isOwned() && 
+            if (inventory.getItem(KeyItem.BOOTS).isOwned() && 
                     inventory.getItem(Gloves.GLOVES).getDescription()
                     .equals(Gloves.TITANS_MITTS))
                 return kingsTomb;
-            if (darkWorld.northEastAccess(inventory) && 
-                    inventory.getItem(Item.MIRROR).isOwned() &&
-                    inventory.getItem(Item.BOOTS).isOwned())
+            if (darkWorld.northWestDarkAccess(inventory) && 
+                    inventory.getItem(KeyItem.MIRROR).isOwned() &&
+                    inventory.getItem(KeyItem.BOOTS).isOwned())
                 return kingsTomb;
         }
         
@@ -496,18 +503,18 @@ public class LightWorld extends Area {
     public Location logicGraveyardLedge(Inventory inventory,
             DarkWorld darkWorld){
         if (!graveyardLedge.isAcquired())
-            if (darkWorld.northEastAccess(inventory) && 
-                    inventory.getItem(Item.MIRROR).isOwned())
+            if (darkWorld.northWestDarkAccess(inventory) && 
+                    inventory.getItem(KeyItem.MIRROR).isOwned())
                 return graveyardLedge;
             
         return null;
     }
     
     public Location logicLumberjackTree(Inventory inventory, 
-            HyruleCastle hyruleCastle){
+            Reward agahnim){
         if (!lumberjackTree.isAcquired())
-            if (hyruleCastle.isAgahnimDefeated() &&
-                    inventory.getItem(Item.BOOTS).isOwned())
+            if (agahnim.isAcquired() &&
+                    inventory.getItem(KeyItem.BOOTS).isOwned())
                 return lumberjackTree;
         
         return null;
@@ -522,8 +529,7 @@ public class LightWorld extends Area {
         
         return null;
     }
-    */
-    
+        
     //Getters and Setters for the locations below
     
     /**

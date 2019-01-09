@@ -68,36 +68,18 @@ public class AreaSet {
         ArrayList<Location> locations = new ArrayList();
         for (String name : areas.keySet()) {
             locations.addAll(areas.get(name).locationsInLogic(inventory));
+            if (name.equals(LightWorld.NAME))
+                locations.addAll(((LightWorld)(areas.get(name))).
+                        extraLocations(inventory, rewards,
+                                ((DarkWorld)(areas.get(DarkWorld.NAME)))));
         }
         
-        /*
-        Extra checks that require rewards
-        if(areas.get(LightWorld.NAME).pedestalCheck(inventory, rewards))
-            locations.add(areas.get(LightWorld.NAME).getPedestal());
-                    
-        if(areas.get(LightWorld.NAME).sahasrahlaCheck(inventory, rewards))
-            locations.add(areas.get(LightWorld.NAME).getSahasrahla());
-                    
+        /*                    
         if(areas.get(DeathMountain.NAME).mimicCaveCheck(inventory,
                 areas.get(TurtleRock.NAME)))
             locations.add(areas.get(DeathMountain.NAME).getMimicCave());
-        
-        ArrayList<Location> ganonsTower = 
-                areas.get(GanonsTower.NAME).locationsInLogic(inventory, rewards);
-        for (int i = 0; i < ganonsTower.size(); i++)
-                locations.add(ganonsTower.get(i));
         */
         
         return locations;
-    }
-    
-    public void extraLocations(Inventory inventory, RewardSet rewards) {
-        /*
-        areas.get(LightWorld.NAME).pedestalCheck(inventory,rewards);
-        areas.get(LightWorld.NAME).sahasrahlaCheck(inventory,rewards);
-        areas.get(LightWorld.NAME).mimicCaveCheck(inventory,
-                areas.get(TurtleRock.NAME));
-        areas.
-        */
     }
 }
