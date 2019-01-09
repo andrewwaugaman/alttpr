@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import items.*;
 
 /**
- * Maybe make a method for each portal instead of checks with no context?
- * Portals check should be in lightWorld/deathMountain, here, or new class?
  * @author Andrew
  */
 public class DarkWorld extends Area {
@@ -378,7 +376,7 @@ public class DarkWorld extends Area {
      * It's in logic if it's not obtained and Death Mountain is accessible:
      * 1) The Hammer is acquired
      * 2) Power Gloves are acquired
-     * 3) An invincibility item is acquired with a bottle for Magic Refill
+     * 3) An invincibility item is acquired
      *    - Cane of Byrna
      *    - Magic Cape    
      * Note - Check about Half Magic
@@ -396,9 +394,6 @@ public class DarkWorld extends Area {
             return false;
         
         if (!inventory.getItem(Gloves.GLOVES).isOwned())
-            return false;
-        
-        if (!inventory.getItem(Bottles.BOTTLES).isOwned())
             return false;
         
         return inventory.getItem(KeyItem.BYRNA).isOwned() || 
