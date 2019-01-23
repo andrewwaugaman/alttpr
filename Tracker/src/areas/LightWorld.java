@@ -409,8 +409,17 @@ public class LightWorld extends Area {
         return !mushroom.isAcquired();
     }    
     
-    public ArrayList<Location> extraLocations(
-            Inventory inventory, RewardSet rewards, DarkWorld darkWorld) {
+    /**
+     * All of these locations could/may require things other than items from
+     * the inventory.  For example some locations require access to specific
+     * areas in the dark world that need to be check
+     * @param inventory The current inventory
+     * @param rewards The Rewards from the different dungeons
+     * @param darkWorld The Dark World 
+     * @return 
+     */
+    public ArrayList<Location> extraLocations(Inventory inventory, 
+            RewardSet rewards, DarkWorld darkWorld) {
         ArrayList<Location> locations = new ArrayList();
         
         locations.add(logicMagicBat(inventory, darkWorld));
@@ -431,6 +440,8 @@ public class LightWorld extends Area {
         return locations;
     }
     
+    //All the methods below are used by extraLocations to make
+    //all the checks easier to read and modify later if necessary
     private Location logicMagicBat(Inventory inventory, DarkWorld darkWorld){
         if (!magicBat.isAcquired()) {
             if (inventory.getItem(KeyItem.HAMMER).isOwned() && 
@@ -445,7 +456,7 @@ public class LightWorld extends Area {
         return null;
     }
         
-    public Location logicCave45(Inventory inventory, DarkWorld darkWorld){
+    private Location logicCave45(Inventory inventory, DarkWorld darkWorld){
         if (!cave45.isAcquired())
             if (darkWorld.southDarkAccess(inventory) && 
                     inventory.getItem(KeyItem.MIRROR).isOwned())
@@ -454,7 +465,7 @@ public class LightWorld extends Area {
         return null;
     }
     
-    public Location logicBombosTable(Inventory inventory, DarkWorld darkWorld){
+    private Location logicBombosTable(Inventory inventory, DarkWorld darkWorld){
         if (!bombosTablet.isAcquired())
             if (darkWorld.southDarkAccess(inventory) &&
                     inventory.getItem(KeyItem.MIRROR).isOwned() &&
@@ -465,7 +476,7 @@ public class LightWorld extends Area {
         return null;
     }
     
-    public Location logicLakeHyliaIsland(Inventory inventory, 
+    private Location logicLakeHyliaIsland(Inventory inventory, 
             DarkWorld darkWorld){
         if (!lakeHyliaIsland.isAcquired())
             if ((darkWorld.southDarkAccess(inventory) || 
@@ -477,7 +488,7 @@ public class LightWorld extends Area {
         return null;
     }
     
-    public Location logicSahasrahla(Reward greenPendant){
+    private Location logicSahasrahla(Reward greenPendant){
         if (!sahasrahla.isAcquired())
             if (greenPendant.isAcquired())
                 return sahasrahla;
@@ -485,7 +496,7 @@ public class LightWorld extends Area {
         return null;     
     }
     
-    public Location logicKingsTomb(Inventory inventory, DarkWorld darkWorld){
+    private Location logicKingsTomb(Inventory inventory, DarkWorld darkWorld){
         if (!kingsTomb.isAcquired()) {
             if (inventory.getItem(KeyItem.BOOTS).isOwned() && 
                     inventory.getItem(Gloves.GLOVES).getDescription()
@@ -500,7 +511,7 @@ public class LightWorld extends Area {
         return null;
     }
     
-    public Location logicGraveyardLedge(Inventory inventory,
+    private Location logicGraveyardLedge(Inventory inventory,
             DarkWorld darkWorld){
         if (!graveyardLedge.isAcquired())
             if (darkWorld.northWestDarkAccess(inventory) && 
@@ -510,7 +521,7 @@ public class LightWorld extends Area {
         return null;
     }
     
-    public Location logicLumberjackTree(Inventory inventory, 
+    private Location logicLumberjackTree(Inventory inventory, 
             Reward agahnim){
         if (!lumberjackTree.isAcquired())
             if (agahnim.isAcquired() &&
@@ -520,7 +531,7 @@ public class LightWorld extends Area {
         return null;
     }
     
-    public Location logicMasterSwordPedestal(Reward greenPendant, 
+    private Location logicMasterSwordPedestal(Reward greenPendant, 
             Reward bluePendant, Reward redPendant){
         if (!masterSwordPedestal.isAcquired())
             if (greenPendant.isAcquired() && bluePendant.isAcquired() &&
