@@ -421,8 +421,12 @@ public class LightWorld extends Area {
     public ArrayList<Location> extraLocations(Inventory inventory, 
             RewardSet rewards, DarkWorld darkWorld) {
         ArrayList<Location> locations = new ArrayList();
+
+        //To do: Change these checks to return a boolean not a Location
         
-        locations.add(logicMagicBat(inventory, darkWorld));
+        if (logicMagicBat(inventory, darkWorld))
+            locations.add(magicBat);
+/*        locations.add(logicMagicBat(inventory, darkWorld));
         locations.add(logicCave45(inventory, darkWorld));
         locations.add(logicBombosTable(inventory, darkWorld));
         locations.add(logicLakeHyliaIsland(inventory, darkWorld));
@@ -435,25 +439,25 @@ public class LightWorld extends Area {
         locations.add(logicMasterSwordPedestal(rewards.getRewards().get(
                 Reward.GREEN_PENDANT), rewards.getRewards().get(
                 Reward.BLUE_PENDANT), rewards.getRewards().get(
-                Reward.RED_PENDANT)));
+                Reward.RED_PENDANT)));*/
 
         return locations;
     }
     
     //All the methods below are used by extraLocations to make
     //all the checks easier to read and modify later if necessary
-    private Location logicMagicBat(Inventory inventory, DarkWorld darkWorld){
+    private boolean logicMagicBat(Inventory inventory, DarkWorld darkWorld){
         if (!magicBat.isAcquired()) {
             if (inventory.getItem(KeyItem.HAMMER).isOwned() && 
                     inventory.getItem(KeyItem.POWDER).isOwned())
-                return magicBat;
+                return true;
             if (darkWorld.northWestDarkAccess(inventory) && 
                     inventory.getItem(KeyItem.MIRROR).isOwned() &&
                     inventory.getItem(KeyItem.POWDER).isOwned())
-                return magicBat;
+                return true;
         }
         
-        return null;
+        return false;
     }
         
     private Location logicCave45(Inventory inventory, DarkWorld darkWorld){
