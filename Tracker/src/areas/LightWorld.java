@@ -421,25 +421,29 @@ public class LightWorld extends Area {
     public ArrayList<Location> extraLocations(Inventory inventory, 
             RewardSet rewards, DarkWorld darkWorld) {
         ArrayList<Location> locations = new ArrayList();
-
-        //To do: Change these checks to return a boolean not a Location
         
         if (logicMagicBat(inventory, darkWorld))
             locations.add(magicBat);
-/*        locations.add(logicMagicBat(inventory, darkWorld));
-        locations.add(logicCave45(inventory, darkWorld));
-        locations.add(logicBombosTable(inventory, darkWorld));
-        locations.add(logicLakeHyliaIsland(inventory, darkWorld));
-        locations.add(logicSahasrahla(rewards.getRewards().get(
-                Reward.GREEN_PENDANT)));
-        locations.add(logicKingsTomb(inventory, darkWorld));
-        locations.add(logicGraveyardLedge(inventory, darkWorld));
-        locations.add(logicLumberjackTree(inventory, rewards.getRewards().get(
-                Reward.AGAHNIM_1)));
-        locations.add(logicMasterSwordPedestal(rewards.getRewards().get(
+        if (logicCave45(inventory, darkWorld))
+            locations.add(cave45);
+        if (logicBombosTablet(inventory, darkWorld))
+            locations.add(bombosTablet);
+        if (logicLakeHyliaIsland(inventory, darkWorld))
+            locations.add(lakeHyliaIsland);
+        if (logicSahasrahla(rewards.getRewards().get(Reward.GREEN_PENDANT)))
+            locations.add(sahasrahla);
+        if (logicKingsTomb(inventory, darkWorld))
+            locations.add(kingsTomb);
+        if (logicGraveyardLedge(inventory, darkWorld))
+            locations.add(graveyardLedge);
+        if (logicLumberjackTree(inventory, rewards.getRewards().get(
+                Reward.AGAHNIM_1)))
+            locations.add(lumberjackTree);
+        if (logicMasterSwordPedestal(rewards.getRewards().get(
                 Reward.GREEN_PENDANT), rewards.getRewards().get(
                 Reward.BLUE_PENDANT), rewards.getRewards().get(
-                Reward.RED_PENDANT)));*/
+                Reward.RED_PENDANT)))
+            locations.add(masterSwordPedestal);
 
         return locations;
     }
@@ -447,104 +451,91 @@ public class LightWorld extends Area {
     //All the methods below are used by extraLocations to make
     //all the checks easier to read and modify later if necessary
     private boolean logicMagicBat(Inventory inventory, DarkWorld darkWorld){
-        if (!magicBat.isAcquired()) {
-            if (inventory.getItem(KeyItem.HAMMER).isOwned() && 
-                    inventory.getItem(KeyItem.POWDER).isOwned())
-                return true;
-            if (darkWorld.northWestDarkAccess(inventory) && 
-                    inventory.getItem(KeyItem.MIRROR).isOwned() &&
-                    inventory.getItem(KeyItem.POWDER).isOwned())
-                return true;
-        }
+        if (magicBat.isAcquired())
+            return false;
         
-        return false;
+        if (inventory.getItem(KeyItem.HAMMER).isOwned() && 
+                inventory.getItem(KeyItem.POWDER).isOwned())
+            return true;
+        
+        return darkWorld.northWestDarkAccess(inventory) && 
+                    inventory.getItem(KeyItem.MIRROR).isOwned() &&
+                    inventory.getItem(KeyItem.POWDER).isOwned();
     }
         
-    //To do: Change these checks to return a boolean not a Location
-
-    private Location logicCave45(Inventory inventory, DarkWorld darkWorld){
-        if (!cave45.isAcquired())
-            if (darkWorld.southDarkAccess(inventory) && 
-                    inventory.getItem(KeyItem.MIRROR).isOwned())
-                return cave45;
-            
-        return null;
+    private boolean logicCave45(Inventory inventory, DarkWorld darkWorld){
+        if (cave45.isAcquired())
+            return false;
+        
+        return darkWorld.southDarkAccess(inventory) && 
+                    inventory.getItem(KeyItem.MIRROR).isOwned();
     }
     
-    private Location logicBombosTable(Inventory inventory, DarkWorld darkWorld){
-        if (!bombosTablet.isAcquired())
-            if (darkWorld.southDarkAccess(inventory) &&
+    private boolean logicBombosTablet(Inventory inventory, 
+            DarkWorld darkWorld){
+        if (bombosTablet.isAcquired())
+            return false;
+        return darkWorld.southDarkAccess(inventory) &&
                     inventory.getItem(KeyItem.MIRROR).isOwned() &&
                     inventory.getItem(KeyItem.BOOK).isOwned() &&
-                    ((Sword)(inventory.getItem(Sword.SWORD))).getLevel() >= 2)
-                return bombosTablet;
-        
-        return null;
+                    ((Sword)(inventory.getItem(Sword.SWORD))).getLevel() >= 2;
     }
     
-    private Location logicLakeHyliaIsland(Inventory inventory, 
+    private boolean logicLakeHyliaIsland(Inventory inventory, 
             DarkWorld darkWorld){
-        if (!lakeHyliaIsland.isAcquired())
-            if ((darkWorld.southDarkAccess(inventory) || 
-                    darkWorld.eastDarkAccess(inventory)) &&
-                    inventory.getItem(KeyItem.MIRROR).isOwned() &&
-                    inventory.getItem(KeyItem.FLIPPERS).isOwned())
-            return lakeHyliaIsland;
+        if (lakeHyliaIsland.isAcquired())
+            return false;
         
-        return null;
+        return (darkWorld.southDarkAccess(inventory) ||
+                darkWorld.eastDarkAccess(inventory)) &&
+                inventory.getItem(KeyItem.MIRROR).isOwned() &&
+                inventory.getItem(KeyItem.FLIPPERS).isOwned();
     }
     
-    private Location logicSahasrahla(Reward greenPendant){
-        if (!sahasrahla.isAcquired())
-            if (greenPendant.isAcquired())
-                return sahasrahla;
+    private boolean logicSahasrahla(Reward greenPendant){
+        if (sahasrahla.isAcquired())
+            return false;
         
-        return null;     
+        return greenPendant.isAcquired();     
     }
     
-    private Location logicKingsTomb(Inventory inventory, DarkWorld darkWorld){
-        if (!kingsTomb.isAcquired()) {
-            if (inventory.getItem(KeyItem.BOOTS).isOwned() && 
-                    inventory.getItem(Gloves.GLOVES).getDescription()
-                    .equals(Gloves.TITANS_MITTS))
-                return kingsTomb;
-            if (darkWorld.northWestDarkAccess(inventory) && 
-                    inventory.getItem(KeyItem.MIRROR).isOwned() &&
-                    inventory.getItem(KeyItem.BOOTS).isOwned())
-                return kingsTomb;
-        }
+    private boolean logicKingsTomb(Inventory inventory, DarkWorld darkWorld){
+        if (kingsTomb.isAcquired())
+            return false;
         
-        return null;
+        if (inventory.getItem(KeyItem.BOOTS).isOwned() && 
+                inventory.getItem(Gloves.GLOVES).getDescription()
+                        .equals(Gloves.TITANS_MITTS))
+            return true;
+        return darkWorld.northWestDarkAccess(inventory) && 
+                inventory.getItem(KeyItem.MIRROR).isOwned() &&
+                inventory.getItem(KeyItem.BOOTS).isOwned();
     }
     
-    private Location logicGraveyardLedge(Inventory inventory,
+    private boolean logicGraveyardLedge(Inventory inventory, 
             DarkWorld darkWorld){
-        if (!graveyardLedge.isAcquired())
-            if (darkWorld.northWestDarkAccess(inventory) && 
-                    inventory.getItem(KeyItem.MIRROR).isOwned())
-                return graveyardLedge;
-            
-        return null;
-    }
-    
-    private Location logicLumberjackTree(Inventory inventory, 
-            Reward agahnim){
-        if (!lumberjackTree.isAcquired())
-            if (agahnim.isAcquired() &&
-                    inventory.getItem(KeyItem.BOOTS).isOwned())
-                return lumberjackTree;
+        if (graveyardLedge.isAcquired())
+            return false;
         
-        return null;
+        return darkWorld.northWestDarkAccess(inventory) && 
+                inventory.getItem(KeyItem.MIRROR).isOwned();
     }
     
-    private Location logicMasterSwordPedestal(Reward greenPendant, 
+    private boolean logicLumberjackTree(Inventory inventory, Reward agahnim){
+        if (lumberjackTree.isAcquired())
+            return false;
+        
+        return agahnim.isAcquired() && 
+                inventory.getItem(KeyItem.BOOTS).isOwned();
+    }
+    
+    private boolean logicMasterSwordPedestal(Reward greenPendant, 
             Reward bluePendant, Reward redPendant){
-        if (!masterSwordPedestal.isAcquired())
-            if (greenPendant.isAcquired() && bluePendant.isAcquired() &&
-                    redPendant.isAcquired())
-                return masterSwordPedestal;
-        
-        return null;
+        if (masterSwordPedestal.isAcquired())
+            return false;
+       
+        return greenPendant.isAcquired() && bluePendant.isAcquired() &&
+                    redPendant.isAcquired();
     }
         
     //Getters and Setters for the locations below
