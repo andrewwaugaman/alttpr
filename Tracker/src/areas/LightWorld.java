@@ -460,6 +460,8 @@ public class LightWorld extends Area {
         return false;
     }
         
+    //To do: Change these checks to return a boolean not a Location
+
     private Location logicCave45(Inventory inventory, DarkWorld darkWorld){
         if (!cave45.isAcquired())
             if (darkWorld.southDarkAccess(inventory) && 
