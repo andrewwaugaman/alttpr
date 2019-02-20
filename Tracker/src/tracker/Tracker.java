@@ -79,6 +79,16 @@ public class Tracker {
                     int quantity = scan.nextInt();
                     inventory.updateBottle(quantity);
                     break;
+                case 7:
+                    System.out.println("Set Eastern Palace Locations");
+                    ArrayList<Location> locations = areas.getLocations(EasternPalace.NAME);
+                    for (int i = 0; i < locations.size(); i++) {
+                        System.out.println(i + ": " + locations.get(i).getDescription());
+                    }
+                    System.out.print("Enter the location you want to set: ");
+                    int setValue = scan.nextInt();
+                    locations.get(setValue).setContents(inventory.getItem(KeyItem.BOOTS));
+                    break;
             }
             
             System.out.println();

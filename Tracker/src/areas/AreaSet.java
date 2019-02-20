@@ -82,4 +82,8 @@ public class AreaSet {
         
         return locations;
     }
+    
+    public ArrayList<Location> getLocations(String name) {
+        return ((EasternPalace)(areas.get(name))).getLocations();
+    }
 }
