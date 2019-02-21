@@ -373,6 +373,30 @@ public class MiseryMire extends Dungeon {
     }          
     
     //Getters and Setters for the locations below
+    
+    /**
+     * Get a list of all the locations
+     * @return All the locations in Misery Mire
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(bridgeChest);
+        locations.add(spikeChest);
+        
+        locations.add(bigChest);
+        
+        locations.add(mapChest);
+        locations.add(mainLobby);
+        
+        locations.add(compassChest);
+        locations.add(bigKeyChest);
+        
+        locations.add(vitreous);
+        
+        return locations;
+    }
         
     /**
      * @return the bridgeChest

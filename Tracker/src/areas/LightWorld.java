@@ -541,6 +541,86 @@ public class LightWorld extends Area {
     //Getters and Setters for the locations below
     
     /**
+     * Get a list of all the locations
+     * @return All the locations in the Light World
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(kakarikoWellTop);
+        locations.add(kakarikoWellLeft);
+        locations.add(kakarikoWellMiddle);
+        locations.add(kakarikoWellRight);
+        locations.add(kakarikoWellBottom);
+        
+        locations.add(blindsHideoutTop);
+        locations.add(blindsHideoutLeft);
+        locations.add(blindsHideoutRight);
+        locations.add(blindsHideoutFarLeft);
+        locations.add(blindsHideoutFarRight);
+        
+        locations.add(bottleMerchant);
+        locations.add(chickenHouse);
+        locations.add(sickKid);
+        locations.add(kakarikoTavern);
+        
+        locations.add(magicBat);
+        
+        locations.add(library);
+        locations.add(mazeRace);
+        
+        locations.add(fluteSpot);
+        locations.add(cave45);
+        locations.add(linksHouse);
+        
+        locations.add(desertLedge);
+        locations.add(checkerboardCave);
+        locations.add(aginahsCave);
+        locations.add(bombosTablet);
+        
+        locations.add(sunkenTreasure);
+        locations.add(floodgateChest);
+        
+        locations.add(miniMoldormCaveFarLeft);
+        locations.add(miniMoldormCaveLeft);
+        locations.add(miniMoldormCaveRight);
+        locations.add(miniMoldormCaveFarRight);
+        locations.add(miniMoldormCaveNPC); 
+        
+        locations.add(iceRodCave);
+        
+        locations.add(lakeHyliaIsland);
+        
+        locations.add(hobo);
+        
+        locations.add(sahasrahlasHutLeft);
+        locations.add(sahasrahlasHutMiddle);
+        locations.add(sahasrahlasHutRight);
+        locations.add(sahasrahla);
+        
+        locations.add(potionShop);
+        
+        locations.add(waterfallFairyLeft);
+        locations.add(waterfallFairyRight);
+        locations.add(kingZora);
+        locations.add(zorasLedge);
+        
+        locations.add(kingsTomb);
+        locations.add(graveyardLedge);
+        locations.add(pegasusRocks);
+    
+        locations.add(lumberjackTree);
+        
+        locations.add(lostWoodsHideout);
+        locations.add(mushroom);
+        
+        locations.add(masterSwordPedestal); 
+        
+        return locations; 
+    }
+    
+    /**
      * @return the kakarikoWellTop
      */
     public Location getKakarikoWellTop() {

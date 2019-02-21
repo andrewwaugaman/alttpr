@@ -383,6 +383,30 @@ public class IcePalace extends Dungeon {
     //Getters and Setters for the locations below
     
     /**
+     * Get a list of all the locations
+     * @return All the locations in Ice Palace
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(compassChest);
+        locations.add(freezorChest);
+        locations.add(icedTRoom);
+        
+        locations.add(bigChest);
+        
+        locations.add(spikeRoom);
+        
+        locations.add(mapChest);
+        locations.add(bigKeyChest);
+        
+        locations.add(kholdstare);
+        
+        return locations; 
+    }
+    
+    /**
      * @return the compassChest
      */
     public Location getCompassChest() {

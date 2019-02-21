@@ -299,6 +299,28 @@ public class DesertPalace extends Dungeon {
     }          
     
     //Getters and Setters for the locations below
+    
+    /**
+     * Get a list of all the locations
+     * @return All the locations in Desert Palace
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(mapChest);
+        
+        locations.add(torch);
+        
+        locations.add(compassChest);
+        locations.add(bigKeyChest);
+        
+        locations.add(bigChest);
+        
+        locations.add(lanmolas);
+        
+        return locations; 
+    }
 
     /**
      * @return the mapChest

@@ -496,6 +496,57 @@ public class DarkWorld extends Area {
     //Private class for the portals is after
     
     /**
+     * Get a list of all the locations
+     * @return All the locations in the Dark World
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(bumperCave);
+        
+        locations.add(cShapedHouse);
+        locations.add(chestGame);
+        locations.add(brewery);
+                
+        locations.add(hammerPegs);
+        locations.add(blacksmith);
+        locations.add(purpleChest);
+        
+        locations.add(diggingGame);
+        
+        locations.add(stumpy);
+        
+        locations.add(hypeCaveTop);
+        locations.add(hypeCaveMiddleRight);
+        locations.add(hypeCaveMiddleLeft);
+        locations.add(hypeCaveBottom);
+        locations.add(hypeCaveNPC);
+        
+        locations.add(mireShedLeft);
+        locations.add(mireShedRight);
+        
+        locations.add(pyramid);
+        
+        locations.add(catfish);
+        
+        locations.add(spikeCave);
+        
+        locations.add(superbunnyCaveTop);
+        locations.add(superbunnyCaveBottom);
+        
+        locations.add(hookshotCaveTopRight);
+        locations.add(hookshotCaveTopLeft);
+        locations.add(hookshotCaveBottomLeft);
+        locations.add(hookshotCaveBottomRight);
+        
+        locations.add(pyramidFairyLeft);
+        locations.add(pyramidFairyRight); 
+        
+        return locations; 
+    }
+    
+    /**
      * @return the bumperCave
      */
     public Location getBumperCave() {

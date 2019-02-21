@@ -15,6 +15,7 @@ public class DeathMountain extends Area {
     
     //Death Mountain has 14 possible item locations
     private final Location oldMan;
+    
     private final Location spectacleRockCave;
     
     private final Location spectacleRock; 
@@ -50,6 +51,7 @@ public class DeathMountain extends Area {
         super();
         
         oldMan = new Location("Old Man");
+        
         spectacleRockCave = new Location("Spectacle Rock Cave");
         
         spectacleRock = new Location("Spectacle Rock"); 
@@ -289,6 +291,40 @@ public class DeathMountain extends Area {
     } */
     
     //Getters and Setters for the locations below
+    
+    /**
+     * Get a list of all the locations
+     * @return All the locations in Death Mountain
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(oldMan);
+        
+        locations.add(spectacleRockCave);
+        
+        locations.add(spectacleRock);
+        
+        locations.add(etherTablet);
+        
+        locations.add(spiralCave);
+        
+        locations.add(paradoxCaveLowerFarLeft);
+        locations.add(paradoxCaveLowerLeft);
+        locations.add(paradoxCaveLowerRight);
+        locations.add(paradoxCaveLowerFarRight);
+        locations.add(paradoxCaveLowerMiddle);
+        
+        locations.add(paradoxCaveUpperLeft);
+        locations.add(paradoxCaveUpperRight);
+        
+        locations.add(floatingIsland);
+        
+        locations.add(mimicCave);
+        
+        return locations; 
+    }
 
     /**
      * @return the oldMan

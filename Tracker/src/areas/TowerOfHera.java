@@ -239,6 +239,26 @@ public class TowerOfHera extends Dungeon {
     //Getters and Setters for the locations below  
     
     /**
+     * Get a list of all the locations
+     * @return All the locations in the Tower of Hera
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(basementCage);
+        locations.add(mapChest);
+
+        locations.add(bigKeyChest);
+        
+        locations.add(compassChest);
+        locations.add(bigChest);
+        locations.add(moldorm);
+        
+        return locations; 
+    }
+    
+    /**
      * @return the basementCage
      */
     public Location getBasementCage() {

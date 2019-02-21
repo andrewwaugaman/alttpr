@@ -397,7 +397,7 @@ public class DarkPalace extends Dungeon {
      * @return True or False if the location is in logic
      */
     private boolean logicArenaLedge(Inventory inventory) {
-        if (mapChest.isAcquired())
+        if (arenaLedge.isAcquired())
             return false;
         
         return inventory.getItem(KeyItem.BOW).isOwned();
@@ -541,6 +541,39 @@ public class DarkPalace extends Dungeon {
     }          
     
     //Getters and Setters for the locations below
+    
+    /**
+     * Get a list of all the locations
+     * @return All the locations in Dark Palace
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(shooterRoom);
+        
+        locations.add(mapChest);
+        locations.add(arenaLedge);
+        
+        locations.add(arenaBridge);
+        locations.add(stalfosBasement);
+        
+        locations.add(compassChest);
+        
+        locations.add(darkBasementLeft);
+        locations.add(darkBasementRight);
+        
+        locations.add(darkMazeTop);
+        locations.add(darkMazeBottom);
+        locations.add(bigChest);
+        
+        locations.add(bigKeyChest);
+        locations.add(harmlessHellway);
+        
+        locations.add(helmasaur); 
+        
+        return locations; 
+    }
 
     /**
      * @return the shooterRoom

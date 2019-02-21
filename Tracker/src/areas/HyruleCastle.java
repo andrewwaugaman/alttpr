@@ -242,6 +242,32 @@ public class HyruleCastle extends Area {
     //Getters and Setters for the locations below
     
     /**
+     * Get a list of all the locations
+     * @return All the locations in Hyrule Castle
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(linksUncle);
+        locations.add(secretPassage);
+        
+        locations.add(mapChest);
+        locations.add(boomerangChest);
+        locations.add(zeldasCell);
+        
+        locations.add(sewersDarkCross);
+        
+        locations.add(sewersSecretRoomLeft);
+        locations.add(sewersSecretRoomMiddle);
+        locations.add(sewersSecretRoomRight);
+        
+        locations.add(sanctuary);
+        
+        return locations;
+    }
+    
+    /**
      * @return Link's Uncle
      */    
     public Location getLinksUncle() {

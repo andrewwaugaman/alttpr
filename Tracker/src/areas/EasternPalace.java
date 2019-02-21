@@ -188,25 +188,30 @@ public class EasternPalace extends Dungeon {
             return false;
         
         return inventory.getItem(KeyItem.BOW).isOwned();
-    }  
+    }
+    
+    //Getters and Setters for the locations below
     
     /**
-     * 
+     * Get a list of all the locations
+     * @return All the locations in Eastern Palace
      */
+    @Override
     public ArrayList<Location> getLocations() {
         ArrayList<Location> locations = new ArrayList();
         
         locations.add(cannonballChest);
         locations.add(mapChest);
         locations.add(compassChest);
+        
         locations.add(bigKeyChest);
+        
         locations.add(bigChest);
+        
         locations.add(armosKnights);
         
         return locations; 
     }
-    
-    //Getters and Setters for the locations below
     
     /**
      * @return the cannonballChest

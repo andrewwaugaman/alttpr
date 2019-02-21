@@ -257,6 +257,29 @@ public class SkullWoods extends Dungeon {
     //Getters and Setters for the locations below
     
     /**
+     * Get a list of all the locations
+     * @return All the locations in Skull Woods
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(compassChest);
+        locations.add(potPrison);
+        locations.add(pinballRoom);
+        locations.add(mapChest);       
+        locations.add(bigKeyChest);
+        
+        locations.add(bigChest);
+        
+        locations.add(bridgeRoom);
+        
+        locations.add(mothula);
+        
+        return locations; 
+    }
+    
+    /**
      * @return the compassChest
      */
     public Location getCompassChest() {

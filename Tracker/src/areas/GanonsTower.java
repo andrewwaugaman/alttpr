@@ -935,6 +935,57 @@ public class GanonsTower extends Dungeon {
     }
     
     //Getters and Setters for the locations below
+    
+    /**
+     * Get a list of all the locations
+     * @return All the locations in Ganon's Tower
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(bobsTorch);
+        
+        locations.add(dmRoomTopLeft);
+        locations.add(dmRoomTopRight);
+        locations.add(dmRoomBottomLeft);
+        locations.add(dmRoomBottomRight);
+        
+        locations.add(mapChest);
+        
+        locations.add(firesnakeRoom);
+        
+        locations.add(randomizerRoomTopLeft);
+        locations.add(randomizerRoomTopRight);
+        locations.add(randomizerRoomBottomLeft);
+        locations.add(randomizerRoomBottomRight);
+        
+        locations.add(hopeRoomLeft);
+        locations.add(hopeRoomRight);
+        
+        locations.add(tileRoom);
+        
+        locations.add(compassRoomTopLeft);
+        locations.add(compassRoomTopRight);
+        locations.add(compassRoomBottomLeft);
+        locations.add(compassRoomBottomRight);
+        
+        locations.add(bobsChest);
+        locations.add(bigKeyChest);
+        locations.add(bigKeyChestRoomLeft);
+        locations.add(bigKeyChestRoomRight);
+        
+        locations.add(bigChest);
+        
+        locations.add(miniHelmasaurRoomLeft);
+        locations.add(miniHelmasaurRoomRight);
+        
+        locations.add(preMoldormChest);
+        
+        locations.add(moldormChest);  
+        
+        return locations; 
+    }
    
     /**
      * @return the bobsTorch

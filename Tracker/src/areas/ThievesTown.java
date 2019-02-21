@@ -304,6 +304,30 @@ public class ThievesTown extends Dungeon {
     //Getters and Setters for the locations below
     
     /**
+     * Get a list of all the locations
+     * @return All the locations in Thieves Town
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(mapChest);
+        locations.add(ambushChest);
+        locations.add(compassChest);        
+        locations.add(bigKeyChest);
+        
+        locations.add(attic);
+        
+        locations.add(blindsCell);
+        
+        locations.add(bigChest);
+        
+        locations.add(blind);
+        
+        return locations; 
+    }
+    
+    /**
      * @return the mapChest
      */
     public Location getMapChest() {

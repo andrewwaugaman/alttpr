@@ -423,6 +423,37 @@ public class TurtleRock extends Dungeon {
     }          
     
     //Getters and Setters for the locations below
+    
+    /**
+     * Get a list of all the locations
+     * @return All the locations in Turtle Rock
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(compassChest);
+        
+        locations.add(rollerRoomLeft);
+        locations.add(rollerRoomRight);
+        
+        locations.add(chainChomps);
+        
+        locations.add(bigKeyChest);
+        
+        locations.add(bigChest);
+        
+        locations.add(crystarollerRoom);
+        
+        locations.add(eyeBridgeTopRight);
+        locations.add(eyeBridgeTopLeft);
+        locations.add(eyeBridgeBottomRight);
+        locations.add(eyeBridgeBottomLeft);
+        
+        locations.add(trinexx);
+        
+        return locations; 
+    }
         
     /**
      * @return the compassChest

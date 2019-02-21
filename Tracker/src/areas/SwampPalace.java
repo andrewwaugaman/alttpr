@@ -333,6 +333,33 @@ public class SwampPalace extends Dungeon {
     }          
     
     //Getters and Setters for the locations below
+    
+    /**
+     * Get a list of all the locations
+     * @return All the locations in Swamp Palace
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(entrance);
+        
+        locations.add(mapChest);
+        
+        locations.add(compassChest);
+        locations.add(westChest);
+        locations.add(bigKeyChest);
+        
+        locations.add(bigChest);
+        
+        locations.add(floodedRoomLeft);
+        locations.add(floodedRoomRight);
+        locations.add(waterfallRoom);
+        
+        locations.add(aarghus);
+        
+        return locations; 
+    }
 
     /**
      * @return the entrance

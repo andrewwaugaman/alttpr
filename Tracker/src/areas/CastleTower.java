@@ -134,6 +134,21 @@ public class CastleTower extends Dungeon {
     }
     
     //Getters and Setters for the locations below
+    
+    /**
+     * Get a list of all the locations
+     * @return All the locations in Castle Tower
+     */
+    @Override
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList();
+        
+        locations.add(room03);
+        
+        locations.add(darkMaze);
+        
+        return locations; 
+    }
 
     /**
      * @return room03

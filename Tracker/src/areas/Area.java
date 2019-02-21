@@ -23,5 +23,11 @@ public abstract class Area {
      * @param inventory The current inventory
      * @return A list of locations that are in logic
      */
-    public abstract ArrayList<Location> locationsInLogic(Inventory inventory);    
+    public abstract ArrayList<Location> locationsInLogic(Inventory inventory);
+    
+    /**
+     * Method to be implemented that returns all locations in the area
+     * @return A list of locations in the area
+     */
+    public abstract ArrayList<Location> getLocations();
 }
