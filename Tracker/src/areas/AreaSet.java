@@ -1,7 +1,7 @@
 package areas;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import items.Inventory;
 import items.Location;
 
@@ -12,7 +12,7 @@ import items.Location;
 public class AreaSet {
     
     //A way to track all the different areas
-    private final HashMap<String,Area> areas;
+    private final LinkedHashMap<String,Area> areas;
     
     //Names of the areas
 
@@ -22,7 +22,7 @@ public class AreaSet {
      * @param rewards The different rewards, used for Agahnim 1/2
      */
     public AreaSet(RewardSet rewards) {
-        areas = new HashMap<>();
+        areas = new LinkedHashMap<>();
         
         areas.put(LightWorld.NAME, new LightWorld());
         areas.put(HyruleCastle.NAME, new HyruleCastle());
@@ -67,6 +67,9 @@ public class AreaSet {
             RewardSet rewards) {
         ArrayList<Location> locations = new ArrayList();
         for (String name : areas.keySet()) {
+            System.out.println("********************");
+            System.out.println(areas.get(name).toString());
+            System.out.println("********************");
             locations.addAll(areas.get(name).locationsInLogic(inventory));
             if (name.equals(LightWorld.NAME))
                 locations.addAll(((LightWorld)(areas.get(name))).
