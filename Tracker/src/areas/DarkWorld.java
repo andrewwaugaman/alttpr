@@ -925,6 +925,15 @@ public class DarkWorld extends Area {
     }
     
     /**
+     * Used to print the name of the area
+     * @return The name of the area
+     */
+    @Override
+    public String toString() {
+        return NAME;
+    }
+    
+    /**
      * Private class to check which portals are on logic that will 
      * be used to see what areas of the Dark World are accessible
      */

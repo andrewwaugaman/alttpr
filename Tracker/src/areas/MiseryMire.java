@@ -523,4 +523,13 @@ public class MiseryMire extends Dungeon {
     public void setMedallion(KeyItem medallion) {
         this.medallion = medallion;
     }
+    
+    /**
+     * Used to print the name of the area
+     * @return The name of the area
+     */
+    @Override
+    public String toString() {
+        return NAME;
+    }
 } 

@@ -390,4 +390,13 @@ public class SkullWoods extends Dungeon {
     public void setMothula(Item contents) {
         mothula.setContents(contents);
     }
+    
+    /**
+     * Used to print the name of the area
+     * @return The name of the area
+     */
+    @Override
+    public String toString() {
+        return NAME;
+    }
 }

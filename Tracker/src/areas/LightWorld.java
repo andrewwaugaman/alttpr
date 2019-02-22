@@ -1319,4 +1319,13 @@ public class LightWorld extends Area {
     public void setMasterSwordPedestal(Item contents) {
         masterSwordPedestal.setContents(contents);
     }
+    
+    /**
+     * Used to print the name of the area
+     * @return The name of the area
+     */
+    @Override
+    public String toString() {
+        return NAME;
+    }
 }

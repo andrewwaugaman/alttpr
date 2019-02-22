@@ -177,4 +177,13 @@ public class CastleTower extends Dungeon {
     public void setDarkMaze(Item contents) {
         darkMaze.setContents(contents);
     }    
+    
+    /**
+     * Used to print the name of the area
+     * @return The name of the area
+     */
+    @Override
+    public String toString() {
+        return NAME;
+    }
 }
