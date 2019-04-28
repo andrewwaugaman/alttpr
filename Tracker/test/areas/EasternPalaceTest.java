@@ -45,39 +45,88 @@ public class EasternPalaceTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of locationsInLogic method, of class EasternPalace.
-     */
+    // The following tests all test locationsInLogic
+    
     @Test
-    public void testLocationsInLogic() {
-        System.out.println("locationsInLogic");
+    public void testLocationsNoItems() {
         Inventory inventory = new Inventory();
         EasternPalace instance = new EasternPalace();
-        String[] locationsNoItems = {"Eastern Palace - Cannonball Chest", 
+        String[] locations = {"Eastern Palace - Cannonball Chest", 
             "Eastern Palace - Map Chest", "Eastern Palace - Compass Chest"};
         
         ArrayList<Location> result = instance.locationsInLogic(inventory);
-        for (int i = 0; i < locationsNoItems.length; i++) {
-            assertEquals(locationsNoItems[i], result.get(i).getDescription());
+        assertEquals(locations.length, result.size());       
+        for (int i = 0; i < locations.length; i++) {
+            assertEquals(locations[i], result.get(i).getDescription());
         }
-
-        String[] locationsWithLantern = {"Eastern Palace - Cannonball Chest", 
+    }
+    
+    @Test
+    public void testLocationsLantern() { 
+        Inventory inventory = new Inventory();
+        inventory.updateItem(KeyItem.LANTERN, true);
+        EasternPalace instance = new EasternPalace();
+        
+        String[] locations = {"Eastern Palace - Cannonball Chest", 
             "Eastern Palace - Map Chest", "Eastern Palace - Compass Chest",
             "Eastern Palace - Big Key Chest"};
         
-        inventory.updateItem(KeyItem.LANTERN, true);
-        result = instance.locationsInLogic(inventory);
-        for (int i = 0; i < locationsWithLantern.length; i++) {
-            assertEquals(locationsWithLantern[i], 
-                    result.get(i).getDescription());
+        ArrayList<Location> result = instance.locationsInLogic(inventory);
+        assertEquals(locations.length, result.size());        
+        for (int i = 0; i < locations.length; i++) {
+            assertEquals(locations[i], result.get(i).getDescription());
         }
+    }
+    
+    @Test
+    public void testBigChest() {
+        Inventory inventory = new Inventory();
+        EasternPalace instance = new EasternPalace();
         
-        /**
-        String[] locationsAllItems = {"Eastern Palace - Cannonball Chest", 
+        instance.setCannonballChest(new Item(EasternPalace.BIG_KEY));
+        String[] locations = {"Eastern Palace - Map Chest", 
+            "Eastern Palace - Compass Chest", "Eastern Palace - Big Chest"};
+        
+        ArrayList<Location> result = instance.locationsInLogic(inventory);
+        assertEquals(locations.length, result.size());
+        for (int i = 0; i < locations.length; i++) {
+            assertEquals(locations[i], result.get(i).getDescription());
+        }
+    }
+    
+    @Test
+    public void testBowNoLantern() {
+        Inventory inventory = new Inventory();
+        EasternPalace instance = new EasternPalace();
+        
+        instance.setMapChest(new Item(EasternPalace.BIG_KEY));
+        String[] locations = {"Eastern Palace - Cannonball Chest", 
+            "Eastern Palace - Compass Chest", "Eastern Palace - Big Chest"};
+        
+        ArrayList<Location> result = instance.locationsInLogic(inventory);
+        assertEquals(locations.length, result.size());        
+        for (int i = 0; i < locations.length; i++) {
+            assertEquals(locations[i], result.get(i).getDescription());
+        }
+    }
+    
+    @Test
+    public void testLanternAndBow() {
+        Inventory inventory = new Inventory();
+        inventory.updateItem(KeyItem.LANTERN, true);
+        inventory.updateItem(KeyItem.BOW, true);
+        EasternPalace instance = new EasternPalace();
+        
+        instance.setBigKeyChest(new Item(EasternPalace.BIG_KEY));
+        String[] locations = {"Eastern Palace - Cannonball Chest", 
             "Eastern Palace - Map Chest", "Eastern Palace - Compass Chest",
-            "Eastern Palace - Big Key Chest", "Eastern Palace - Big Chest",
-            "Eastern Palace - Armos Knights"};
-            */
+            "Eastern Palace - Big Chest", "Eastern Palace - Armos Knights"};
+        
+        ArrayList<Location> result = instance.locationsInLogic(inventory);
+        assertEquals(locations.length, result.size());
+        for (int i = 0; i < locations.length; i++) {
+            assertEquals(locations[i], result.get(i).getDescription());
+        }
     }
 
     /**
